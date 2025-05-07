@@ -51,7 +51,7 @@ export const ImageSide: React.FC<ImageSideProps> = ({ className }) => {
           <div className="self-start pl-0 ml-0">
             {/* Logo image with increased size */}
             <img 
-              src="/lovable-uploads/06e2c82d-7ee7-4772-bcb4-9236bad6464f.png" 
+              src="/lovable-uploads/1aa305fd-db99-4ff2-84a0-f9041679cd58.png" 
               alt="Advertising Vehicles Logo" 
               className="h-32 object-contain pl-0 ml-0" /* Added pl-0 and ml-0 to remove left padding and margin */
             />
