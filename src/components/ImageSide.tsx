@@ -51,7 +51,7 @@ export const ImageSide: React.FC<ImageSideProps> = ({ className }) => {
           <div className="self-start">
             {/* New logo image */}
             <img 
-              src="/lovable-uploads/aa0704c9-3544-48b9-b8f9-fe54044d9e6b.png" 
+              src="/lovable-uploads/06e2c82d-7ee7-4772-bcb4-9236bad6464f.png" 
               alt="Advertising Vehicles Logo" 
               className="h-16 object-contain"
             />
