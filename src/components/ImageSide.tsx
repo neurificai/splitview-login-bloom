@@ -32,29 +32,25 @@ export const ImageSide: React.FC<ImageSideProps> = ({ className }) => {
     <div className={`relative overflow-hidden ${className}`}>
       <div className="absolute inset-0 bg-gradient-to-b from-blue-500/30 to-blue-700/50 mix-blend-overlay" />
       
-      {/* Replaced image with video background */}
+      {/* Video background using YouTube embed */}
       <div className="absolute inset-0">
-        <video 
-          autoPlay 
-          muted 
-          loop 
+        <iframe 
+          src="https://www.youtube.com/embed/EQX_AQB-Eos?autoplay=1&mute=1&loop=1&playlist=EQX_AQB-Eos&controls=0&showinfo=0&rel=0&disablekb=1&modestbranding=1" 
+          allow="autoplay; encrypted-media"
           className="w-full h-full object-cover"
-        >
-          <source src="/lovable-uploads/ebdc18dd-6149-48fb-ac63-307cfa7d9f3d.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+          style={{ border: 'none' }}
+        ></iframe>
       </div>
       
       <div className="relative z-10 p-8 h-full flex flex-col justify-between">
         <div className="flex items-center">
-          {/* Removed white blurred background */}
+          {/* Logo container without blurred background */}
           <div className="self-start">
-            {/* Cropped square logo without text */}
+            {/* New logo image */}
             <img 
-              src="/lovable-uploads/2a0eea23-09c1-49d8-ba5d-3d017d76b5ac.png" 
+              src="/lovable-uploads/aa0704c9-3544-48b9-b8f9-fe54044d9e6b.png" 
               alt="Advertising Vehicles Logo" 
-              className="h-16 object-cover object-left"
-              style={{ clipPath: 'inset(0 70% 0 0)' }} 
+              className="h-16 object-contain"
             />
           </div>
         </div>
