@@ -30,7 +30,8 @@ export const ImageSide: React.FC<ImageSideProps> = ({ className }) => {
 
   return (
     <div className={`relative overflow-hidden ${className}`}>
-      <div className="absolute inset-0 bg-gradient-to-b from-blue-500/30 to-blue-700/50 mix-blend-overlay" />
+      {/* Light color theme overlay similar to advertisingvehicles.com */}
+      <div className="absolute inset-0 bg-gradient-to-b from-white/60 to-gray-100/70 mix-blend-overlay" />
       
       {/* Video background with YouTube embed */}
       <div className="absolute inset-0 overflow-hidden">
