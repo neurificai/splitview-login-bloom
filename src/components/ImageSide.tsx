@@ -48,12 +48,12 @@ export const ImageSide: React.FC<ImageSideProps> = ({ className }) => {
       <div className="relative z-10 p-8 h-full flex flex-col justify-between">
         <div className="flex items-center">
           {/* Logo container with left padding and margin set to 0 */}
-          <div className="self-start pl-0 ml-0">
-            {/* Logo image with increased size */}
+          <div className="self-start pl-0 ml-0 pt-0">
+            {/* Logo image scaled down to 75% (h-24 instead of h-32) */}
             <img 
               src="/lovable-uploads/1aa305fd-db99-4ff2-84a0-f9041679cd58.png" 
               alt="Advertising Vehicles Logo" 
-              className="h-32 object-contain pl-0 ml-0" /* Added pl-0 and ml-0 to remove left padding and margin */
+              className="h-24 object-contain pl-0 ml-0" /* Changed from h-32 to h-24 (75% of original size) */
             />
           </div>
         </div>
