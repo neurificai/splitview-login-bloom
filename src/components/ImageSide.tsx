@@ -49,11 +49,11 @@ export const ImageSide: React.FC<ImageSideProps> = ({ className }) => {
         <div className="flex items-center">
           {/* Logo container without blurred background */}
           <div className="self-start">
-            {/* New logo image */}
+            {/* Logo image with increased size */}
             <img 
               src="/lovable-uploads/06e2c82d-7ee7-4772-bcb4-9236bad6464f.png" 
               alt="Advertising Vehicles Logo" 
-              className="h-16 object-contain"
+              className="h-32 object-contain" /* Changed from h-16 to h-32 to double the size */
             />
           </div>
         </div>
