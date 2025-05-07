@@ -36,16 +36,18 @@ export const ImageSide: React.FC<ImageSideProps> = ({ className }) => {
       <div className="relative z-10 p-8 h-full flex flex-col justify-between">
         <div className="flex items-center">
           <div className="backdrop-blur-sm bg-white/20 p-0 pl-0 shadow-lg self-start">
+            {/* Cropped square logo without text */}
             <img 
               src="/lovable-uploads/2a0eea23-09c1-49d8-ba5d-3d017d76b5ac.png" 
               alt="Advertising Vehicles Logo" 
-              className="h-16" 
+              className="h-16 object-cover object-left"
+              style={{ clipPath: 'inset(0 70% 0 0)' }} 
             />
           </div>
         </div>
         
         <div className="bg-black/80 p-6 rounded-md shadow-lg backdrop-blur-sm max-w-md transform transition-all duration-300 border-l-4 border-blue-500">
-          <h3 className="text-2xl font-bold text-white mb-2 font-mono relative">
+          <h3 className="text-2xl font-light text-white mb-2 font-sans tracking-wide relative">
             {displayText}
             <span className={`inline-block w-1 h-6 bg-blue-400 ml-1 align-middle ${isComplete ? 'animate-pulse' : 'animate-blink'}`}></span>
           </h3>
