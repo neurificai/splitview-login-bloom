@@ -17,7 +17,7 @@ export const ImageSide: React.FC<ImageSideProps> = ({ className }) => {
     
     const typingInterval = setInterval(() => {
       if (currentIndex < fullText.length) {
-        setDisplayText((prev) => prev + fullText[currentIndex]);
+        setDisplayText(fullText.substring(0, currentIndex + 1));
         currentIndex++;
       } else {
         clearInterval(typingInterval);
