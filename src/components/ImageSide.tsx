@@ -58,7 +58,7 @@ export const ImageSide: React.FC<ImageSideProps> = ({ className }) => {
           </div>
         </div>
         
-        <div className="bg-black/80 p-6 rounded-md shadow-lg backdrop-blur-sm max-w-md transform transition-all duration-300 border-l-4 border-blue-500">
+        <div className="bg-black/80 p-6 rounded-md shadow-xl backdrop-blur-sm w-[70%] transform transition-all duration-300 border-l-4 border-blue-500 shadow-lg shadow-black/30">
           <h3 className="text-2xl font-light text-white mb-2 font-sans tracking-wide relative">
             {displayText}
             <span className={`inline-block w-1 h-6 bg-blue-400 ml-1 align-middle ${isComplete ? 'animate-pulse' : 'animate-blink'}`}></span>
