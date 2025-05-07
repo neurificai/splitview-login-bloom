@@ -13,11 +13,11 @@ export const ImageSide: React.FC<ImageSideProps> = ({ className }) => {
       
       <div className="relative z-10 p-8 h-full flex flex-col justify-between">
         <div className="flex items-center">
-          <div className="backdrop-blur-sm bg-white/20 p-3 rounded-xl shadow-lg">
+          <div className="backdrop-blur-sm bg-white/20 p-3 shadow-lg">
             <img 
               src="/lovable-uploads/2a0eea23-09c1-49d8-ba5d-3d017d76b5ac.png" 
               alt="Advertising Vehicles Logo" 
-              className="h-10" 
+              className="h-16" 
             />
           </div>
         </div>
