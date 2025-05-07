@@ -31,11 +31,24 @@ export const ImageSide: React.FC<ImageSideProps> = ({ className }) => {
   return (
     <div className={`relative overflow-hidden ${className}`}>
       <div className="absolute inset-0 bg-gradient-to-b from-blue-500/30 to-blue-700/50 mix-blend-overlay" />
-      <div className="absolute inset-0 split-screen-image" style={{ backgroundImage: `url('/lovable-uploads/ebdc18dd-6149-48fb-ac63-307cfa7d9f3d.png')` }} />
+      
+      {/* Replaced image with video background */}
+      <div className="absolute inset-0">
+        <video 
+          autoPlay 
+          muted 
+          loop 
+          className="w-full h-full object-cover"
+        >
+          <source src="/lovable-uploads/ebdc18dd-6149-48fb-ac63-307cfa7d9f3d.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
       
       <div className="relative z-10 p-8 h-full flex flex-col justify-between">
         <div className="flex items-center">
-          <div className="backdrop-blur-sm bg-white/20 p-0 pl-0 shadow-lg self-start">
+          {/* Removed white blurred background */}
+          <div className="self-start">
             {/* Cropped square logo without text */}
             <img 
               src="/lovable-uploads/2a0eea23-09c1-49d8-ba5d-3d017d76b5ac.png" 
