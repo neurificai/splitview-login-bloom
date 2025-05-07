@@ -32,14 +32,16 @@ export const ImageSide: React.FC<ImageSideProps> = ({ className }) => {
     <div className={`relative overflow-hidden ${className}`}>
       <div className="absolute inset-0 bg-gradient-to-b from-blue-500/30 to-blue-700/50 mix-blend-overlay" />
       
-      {/* Video background using YouTube embed */}
-      <div className="absolute inset-0">
-        <iframe 
-          src="https://www.youtube.com/embed/EQX_AQB-Eos?autoplay=1&mute=1&loop=1&playlist=EQX_AQB-Eos&controls=0&showinfo=0&rel=0&disablekb=1&modestbranding=1" 
-          allow="autoplay; encrypted-media"
-          className="w-full h-full object-cover"
-          style={{ border: 'none' }}
-        ></iframe>
+      {/* Video background with YouTube embed */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="relative w-[calc(100%+120px)] h-[calc(100%+120px)] -left-[60px] -top-[60px]">
+          <iframe 
+            src="https://www.youtube.com/embed/EQX_AQB-Eos?autoplay=1&mute=1&loop=1&playlist=EQX_AQB-Eos&controls=0&showinfo=0&rel=0&disablekb=1&modestbranding=1" 
+            allow="autoplay; encrypted-media"
+            className="absolute w-full h-full"
+            style={{ border: 'none' }}
+          ></iframe>
+        </div>
       </div>
       
       <div className="relative z-10 p-8 h-full flex flex-col justify-between">
