@@ -21,7 +21,7 @@ const ContactBox: React.FC<ContactBoxProps> = ({ contacts }) => {
     <Card className="shadow-md border-none bg-white transition-all hover:shadow-lg">
       <CardContent className="p-4">
         <div className="space-y-3">
-          {contacts.slice(0, 4).map((contact, index) => (
+          {contacts.slice(0, 2).map((contact, index) => (
             <div key={index} className="flex items-center gap-3 p-2 rounded-lg hover:bg-sky-50 transition-colors">
               <Avatar className="h-10 w-10 border border-sky-100 shadow-sm">
                 {contact.avatar ? (
@@ -45,7 +45,7 @@ const ContactBox: React.FC<ContactBoxProps> = ({ contacts }) => {
             </div>
           ))}
           
-          {contacts.length > 4 && (
+          {contacts.length > 2 && (
             <div className="text-center mt-2">
               <a href="#" className="text-sm text-blue-500 flex items-center justify-center gap-1 hover:underline">
                 View all ({contacts.length})
