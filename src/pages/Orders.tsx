@@ -18,7 +18,7 @@ const Orders = () => {
   });
 
   return (
-    <DashboardLayout title="Orders Dashboard">
+    <DashboardLayout>
       <div className="mb-6">
         <OrdersToolbar 
           searchQuery={searchQuery}
