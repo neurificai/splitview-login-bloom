@@ -7,6 +7,8 @@ import { getOrderById, getOrderDetailsById, OrderDetails as OrderDetailsType } f
 import OrderDetailsHeader from "@/components/order-details/OrderDetailsHeader";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import ContactBox from "@/components/ContactBox";
+import ShortcutsBox from "@/components/order-details/ShortcutsBox";
 
 const OrderDetails = () => {
   const { id } = useParams<{ id: string }>();
@@ -66,21 +68,55 @@ const OrderDetails = () => {
 
   const { order } = orderDetails;
 
+  // Mock contact data - in a real app, this would come from API
+  const contacts = [
+    {
+      name: "Sarah Johnson",
+      role: "Account Manager",
+      email: "sarah.j@example.com",
+      phone: "(555) 123-4567"
+    },
+    {
+      name: "Mike Peterson",
+      role: "Design Lead",
+      email: "mike.p@example.com",
+      phone: "(555) 987-6543"
+    }
+  ];
+
+  // Determine which shortcuts to show based on the order's progress
+  const hasApprovedDesign = orderDetails.approvedDesigns && orderDetails.approvedDesigns.length > 0;
+  const hasInstallPictures = orderDetails.activities.some(a => a.type === "install" && a.title.includes("Complete"));
+
   return (
     <DashboardLayout>
       <div className="mb-6">
         {/* Header with back button and order info */}
         <OrderDetailsHeader order={order} />
         
-        {/* Order details tabs */}
-        <OrderDetailsTabs 
-          activities={orderDetails.activities}
-          shippingAddresses={orderDetails.shippingAddresses}
-          vehicleDetails={orderDetails.vehicleDetails}
-          installLocations={orderDetails.installLocations}
-          approvedDesigns={orderDetails.approvedDesigns}
-          invoices={orderDetails.invoices}
-        />
+        <div className="flex gap-6">
+          {/* Main content area - now wrapped in a div that takes 70% width */}
+          <div className="flex-1">
+            <OrderDetailsTabs 
+              activities={orderDetails.activities}
+              shippingAddresses={orderDetails.shippingAddresses}
+              vehicleDetails={orderDetails.vehicleDetails}
+              installLocations={orderDetails.installLocations}
+              approvedDesigns={orderDetails.approvedDesigns}
+              invoices={orderDetails.invoices}
+            />
+          </div>
+          
+          {/* Sidebar for contacts and shortcuts */}
+          <div className="w-80 space-y-4">
+            <ContactBox contacts={contacts} />
+            <ShortcutsBox 
+              hasEstimate={true}
+              hasApprovedDesign={hasApprovedDesign}
+              hasInstallPictures={hasInstallPictures}
+            />
+          </div>
+        </div>
       </div>
     </DashboardLayout>
   );
