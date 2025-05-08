@@ -25,6 +25,7 @@ interface OrderDetailsTabsProps {
     amount: number;
     status: "paid" | "pending";
   }[];
+  sidebarContent?: React.ReactNode;
 }
 
 const OrderDetailsTabs: React.FC<OrderDetailsTabsProps> = ({
@@ -33,7 +34,8 @@ const OrderDetailsTabs: React.FC<OrderDetailsTabsProps> = ({
   vehicleDetails,
   installLocations,
   approvedDesigns,
-  invoices
+  invoices,
+  sidebarContent
 }) => {
   // Add state to control the active tab
   const [activeTab, setActiveTab] = useState<string>("estimate");
@@ -158,39 +160,50 @@ const OrderDetailsTabs: React.FC<OrderDetailsTabsProps> = ({
         <TabsTrigger value="invoice">Invoice</TabsTrigger>
       </TabsList>
       
-      {/* Tab content */}
-      <TabsContent value="estimate">
-        <EstimateTab activities={activities} />
-      </TabsContent>
-      
-      <TabsContent value="design">
-        <DesignTab 
-          activities={activities}
-          approvedDesigns={approvedDesigns}
-        />
-      </TabsContent>
-      
-      <TabsContent value="print">
-        <PrintTab 
-          activities={activities}
-          shippingAddresses={shippingAddresses}
-        />
-      </TabsContent>
-      
-      <TabsContent value="install">
-        <InstallTab 
-          activities={activities}
-          vehicleDetails={vehicleDetails}
-          installLocations={installLocations}
-        />
-      </TabsContent>
-      
-      <TabsContent value="invoice">
-        <InvoiceTab 
-          activities={activities}
-          invoices={invoices}
-        />
-      </TabsContent>
+      {/* Content area with sidebar layout */}
+      <div className="flex gap-4">
+        <div className="flex-1">
+          <TabsContent value="estimate">
+            <EstimateTab activities={activities} />
+          </TabsContent>
+          
+          <TabsContent value="design">
+            <DesignTab 
+              activities={activities}
+              approvedDesigns={approvedDesigns}
+            />
+          </TabsContent>
+          
+          <TabsContent value="print">
+            <PrintTab 
+              activities={activities}
+              shippingAddresses={shippingAddresses}
+            />
+          </TabsContent>
+          
+          <TabsContent value="install">
+            <InstallTab 
+              activities={activities}
+              vehicleDetails={vehicleDetails}
+              installLocations={installLocations}
+            />
+          </TabsContent>
+          
+          <TabsContent value="invoice">
+            <InvoiceTab 
+              activities={activities}
+              invoices={invoices}
+            />
+          </TabsContent>
+        </div>
+        
+        {/* Sidebar with contacts and shortcuts */}
+        {sidebarContent && (
+          <div className="w-64 shrink-0">
+            {sidebarContent}
+          </div>
+        )}
+      </div>
     </Tabs>
   );
 };

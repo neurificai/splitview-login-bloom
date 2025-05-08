@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import DashboardLayout from "@/components/DashboardLayout";
@@ -94,33 +93,31 @@ const OrderDetails = () => {
         {/* Header with back button and order info */}
         <OrderDetailsHeader order={order} />
         
-        <div className="flex flex-col md:flex-row gap-4 mt-4">
-          <div className="w-full md:w-3/4">
-            <OrderDetailsTabs 
-              activities={orderDetails.activities}
-              shippingAddresses={orderDetails.shippingAddresses}
-              vehicleDetails={orderDetails.vehicleDetails}
-              installLocations={orderDetails.installLocations}
-              approvedDesigns={orderDetails.approvedDesigns}
-              invoices={orderDetails.invoices}
-            />
-          </div>
-          
-          <div className="w-full md:w-1/4 space-y-4">
-            <div>
-              <h3 className="font-medium text-xs mb-1 text-gray-700 uppercase tracking-wide">Contacts</h3>
-              <ContactBox contacts={contacts} />
+        {/* Main tabs row - full width */}
+        <OrderDetailsTabs 
+          activities={orderDetails.activities}
+          shippingAddresses={orderDetails.shippingAddresses}
+          vehicleDetails={orderDetails.vehicleDetails}
+          installLocations={orderDetails.installLocations}
+          approvedDesigns={orderDetails.approvedDesigns}
+          invoices={orderDetails.invoices}
+          sidebarContent={
+            <div className="space-y-4">
+              <div>
+                <h3 className="font-medium text-xs mb-1 text-gray-700 uppercase tracking-wide">Contacts</h3>
+                <ContactBox contacts={contacts} />
+              </div>
+              
+              <div>
+                <ShortcutsBox 
+                  hasEstimate={true}
+                  hasApprovedDesign={hasApprovedDesign}
+                  hasInstallPictures={hasInstallPictures}
+                />
+              </div>
             </div>
-            
-            <div>
-              <ShortcutsBox 
-                hasEstimate={true}
-                hasApprovedDesign={hasApprovedDesign}
-                hasInstallPictures={hasInstallPictures}
-              />
-            </div>
-          </div>
-        </div>
+          }
+        />
       </div>
     </DashboardLayout>
   );
