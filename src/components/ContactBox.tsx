@@ -14,14 +14,15 @@ interface ContactPerson {
 
 interface ContactBoxProps {
   contacts: ContactPerson[];
+  inSidebar?: boolean;
 }
 
-const ContactBox: React.FC<ContactBoxProps> = ({ contacts }) => {
+const ContactBox: React.FC<ContactBoxProps> = ({ contacts, inSidebar = false }) => {
   return (
-    <div className="pl-6">
+    <div className={inSidebar ? "px-2 mb-4" : "pl-6"}>
       <h3 className="font-medium text-xs mb-2 text-gray-700 uppercase tracking-wide">Contacts</h3>
       <Card className="shadow-sm border-none bg-white">
-        <CardContent className="p-5">
+        <CardContent className={inSidebar ? "p-3" : "p-5"}>
           <div className="space-y-3">
             {contacts.slice(0, 2).map((contact, index) => (
               <div key={index} className="flex items-center gap-3 p-2 rounded-md hover:bg-sky-50 transition-colors">

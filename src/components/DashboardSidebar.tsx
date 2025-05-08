@@ -3,6 +3,7 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import Logo from "./Logo";
+import ContactBox from "./ContactBox";
 import { 
   LayoutDashboard, 
   MessageSquare, 
@@ -19,8 +20,26 @@ const sidebarItems = [
   { icon: Settings, label: "Settings", href: "/settings" },
 ];
 
+// Sample contacts for the sidebar
+const sidebarContacts = [
+  {
+    name: "Sarah Johnson",
+    role: "Account Manager",
+    email: "sarah.johnson@example.com",
+    phone: "555-123-4567",
+    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=96&h=96&fit=crop"
+  },
+  {
+    name: "Michael Chen",
+    role: "Design Lead",
+    email: "michael.chen@example.com",
+    phone: "555-987-6543"
+  }
+];
+
 const DashboardSidebar: React.FC = () => {
   const location = useLocation();
+  const isOrdersPage = location.pathname === "/orders";
   
   return (
     <div className="hidden md:flex h-screen flex-col border-r bg-white w-64 py-4 px-2 fixed left-0 top-0">
@@ -44,7 +63,7 @@ const DashboardSidebar: React.FC = () => {
         </div>
       </div>
       
-      <nav className="space-y-1 px-2 flex-1">
+      <nav className="space-y-1 px-2 mb-6">
         {sidebarItems.map((item) => (
           <Link
             key={item.label}
@@ -61,6 +80,13 @@ const DashboardSidebar: React.FC = () => {
           </Link>
         ))}
       </nav>
+      
+      {/* Show contacts in sidebar when on the Orders page */}
+      {isOrdersPage && (
+        <div className="flex-1 overflow-auto pb-4">
+          <ContactBox contacts={sidebarContacts} inSidebar={true} />
+        </div>
+      )}
     </div>
   );
 };
