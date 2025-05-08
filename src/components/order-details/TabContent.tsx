@@ -75,9 +75,9 @@ const TabContent: React.FC<TabContentProps> = ({
         </TabsContent>
       </div>
       
-      {/* Sidebar with contacts and shortcuts */}
+      {/* Sidebar with contacts and shortcuts - adjusted margin top */}
       {sidebarContent && (
-        <div className="w-64 shrink-0 mt-[39px]">
+        <div className="w-64 shrink-0 mt-[48px]">
           {sidebarContent}
         </div>
       )}

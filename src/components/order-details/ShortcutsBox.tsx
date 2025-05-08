@@ -2,7 +2,7 @@
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Image, Eye, Download, View } from "lucide-react";
+import { Image, Eye, Download } from "lucide-react";
 
 interface ShortcutsBoxProps {
   hasEstimate?: boolean;
@@ -16,10 +16,10 @@ const ShortcutsBox: React.FC<ShortcutsBoxProps> = ({
   hasInstallPictures = false 
 }) => {
   return (
-    <div>
-      <h3 className="font-medium text-xs mb-1 text-gray-700 uppercase tracking-wide">Quick Shortcuts</h3>
+    <div className="pl-6">
+      <h3 className="font-medium text-xs mb-2 text-gray-700 uppercase tracking-wide">Quick Shortcuts</h3>
       <Card className="shadow-sm border-none bg-white">
-        <CardContent className="pt-4 pb-4 px-4 flex flex-col gap-1.5">
+        <CardContent className="pt-5 pb-5 px-5 flex flex-col gap-2">
           {hasEstimate && (
             <Button 
               variant="outline" 

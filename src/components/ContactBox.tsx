@@ -18,13 +18,13 @@ interface ContactBoxProps {
 
 const ContactBox: React.FC<ContactBoxProps> = ({ contacts }) => {
   return (
-    <div>
-      <h3 className="font-medium text-xs mb-1 text-gray-700 uppercase tracking-wide">Contacts</h3>
+    <div className="pl-6">
+      <h3 className="font-medium text-xs mb-2 text-gray-700 uppercase tracking-wide">Contacts</h3>
       <Card className="shadow-sm border-none bg-white">
-        <CardContent className="p-4">
-          <div className="space-y-2">
+        <CardContent className="p-5">
+          <div className="space-y-3">
             {contacts.slice(0, 2).map((contact, index) => (
-              <div key={index} className="flex items-center gap-2 p-1.5 rounded-md hover:bg-sky-50 transition-colors">
+              <div key={index} className="flex items-center gap-3 p-2 rounded-md hover:bg-sky-50 transition-colors">
                 <Avatar className="h-8 w-8 border border-sky-100">
                   {contact.avatar ? (
                     <AvatarImage src={contact.avatar} alt={contact.name} />
@@ -34,7 +34,7 @@ const ContactBox: React.FC<ContactBoxProps> = ({ contacts }) => {
                     </AvatarFallback>
                   )}
                 </Avatar>
-                <div className="space-y-0 flex-1 min-w-0 overflow-hidden">
+                <div className="space-y-0.5 flex-1 min-w-0 overflow-hidden">
                   <p className="text-xs font-medium leading-none text-gray-800">{contact.name}</p>
                   <p className="text-xs text-sky-600">{contact.role}</p>
                   <div className="flex items-center gap-1 text-xs mt-0.5">
