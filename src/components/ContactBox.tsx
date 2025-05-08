@@ -45,7 +45,7 @@ const ContactBox: React.FC<ContactBoxProps> = ({ contacts }) => {
                   </div>
                   <div className="flex items-center">
                     <Phone className="h-3 w-3 mr-1 text-green-500" />
-                    <span className="text-gray-800 font-medium">{contact.phone}</span>
+                    <span className="text-black font-medium">{contact.phone}</span>
                   </div>
                 </div>
               </div>

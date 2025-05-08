@@ -5,7 +5,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { formatDate, calculateDueDate } from "@/services/orderService";
-import { ChevronDown, ChevronUp, CheckCircle, XCircle } from "lucide-react";
+import { ChevronDown, ChevronUp, CheckCircle, XCircle, ZoomIn } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -138,20 +138,31 @@ const OrdersList: React.FC<OrdersListProps> = ({ orders }) => {
                   </div>
                 </div>
 
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="text-[#007AFF]"
-                  onClick={() => toggleNotes(order.AV_SO)}
-                  aria-expanded={isExpanded}
-                >
-                  <span>Notes</span>
-                  {isExpanded ? (
-                    <ChevronUp size={16} />
-                  ) : (
-                    <ChevronDown size={16} />
-                  )}
-                </Button>
+                <div className="flex items-center gap-2">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="text-[#007AFF]"
+                    onClick={() => toggleNotes(order.AV_SO)}
+                    aria-expanded={isExpanded}
+                  >
+                    <span>Notes</span>
+                    {isExpanded ? (
+                      <ChevronUp size={16} />
+                    ) : (
+                      <ChevronDown size={16} />
+                    )}
+                  </Button>
+                  
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="text-[#007AFF]"
+                  >
+                    <span>Order Details</span>
+                    <ZoomIn size={16} />
+                  </Button>
+                </div>
               </div>
 
               {/* Expandable Notes Section */}
