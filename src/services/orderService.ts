@@ -18,6 +18,35 @@ export interface Order {
   Customer_Notes: string;
 }
 
+// Activity timeline items
+export interface ActivityItem {
+  date: string;
+  title: string;
+  description: string;
+  type: 'estimate' | 'design' | 'print' | 'install' | 'invoice';
+  status: 'completed' | 'pending' | 'upcoming';
+}
+
+// Order details data model
+export interface OrderDetails {
+  order: Order;
+  activities: ActivityItem[];
+  shippingAddresses?: string[];
+  vehicleDetails?: {
+    model?: string;
+    year?: string;
+    availabilityDate?: string;
+  };
+  installLocations?: string[];
+  approvedDesigns?: string[];
+  invoices?: {
+    id: string;
+    date: string;
+    amount: number;
+    status: 'paid' | 'pending';
+  }[];
+}
+
 // View mode and filter options
 export type ViewMode = "card" | "table";
 export type FilterOption = "all" | "inProgress" | "completed";
@@ -94,6 +123,280 @@ export const orders: Order[] = [
   }
 ];
 
+// Mock order details data
+export const orderDetailsData: Record<string, OrderDetails> = {
+  "AVSO1793": {
+    order: orders[0],
+    activities: [
+      {
+        date: "2025-04-28",
+        title: "Estimate Sent",
+        description: "Initial estimate sent to client",
+        type: "estimate",
+        status: "completed"
+      },
+      {
+        date: "2025-05-01",
+        title: "Estimate Signed",
+        description: "Client approved and signed the estimate",
+        type: "estimate",
+        status: "completed"
+      },
+      {
+        date: "2025-05-02",
+        title: "Initial Design",
+        description: "First design mockup sent for review",
+        type: "design",
+        status: "completed"
+      },
+      {
+        date: "2025-05-04",
+        title: "Design Revisions",
+        description: "Client requested changes to color scheme",
+        type: "design",
+        status: "completed"
+      },
+      {
+        date: "2025-05-05",
+        title: "Design Approved",
+        description: "Final design approved by client",
+        type: "design",
+        status: "completed"
+      },
+      {
+        date: "2025-05-06",
+        title: "Art Sent to Print",
+        description: "Design files sent to production team",
+        type: "print",
+        status: "completed"
+      },
+      {
+        date: "2025-05-15",
+        title: "Install Scheduled",
+        description: "Installation scheduled for May 20th",
+        type: "install",
+        status: "upcoming"
+      },
+    ],
+    shippingAddresses: [
+      "3306 Proforce Ave, Charlotte, NC 28205",
+      "3310 Proforce Ave, Charlotte, NC 28205",
+      "3314 Proforce Ave, Charlotte, NC 28205"
+    ],
+    vehicleDetails: {
+      model: "Ford Transit 2022",
+      year: "2022",
+      availabilityDate: "2025-05-18"
+    },
+    installLocations: [
+      "Charlotte HQ", "Charlotte Warehouse", "Charlotte Distribution Center"
+    ],
+    approvedDesigns: ["Design_v2_final.pdf", "Installation_diagram.pdf"],
+    invoices: [
+      {
+        id: "INV-2025-045",
+        date: "2025-05-01",
+        amount: 2500,
+        status: "paid"
+      },
+      {
+        id: "INV-2025-067",
+        date: "2025-05-15",
+        amount: 2500,
+        status: "pending"
+      }
+    ]
+  },
+  "AVSO1794": {
+    order: orders[1],
+    activities: [
+      {
+        date: "2025-05-03",
+        title: "Estimate Sent",
+        description: "Initial estimate sent to client",
+        type: "estimate",
+        status: "completed"
+      },
+      {
+        date: "2025-05-05",
+        title: "Estimate Signed",
+        description: "Client approved and signed the estimate",
+        type: "estimate",
+        status: "completed"
+      },
+      {
+        date: "2025-05-08",
+        title: "Frame Design Approved",
+        description: "Frame specifications approved",
+        type: "design",
+        status: "completed"
+      },
+      {
+        date: "2025-05-12",
+        title: "Frames in Production",
+        description: "Frames being manufactured",
+        type: "print",
+        status: "completed"
+      },
+      {
+        date: "2025-05-15",
+        title: "Install Preparation",
+        description: "Site preparation for frame installation",
+        type: "install",
+        status: "completed"
+      }
+    ],
+    shippingAddresses: [
+      "4221 Oak Street, Austin, TX 78701"
+    ],
+    installLocations: [
+      "Austin Main Office", "Austin East Wing"
+    ],
+    approvedDesigns: ["Frame_specs.pdf"],
+    invoices: [
+      {
+        id: "INV-2025-052",
+        date: "2025-05-05",
+        amount: 3200,
+        status: "paid"
+      }
+    ]
+  },
+  "AVSO1795": {
+    order: orders[2],
+    activities: [
+      {
+        date: "2025-04-20",
+        title: "Estimate Sent",
+        description: "Initial estimate sent to client",
+        type: "estimate",
+        status: "completed"
+      },
+      {
+        date: "2025-04-22",
+        title: "Estimate Signed",
+        description: "Client approved and signed the estimate",
+        type: "estimate",
+        status: "completed"
+      },
+      {
+        date: "2025-04-24",
+        title: "Initial Design",
+        description: "First design mockup sent for review",
+        type: "design",
+        status: "completed"
+      },
+      {
+        date: "2025-04-26",
+        title: "Design Revisions",
+        description: "Client requested branding changes",
+        type: "design",
+        status: "completed"
+      },
+      {
+        date: "2025-04-28",
+        title: "Design Approved",
+        description: "Final design approved by client",
+        type: "design",
+        status: "completed"
+      },
+      {
+        date: "2025-04-30",
+        title: "Art Sent to Print",
+        description: "Design files sent to production team",
+        type: "print",
+        status: "completed"
+      },
+      {
+        date: "2025-05-05",
+        title: "Install Started",
+        description: "Installation team deployed",
+        type: "install",
+        status: "completed"
+      },
+      {
+        date: "2025-05-07",
+        title: "Installation Complete",
+        description: "All items successfully installed",
+        type: "install",
+        status: "completed"
+      },
+      {
+        date: "2025-05-08",
+        title: "Final Invoice Sent",
+        description: "Invoice for remaining balance sent",
+        type: "invoice",
+        status: "pending"
+      }
+    ],
+    shippingAddresses: [
+      "1800 Fleet Avenue, Denver, CO 80204",
+      "1810 Fleet Avenue, Denver, CO 80204"
+    ],
+    vehicleDetails: {
+      model: "Various Fleet Vehicles",
+      year: "2023-2024",
+      availabilityDate: "2025-05-01"
+    },
+    installLocations: [
+      "Denver Main Depot", "Denver Secondary Lot"
+    ],
+    approvedDesigns: ["Fleet_design_final.pdf", "Vehicle_layout.pdf", "Brand_guidelines.pdf"],
+    invoices: [
+      {
+        id: "INV-2025-039",
+        date: "2025-04-22",
+        amount: 12000,
+        status: "paid"
+      },
+      {
+        id: "INV-2025-064",
+        date: "2025-05-08",
+        amount: 12000,
+        status: "pending"
+      }
+    ]
+  },
+  "AVSO1796": {
+    order: orders[3],
+    activities: [
+      {
+        date: "2025-05-01",
+        title: "Estimate Sent",
+        description: "Initial estimate sent to client",
+        type: "estimate",
+        status: "completed"
+      },
+      {
+        date: "2025-05-03",
+        title: "Estimate Signed",
+        description: "Client approved and signed the estimate",
+        type: "estimate",
+        status: "completed"
+      },
+      {
+        date: "2025-05-04",
+        title: "Initial Design",
+        description: "First design mockup sent for review",
+        type: "design",
+        status: "pending"
+      }
+    ],
+    shippingAddresses: [
+      "800 Tech Drive, Seattle, WA 98109"
+    ],
+    approvedDesigns: [],
+    invoices: [
+      {
+        id: "INV-2025-049",
+        date: "2025-05-03",
+        amount: 1800,
+        status: "paid"
+      }
+    ]
+  }
+};
+
 // Helper function to calculate due date (15 days from order date)
 export const calculateDueDate = (orderDate: string): Date => {
   const date = new Date(orderDate);
@@ -109,4 +412,14 @@ export const formatDate = (dateString: string): string => {
     day: 'numeric',
     year: 'numeric'
   });
+};
+
+// Find an order by its ID
+export const getOrderById = (id: string): Order | undefined => {
+  return orders.find(order => order.AV_SO === id);
+};
+
+// Get order details by order ID
+export const getOrderDetailsById = (id: string): OrderDetails | undefined => {
+  return orderDetailsData[id];
 };

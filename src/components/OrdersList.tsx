@@ -8,6 +8,7 @@ import { formatDate, calculateDueDate } from "@/services/orderService";
 import { ChevronDown, ChevronUp, CheckCircle, XCircle, ZoomIn } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { Link } from "react-router-dom";
 
 interface OrdersListProps {
   orders: Order[];
@@ -154,14 +155,16 @@ const OrdersList: React.FC<OrdersListProps> = ({ orders }) => {
                     )}
                   </Button>
                   
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="text-[#007AFF]"
-                  >
-                    <span>Order Details</span>
-                    <ZoomIn size={16} />
-                  </Button>
+                  <Link to={`/order/${order.AV_SO}`}>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="text-[#007AFF]"
+                    >
+                      <span>Order Details</span>
+                      <ZoomIn size={16} />
+                    </Button>
+                  </Link>
                 </div>
               </div>
 
