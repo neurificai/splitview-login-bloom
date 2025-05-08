@@ -74,54 +74,64 @@ const OrderDetailsTabs: React.FC<OrderDetailsTabsProps> = ({
 
   return (
     <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-      <div className="relative flex mb-8">
-        {/* Arrow-shaped tabs */}
+      <div className="relative flex mb-10">
+        {/* Arrow-shaped tabs with improved styling */}
         <div 
           className={cn(
-            "flex-1 py-2 px-3 text-center relative arrow-tab first-tab",
-            tabStatus.estimate ? "bg-[#33C3F0] text-white" : "bg-gray-200 text-gray-600"
+            "flex-1 py-3 px-4 text-center relative arrow-tab first-tab font-medium transition-all duration-300",
+            activeTab === "estimate" ? "bg-[#33C3F0] text-white" : 
+            tabStatus.estimate ? "bg-[#8DE3FD] text-white" : "bg-gray-200 text-gray-600",
+            "hover:brightness-105"
           )}
-          data-state={tabStatus.estimate ? "active" : "inactive"}
+          data-state={activeTab === "estimate" ? "active" : tabStatus.estimate ? "completed" : "inactive"}
           onClick={() => handleTabClick("estimate")}
         >
           Estimate
         </div>
         <div 
           className={cn(
-            "flex-1 py-2 px-3 text-center relative arrow-tab",
-            tabStatus.design ? "bg-[#33C3F0] text-white" : "bg-gray-200 text-gray-600"
+            "flex-1 py-3 px-4 text-center relative arrow-tab font-medium transition-all duration-300",
+            activeTab === "design" ? "bg-[#33C3F0] text-white" : 
+            tabStatus.design ? "bg-[#8DE3FD] text-white" : "bg-gray-200 text-gray-600",
+            "hover:brightness-105"
           )}
-          data-state={tabStatus.design ? "active" : "inactive"}
+          data-state={activeTab === "design" ? "active" : tabStatus.design ? "completed" : "inactive"}
           onClick={() => handleTabClick("design")}
         >
           Design
         </div>
         <div 
           className={cn(
-            "flex-1 py-2 px-3 text-center relative arrow-tab",
-            tabStatus.print ? "bg-[#33C3F0] text-white" : "bg-gray-200 text-gray-600"
+            "flex-1 py-3 px-4 text-center relative arrow-tab font-medium transition-all duration-300",
+            activeTab === "print" ? "bg-[#33C3F0] text-white" : 
+            tabStatus.print ? "bg-[#8DE3FD] text-white" : "bg-gray-200 text-gray-600",
+            "hover:brightness-105"
           )}
-          data-state={tabStatus.print ? "active" : "inactive"}
+          data-state={activeTab === "print" ? "active" : tabStatus.print ? "completed" : "inactive"}
           onClick={() => handleTabClick("print")}
         >
           Print
         </div>
         <div 
           className={cn(
-            "flex-1 py-2 px-3 text-center relative arrow-tab",
-            tabStatus.install ? "bg-[#33C3F0] text-white" : "bg-gray-200 text-gray-600"
+            "flex-1 py-3 px-4 text-center relative arrow-tab font-medium transition-all duration-300",
+            activeTab === "install" ? "bg-[#33C3F0] text-white" : 
+            tabStatus.install ? "bg-[#8DE3FD] text-white" : "bg-gray-200 text-gray-600",
+            "hover:brightness-105"
           )}
-          data-state={tabStatus.install ? "active" : "inactive"}
+          data-state={activeTab === "install" ? "active" : tabStatus.install ? "completed" : "inactive"}
           onClick={() => handleTabClick("install")}
         >
           Install
         </div>
         <div 
           className={cn(
-            "flex-1 py-2 px-3 text-center relative arrow-tab last-tab",
-            tabStatus.invoice ? "bg-[#33C3F0] text-white" : "bg-gray-200 text-gray-600"
+            "flex-1 py-3 px-4 text-center relative arrow-tab last-tab font-medium transition-all duration-300",
+            activeTab === "invoice" ? "bg-[#33C3F0] text-white" : 
+            tabStatus.invoice ? "bg-[#8DE3FD] text-white" : "bg-gray-200 text-gray-600",
+            "hover:brightness-105"
           )}
-          data-state={tabStatus.invoice ? "active" : "inactive"}
+          data-state={activeTab === "invoice" ? "active" : tabStatus.invoice ? "completed" : "inactive"}
           onClick={() => handleTabClick("invoice")}
         >
           Invoice
