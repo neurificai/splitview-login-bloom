@@ -95,7 +95,7 @@ const OrderDetails = () => {
         <OrderDetailsHeader order={order} />
         
         <div className="flex gap-6">
-          {/* Main content area - now wrapped in a div that takes 70% width */}
+          {/* Main content area - tabs section */}
           <div className="flex-1">
             <OrderDetailsTabs 
               activities={orderDetails.activities}
@@ -107,14 +107,18 @@ const OrderDetails = () => {
             />
           </div>
           
-          {/* Sidebar for contacts and shortcuts */}
-          <div className="w-80 space-y-4">
-            <ContactBox contacts={contacts} />
-            <ShortcutsBox 
-              hasEstimate={true}
-              hasApprovedDesign={hasApprovedDesign}
-              hasInstallPictures={hasInstallPictures}
-            />
+          {/* Sidebar with equal height cards */}
+          <div className="w-80 flex flex-col gap-4">
+            <div className="h-1/2">
+              <ContactBox contacts={contacts} />
+            </div>
+            <div className="h-1/2">
+              <ShortcutsBox 
+                hasEstimate={true}
+                hasApprovedDesign={hasApprovedDesign}
+                hasInstallPictures={hasInstallPictures}
+              />
+            </div>
           </div>
         </div>
       </div>

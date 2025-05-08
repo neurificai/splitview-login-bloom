@@ -18,26 +18,26 @@ interface ContactBoxProps {
 
 const ContactBox: React.FC<ContactBoxProps> = ({ contacts }) => {
   return (
-    <Card className="shadow-md border-none bg-white">
-      <CardHeader className="pb-2">
-        <CardTitle className="text-base font-medium text-gray-700">Your Contacts</CardTitle>
+    <Card className="shadow-md border-none bg-white h-full transition-all hover:shadow-lg">
+      <CardHeader className="pb-2 bg-gradient-to-r from-sky-50 to-white">
+        <CardTitle className="text-base font-medium text-sky-700">Your Contacts</CardTitle>
       </CardHeader>
-      <CardContent className="pt-0">
-        <div className="space-y-4">
+      <CardContent className="pt-3">
+        <div className="space-y-3">
           {contacts.map((contact, index) => (
-            <div key={index} className="flex items-center gap-3">
-              <Avatar className="h-10 w-10 border">
+            <div key={index} className="flex items-center gap-3 p-2 rounded-lg hover:bg-sky-50 transition-colors">
+              <Avatar className="h-10 w-10 border border-sky-100 shadow-sm">
                 {contact.avatar ? (
                   <AvatarImage src={contact.avatar} alt={contact.name} />
                 ) : (
-                  <AvatarFallback className="bg-orange-100 text-orange-600">
+                  <AvatarFallback className="bg-gradient-to-br from-sky-100 to-blue-100 text-sky-600">
                     {contact.name.split(" ").map((n) => n[0]).join("")}
                   </AvatarFallback>
                 )}
               </Avatar>
-              <div className="space-y-1 flex-1 min-w-0 overflow-hidden">
-                <p className="text-sm font-medium leading-none">{contact.name}</p>
-                <p className="text-xs text-muted-foreground">{contact.role}</p>
+              <div className="space-y-0.5 flex-1 min-w-0 overflow-hidden">
+                <p className="text-sm font-medium leading-none text-gray-800">{contact.name}</p>
+                <p className="text-xs text-sky-600 font-medium">{contact.role}</p>
                 <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 text-xs mt-1">
                   <div className="flex items-center">
                     <Mail className="h-3 w-3 mr-1 text-blue-500" />
@@ -45,7 +45,7 @@ const ContactBox: React.FC<ContactBoxProps> = ({ contacts }) => {
                   </div>
                   <div className="flex items-center">
                     <Phone className="h-3 w-3 mr-1 text-green-500" />
-                    <span className="text-black font-medium">{contact.phone}</span>
+                    <span className="text-gray-700 font-medium">{contact.phone}</span>
                   </div>
                 </div>
               </div>
