@@ -120,7 +120,7 @@ const OrderDetails = () => {
             <div className="w-full">
               <div className="h-2 bg-gray-200 rounded-full w-full relative">
                 <div 
-                  className="h-full bg-blue-500 rounded-full absolute left-0 transition-all duration-500 ease-out"
+                  className="h-full bg-green-500 rounded-full absolute left-0 transition-all duration-500 ease-out"
                   style={{ width: `${order.Job_Status_Pct}%` }}
                   aria-valuenow={order.Job_Status_Pct}
                   aria-valuemin={0}
@@ -133,7 +133,7 @@ const OrderDetails = () => {
             {/* Progress steps */}
             <div className="flex justify-between mt-4">
               <div className="flex flex-col items-center w-1/5">
-                <div className="h-6 w-6 rounded-full bg-blue-500 flex items-center justify-center">
+                <div className="h-6 w-6 rounded-full bg-green-500 flex items-center justify-center">
                   <svg className="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
@@ -143,7 +143,7 @@ const OrderDetails = () => {
               
               <div className="flex flex-col items-center w-1/5">
                 {order.Job_Status_Pct >= 30 ? (
-                  <div className="h-6 w-6 rounded-full bg-blue-500 flex items-center justify-center">
+                  <div className="h-6 w-6 rounded-full bg-green-500 flex items-center justify-center">
                     <svg className="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
@@ -158,7 +158,7 @@ const OrderDetails = () => {
               
               <div className="flex flex-col items-center w-1/5">
                 {order.Job_Status_Pct >= 60 ? (
-                  <div className="h-6 w-6 rounded-full bg-blue-500 flex items-center justify-center">
+                  <div className="h-6 w-6 rounded-full bg-green-500 flex items-center justify-center">
                     <svg className="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
@@ -173,7 +173,7 @@ const OrderDetails = () => {
               
               <div className="flex flex-col items-center w-1/5">
                 {order.Job_Status_Pct >= 80 ? (
-                  <div className="h-6 w-6 rounded-full bg-blue-500 flex items-center justify-center">
+                  <div className="h-6 w-6 rounded-full bg-green-500 flex items-center justify-center">
                     <svg className="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
@@ -188,7 +188,7 @@ const OrderDetails = () => {
               
               <div className="flex flex-col items-center w-1/5">
                 {order.Job_Status_Pct === 100 ? (
-                  <div className="h-6 w-6 rounded-full bg-blue-500 flex items-center justify-center">
+                  <div className="h-6 w-6 rounded-full bg-green-500 flex items-center justify-center">
                     <svg className="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>

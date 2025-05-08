@@ -73,7 +73,7 @@ const OrderDetailsTabs: React.FC<OrderDetailsTabsProps> = ({
           {/* Activity Section */}
           <div className="md:col-span-2 bg-white rounded-xl border p-6 shadow-sm">
             <h3 className="text-lg font-medium mb-6 flex items-center gap-2">
-              <Activity size={18} className="text-blue-500" />
+              <Activity size={18} className="text-green-500" />
               Activity
             </h3>
             
@@ -88,9 +88,9 @@ const OrderDetailsTabs: React.FC<OrderDetailsTabsProps> = ({
                       )}
                       
                       <div className="flex items-start">
-                        <div className="mr-4 bg-blue-100 rounded-full p-1 z-10">
+                        <div className="mr-4 bg-green-100 rounded-full p-1 z-10">
                           {activity.status === "completed" ? (
-                            <Check className="h-6 w-6 text-blue-500" />
+                            <Check className="h-6 w-6 text-green-500" />
                           ) : (
                             <Clock className="h-6 w-6 text-amber-500" />
                           )}
@@ -112,7 +112,7 @@ const OrderDetailsTabs: React.FC<OrderDetailsTabsProps> = ({
                 <h4 className="font-medium mb-2">Next Steps</h4>
                 {estimateActivities.some(a => a.status === "pending") ? (
                   <div className="flex items-center gap-2 text-gray-600 text-sm">
-                    <ArrowRight size={16} className="text-blue-500" />
+                    <ArrowRight size={16} className="text-green-500" />
                     <span>Pending estimate approval</span>
                   </div>
                 ) : (
@@ -175,7 +175,7 @@ const OrderDetailsTabs: React.FC<OrderDetailsTabsProps> = ({
           {/* Activity Section */}
           <div className="md:col-span-2 bg-white rounded-xl border p-6 shadow-sm">
             <h3 className="text-lg font-medium mb-6 flex items-center gap-2">
-              <Activity size={18} className="text-blue-500" />
+              <Activity size={18} className="text-green-500" />
               Activity
             </h3>
             
@@ -190,9 +190,9 @@ const OrderDetailsTabs: React.FC<OrderDetailsTabsProps> = ({
                       )}
                       
                       <div className="flex items-start">
-                        <div className="mr-4 bg-blue-100 rounded-full p-1 z-10">
+                        <div className="mr-4 bg-green-100 rounded-full p-1 z-10">
                           {activity.status === "completed" ? (
-                            <Check className="h-6 w-6 text-blue-500" />
+                            <Check className="h-6 w-6 text-green-500" />
                           ) : (
                             <Clock className="h-6 w-6 text-amber-500" />
                           )}
@@ -286,7 +286,7 @@ const OrderDetailsTabs: React.FC<OrderDetailsTabsProps> = ({
           {/* Activity Section */}
           <div className="md:col-span-2 bg-white rounded-xl border p-6 shadow-sm">
             <h3 className="text-lg font-medium mb-6 flex items-center gap-2">
-              <Activity size={18} className="text-blue-500" />
+              <Activity size={18} className="text-green-500" />
               Activity
             </h3>
             
@@ -301,9 +301,9 @@ const OrderDetailsTabs: React.FC<OrderDetailsTabsProps> = ({
                       )}
                       
                       <div className="flex items-start">
-                        <div className="mr-4 bg-blue-100 rounded-full p-1 z-10">
+                        <div className="mr-4 bg-green-100 rounded-full p-1 z-10">
                           {activity.status === "completed" ? (
-                            <Check className="h-6 w-6 text-blue-500" />
+                            <Check className="h-6 w-6 text-green-500" />
                           ) : (
                             <Clock className="h-6 w-6 text-amber-500" />
                           )}
@@ -378,7 +378,7 @@ const OrderDetailsTabs: React.FC<OrderDetailsTabsProps> = ({
           {/* Activity Section */}
           <div className="md:col-span-2 bg-white rounded-xl border p-6 shadow-sm">
             <h3 className="text-lg font-medium mb-6 flex items-center gap-2">
-              <Activity size={18} className="text-blue-500" />
+              <Activity size={18} className="text-green-500" />
               Activity
             </h3>
             
@@ -393,9 +393,9 @@ const OrderDetailsTabs: React.FC<OrderDetailsTabsProps> = ({
                       )}
                       
                       <div className="flex items-start">
-                        <div className="mr-4 bg-blue-100 rounded-full p-1 z-10">
+                        <div className="mr-4 bg-green-100 rounded-full p-1 z-10">
                           {activity.status === "completed" ? (
-                            <Check className="h-6 w-6 text-blue-500" />
+                            <Check className="h-6 w-6 text-green-500" />
                           ) : (
                             <Clock className="h-6 w-6 text-amber-500" />
                           )}
@@ -488,7 +488,7 @@ const OrderDetailsTabs: React.FC<OrderDetailsTabsProps> = ({
           {/* Activity Section */}
           <div className="md:col-span-2 bg-white rounded-xl border p-6 shadow-sm">
             <h3 className="text-lg font-medium mb-6 flex items-center gap-2">
-              <Activity size={18} className="text-blue-500" />
+              <Activity size={18} className="text-green-500" />
               Activity
             </h3>
             
@@ -503,9 +503,9 @@ const OrderDetailsTabs: React.FC<OrderDetailsTabsProps> = ({
                       )}
                       
                       <div className="flex items-start">
-                        <div className="mr-4 bg-blue-100 rounded-full p-1 z-10">
+                        <div className="mr-4 bg-green-100 rounded-full p-1 z-10">
                           {activity.status === "completed" ? (
-                            <Check className="h-6 w-6 text-blue-500" />
+                            <Check className="h-6 w-6 text-green-500" />
                           ) : (
                             <Clock className="h-6 w-6 text-amber-500" />
                           )}
@@ -527,7 +527,7 @@ const OrderDetailsTabs: React.FC<OrderDetailsTabsProps> = ({
                 <div className="pt-4">
                   <h4 className="font-medium mb-2">Next Steps</h4>
                   <div className="flex items-center gap-2 text-gray-600 text-sm">
-                    <ArrowRight size={16} className="text-blue-500" />
+                    <ArrowRight size={16} className="text-green-500" />
                     <span>Complete payment for pending invoice</span>
                   </div>
                 </div>

@@ -72,7 +72,7 @@ const OrderCard: React.FC<OrderCardProps> = ({ order }) => {
         <div className="mb-3">
           <div className="flex justify-between items-center mb-1">
             <span className="text-sm font-medium">Progress</span>
-            <span className="text-sm font-semibold text-[#007AFF]">{order.Job_Status_Pct}%</span>
+            <span className="text-sm font-semibold text-green-600">{order.Job_Status_Pct}%</span>
           </div>
           
           <Progress 
