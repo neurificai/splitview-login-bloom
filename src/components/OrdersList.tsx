@@ -70,16 +70,16 @@ const OrdersList: React.FC<OrdersListProps> = ({ orders, viewMode }) => {
                 </div>
               </div>
 
-              {/* Progress Bar - Horizontal, 90% width */}
+              {/* Progress Bar - Horizontal, 90% width, now green and thinner */}
               <div className="mb-4 w-full">
                 <div className="flex justify-between items-center mb-1">
                   <span className="text-xs text-gray-500">Progress</span>
-                  <span className="text-sm font-medium text-[#007AFF]">{order.Job_Status_Pct}%</span>
+                  <span className="text-sm font-medium text-green-600">{order.Job_Status_Pct}%</span>
                 </div>
                 <div className="w-[90%] mx-auto">
-                  <div className="h-2 bg-[#E0E4EA] rounded-full w-full relative">
+                  <div className="h-1 bg-[#E0E4EA] rounded-full w-full relative">
                     <div 
-                      className="h-full bg-[#007AFF] rounded-full absolute left-0 transition-all duration-500 ease-out"
+                      className="h-full bg-green-500 rounded-full absolute left-0 transition-all duration-500 ease-out"
                       style={{ width: `${order.Job_Status_Pct}%` }}
                       aria-valuenow={order.Job_Status_Pct}
                       aria-valuemin={0}
