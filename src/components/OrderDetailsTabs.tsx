@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { ActivityItem } from "@/services/orderService";
 import EstimateTab from "./order-details/tabs/EstimateTab";
@@ -35,6 +35,9 @@ const OrderDetailsTabs: React.FC<OrderDetailsTabsProps> = ({
   approvedDesigns,
   invoices
 }) => {
+  // Add state to control the active tab
+  const [activeTab, setActiveTab] = useState<string>("estimate");
+  
   // Determine progress stage based on activities
   const getTabStatus = () => {
     const stages = {
@@ -64,8 +67,13 @@ const OrderDetailsTabs: React.FC<OrderDetailsTabsProps> = ({
   
   const tabStatus = getTabStatus();
 
+  // Handle tab selection
+  const handleTabClick = (tabValue: string) => {
+    setActiveTab(tabValue);
+  };
+
   return (
-    <Tabs defaultValue="estimate" className="w-full">
+    <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
       <div className="relative flex mb-8">
         {/* Arrow-shaped tabs */}
         <div 
@@ -74,7 +82,7 @@ const OrderDetailsTabs: React.FC<OrderDetailsTabsProps> = ({
             tabStatus.estimate ? "bg-[#33C3F0] text-white" : "bg-gray-200 text-gray-600"
           )}
           data-state={tabStatus.estimate ? "active" : "inactive"}
-          onClick={() => document.querySelector('[data-value="estimate"]')?.click()}
+          onClick={() => handleTabClick("estimate")}
         >
           Estimate
         </div>
@@ -84,7 +92,7 @@ const OrderDetailsTabs: React.FC<OrderDetailsTabsProps> = ({
             tabStatus.design ? "bg-[#33C3F0] text-white" : "bg-gray-200 text-gray-600"
           )}
           data-state={tabStatus.design ? "active" : "inactive"}
-          onClick={() => document.querySelector('[data-value="design"]')?.click()}
+          onClick={() => handleTabClick("design")}
         >
           Design
         </div>
@@ -94,7 +102,7 @@ const OrderDetailsTabs: React.FC<OrderDetailsTabsProps> = ({
             tabStatus.print ? "bg-[#33C3F0] text-white" : "bg-gray-200 text-gray-600"
           )}
           data-state={tabStatus.print ? "active" : "inactive"}
-          onClick={() => document.querySelector('[data-value="print"]')?.click()}
+          onClick={() => handleTabClick("print")}
         >
           Print
         </div>
@@ -104,7 +112,7 @@ const OrderDetailsTabs: React.FC<OrderDetailsTabsProps> = ({
             tabStatus.install ? "bg-[#33C3F0] text-white" : "bg-gray-200 text-gray-600"
           )}
           data-state={tabStatus.install ? "active" : "inactive"}
-          onClick={() => document.querySelector('[data-value="install"]')?.click()}
+          onClick={() => handleTabClick("install")}
         >
           Install
         </div>
@@ -114,7 +122,7 @@ const OrderDetailsTabs: React.FC<OrderDetailsTabsProps> = ({
             tabStatus.invoice ? "bg-[#33C3F0] text-white" : "bg-gray-200 text-gray-600"
           )}
           data-state={tabStatus.invoice ? "active" : "inactive"}
-          onClick={() => document.querySelector('[data-value="invoice"]')?.click()}
+          onClick={() => handleTabClick("invoice")}
         >
           Invoice
         </div>
