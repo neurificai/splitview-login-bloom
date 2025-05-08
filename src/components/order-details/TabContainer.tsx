@@ -25,14 +25,7 @@ const TabContainer: React.FC<TabContainerProps> = ({ mainTab, children, colorSch
   
   // Get the active color for the underline based on the main tab
   const getActiveColor = () => {
-    switch(mainTab) {
-      case "estimate": return "border-[#33C3F0]";
-      case "design": return "border-[#33C3F0]";
-      case "print": return "border-[#33C3F0]";
-      case "install": return "border-[#33C3F0]";
-      case "invoice": return "border-[#33C3F0]";
-      default: return "border-[#33C3F0]";
-    }
+    return "border-[#33C3F0]";
   };
   
   const activeColor = getActiveColor();
@@ -43,10 +36,7 @@ const TabContainer: React.FC<TabContainerProps> = ({ mainTab, children, colorSch
         <button 
           onClick={() => handleSubTabChange("activity")}
           className={cn(
-            "px-5 py-2 text-sm font-medium transition-colors relative",
-            activeSubTab === "activity" 
-              ? "text-[#33C3F0]" 
-              : "text-gray-500 hover:text-gray-900"
+            "px-5 py-2 text-sm font-medium transition-colors relative text-gray-700",
           )}
         >
           Activity
@@ -57,10 +47,7 @@ const TabContainer: React.FC<TabContainerProps> = ({ mainTab, children, colorSch
         <button 
           onClick={() => handleSubTabChange("collaborate")}
           className={cn(
-            "px-5 py-2 text-sm font-medium transition-colors relative",
-            activeSubTab === "collaborate" 
-              ? "text-[#33C3F0]" 
-              : "text-gray-500 hover:text-gray-900"
+            "px-5 py-2 text-sm font-medium transition-colors relative text-gray-700",
           )}
         >
           Collaborate
@@ -71,10 +58,7 @@ const TabContainer: React.FC<TabContainerProps> = ({ mainTab, children, colorSch
         <button 
           onClick={() => handleSubTabChange("detail")}
           className={cn(
-            "px-5 py-2 text-sm font-medium transition-colors relative",
-            activeSubTab === "detail" 
-              ? "text-[#33C3F0]" 
-              : "text-gray-500 hover:text-gray-900"
+            "px-5 py-2 text-sm font-medium transition-colors relative text-gray-700",
           )}
         >
           Detail
