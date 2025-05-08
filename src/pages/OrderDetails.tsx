@@ -106,52 +106,32 @@ const OrderDetails = () => {
         {/* Header with back button and order info */}
         <OrderDetailsHeader order={order} />
         
-        <div className="flex flex-col md:flex-row gap-4">
+        <div className="flex flex-col md:flex-row">
           {/* Main content area - tabs section */}
-          <div className="flex-1">
-            <div className="flex items-center justify-between mb-4">
-              <div className="inline-flex h-10 items-center justify-center rounded-lg p-1 text-muted-foreground gap-8 border-b">
-                <button className="px-5 py-2 text-sm font-medium transition-colors relative text-gray-700">
-                  Activity
-                  <span className="absolute inset-x-0 bottom-0 h-0.5 bg-[#33C3F0]"></span>
-                </button>
-                <button className="px-5 py-2 text-sm font-medium transition-colors relative text-gray-700">
-                  Collaborate
-                </button>
-                <button className="px-5 py-2 text-sm font-medium transition-colors relative text-gray-700">
-                  Detail
-                </button>
-              </div>
-              
-              <div className="flex items-center">
-                <h3 className="font-medium text-sm text-gray-700 uppercase tracking-wide">Contacts</h3>
-              </div>
+          <div className="flex-1 md:pr-4">
+            <OrderDetailsTabs 
+              activities={orderDetails.activities}
+              shippingAddresses={orderDetails.shippingAddresses}
+              vehicleDetails={orderDetails.vehicleDetails}
+              installLocations={orderDetails.installLocations}
+              approvedDesigns={orderDetails.approvedDesigns}
+              invoices={orderDetails.invoices}
+            />
+          </div>
+          
+          {/* Right sidebar */}
+          <div className="w-full md:w-80 flex flex-col gap-4 mt-4 md:mt-0">
+            <div className="mb-4">
+              <h3 className="font-medium text-base mb-2 text-gray-700 uppercase tracking-wide">Contacts</h3>
+              <ContactBox contacts={contacts} />
             </div>
             
-            <div className="flex flex-col md:flex-row gap-4">
-              <div className="flex-1">
-                <OrderDetailsTabs 
-                  activities={orderDetails.activities}
-                  shippingAddresses={orderDetails.shippingAddresses}
-                  vehicleDetails={orderDetails.vehicleDetails}
-                  installLocations={orderDetails.installLocations}
-                  approvedDesigns={orderDetails.approvedDesigns}
-                  invoices={orderDetails.invoices}
-                />
-              </div>
-              
-              {/* Right sidebar */}
-              <div className="w-full md:w-80 flex flex-col gap-4">
-                <ContactBox contacts={contacts} />
-                
-                <div className="mt-2">
-                  <ShortcutsBox 
-                    hasEstimate={true}
-                    hasApprovedDesign={hasApprovedDesign}
-                    hasInstallPictures={hasInstallPictures}
-                  />
-                </div>
-              </div>
+            <div className="mt-4">
+              <ShortcutsBox 
+                hasEstimate={true}
+                hasApprovedDesign={hasApprovedDesign}
+                hasInstallPictures={hasInstallPictures}
+              />
             </div>
           </div>
         </div>
