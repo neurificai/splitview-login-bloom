@@ -1,6 +1,6 @@
 
 import React, { useState } from "react";
-import { TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { cn } from "@/lib/utils";
 
 interface TabContainerProps {
   mainTab: string;
@@ -25,32 +25,41 @@ const TabContainer: React.FC<TabContainerProps> = ({ mainTab, children, colorSch
   
   return (
     <div className="mb-6">
-      <TabsList className="inline-flex h-9 items-center justify-center rounded-lg bg-white border p-1 text-muted-foreground mb-4 w-full sm:w-auto">
-        <TabsTrigger 
-          value="activity" 
+      <div className="inline-flex h-9 items-center justify-center rounded-lg bg-white border p-1 text-muted-foreground mb-4 w-full sm:w-auto gap-2">
+        <button 
           onClick={() => handleSubTabChange("activity")}
-          className={activeSubTab === "activity" ? `${colorScheme.activity} text-gray-800` : ""}
-          data-state={activeSubTab === "activity" ? "active" : ""}
+          className={cn(
+            "px-4 py-1.5 text-sm font-medium rounded-md transition-colors",
+            activeSubTab === "activity" 
+              ? `${colorScheme.activity} text-gray-800 shadow-sm` 
+              : "bg-blue-50 text-gray-600 hover:bg-blue-100"
+          )}
         >
           Activity
-        </TabsTrigger>
-        <TabsTrigger 
-          value="collaborate" 
+        </button>
+        <button 
           onClick={() => handleSubTabChange("collaborate")}
-          className={activeSubTab === "collaborate" ? `${colorScheme.collaborate} text-gray-800` : ""}
-          data-state={activeSubTab === "collaborate" ? "active" : ""}
+          className={cn(
+            "px-4 py-1.5 text-sm font-medium rounded-md transition-colors",
+            activeSubTab === "collaborate" 
+              ? `${colorScheme.collaborate} text-gray-800 shadow-sm` 
+              : "bg-blue-50 text-gray-600 hover:bg-blue-100"
+          )}
         >
           Collaborate
-        </TabsTrigger>
-        <TabsTrigger 
-          value="detail" 
+        </button>
+        <button 
           onClick={() => handleSubTabChange("detail")}
-          className={activeSubTab === "detail" ? `${colorScheme.detail} text-gray-800` : ""}
-          data-state={activeSubTab === "detail" ? "active" : ""}
+          className={cn(
+            "px-4 py-1.5 text-sm font-medium rounded-md transition-colors",
+            activeSubTab === "detail" 
+              ? `${colorScheme.detail} text-gray-800 shadow-sm` 
+              : "bg-blue-50 text-gray-600 hover:bg-blue-100"
+          )}
         >
           Detail
-        </TabsTrigger>
-      </TabsList>
+        </button>
+      </div>
       
       <div className="mt-4">
         {children[activeSubTab as keyof typeof children]}

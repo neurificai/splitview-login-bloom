@@ -4,6 +4,7 @@ import { ActivityItem } from "@/services/orderService";
 import { FileText, Truck, MapPin } from "lucide-react";
 import ActivityTimeline from "../ActivityTimeline";
 import TabContainer from "../TabContainer";
+import { tabColors } from "../TabColors";
 
 interface PrintTabProps {
   activities: ActivityItem[];
@@ -12,12 +13,6 @@ interface PrintTabProps {
 
 const PrintTab: React.FC<PrintTabProps> = ({ activities, shippingAddresses }) => {
   const printActivities = activities.filter(a => a.type === "print");
-  
-  const colorScheme = {
-    activity: "bg-[#FEF7CD]",
-    collaborate: "bg-[#FEF7CD]",
-    detail: "bg-[#FEF7CD]",
-  };
   
   const activityContent = (
     <ActivityTimeline activities={printActivities} title="Activity" />
@@ -72,7 +67,7 @@ const PrintTab: React.FC<PrintTabProps> = ({ activities, shippingAddresses }) =>
   return (
     <TabContainer
       mainTab="print"
-      colorScheme={colorScheme}
+      colorScheme={tabColors.print}
       children={{
         activity: activityContent,
         collaborate: collaborateContent,

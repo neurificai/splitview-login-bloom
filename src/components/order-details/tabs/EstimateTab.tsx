@@ -6,6 +6,7 @@ import { Card, CardHeader, CardTitle, CardDescription, CardFooter } from "@/comp
 import { Button } from "@/components/ui/button";
 import ActivityTimeline from "../ActivityTimeline";
 import TabContainer from "../TabContainer";
+import { tabColors } from "../TabColors";
 
 interface EstimateTabProps {
   activities: ActivityItem[];
@@ -13,12 +14,6 @@ interface EstimateTabProps {
 
 const EstimateTab: React.FC<EstimateTabProps> = ({ activities }) => {
   const estimateActivities = activities.filter(a => a.type === "estimate");
-  
-  const colorScheme = {
-    activity: "bg-[#F2FCE2]",
-    collaborate: "bg-[#F2FCE2]",
-    detail: "bg-[#F2FCE2]",
-  };
   
   const activityContent = (
     <ActivityTimeline activities={estimateActivities} title="Activity" />
@@ -71,7 +66,7 @@ const EstimateTab: React.FC<EstimateTabProps> = ({ activities }) => {
   return (
     <TabContainer
       mainTab="estimate"
-      colorScheme={colorScheme}
+      colorScheme={tabColors.estimate}
       children={{
         activity: activityContent,
         collaborate: collaborateContent,

@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { formatDate } from "@/services/orderService";
 import ActivityTimeline from "../ActivityTimeline";
 import TabContainer from "../TabContainer";
+import { tabColors } from "../TabColors";
 
 interface InvoiceTabProps {
   activities: ActivityItem[];
@@ -21,12 +22,6 @@ interface InvoiceTabProps {
 
 const InvoiceTab: React.FC<InvoiceTabProps> = ({ activities, invoices }) => {
   const invoiceActivities = activities.filter(a => a.type === "invoice");
-  
-  const colorScheme = {
-    activity: "bg-[#FFDEE2]",
-    collaborate: "bg-[#FFDEE2]",
-    detail: "bg-[#FFDEE2]",
-  };
   
   const activityContent = (
     <ActivityTimeline activities={invoiceActivities} title="Activity" />
@@ -101,7 +96,7 @@ const InvoiceTab: React.FC<InvoiceTabProps> = ({ activities, invoices }) => {
   return (
     <TabContainer
       mainTab="invoice"
-      colorScheme={colorScheme}
+      colorScheme={tabColors.invoice}
       children={{
         activity: activityContent,
         collaborate: collaborateContent,

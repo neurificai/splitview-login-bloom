@@ -6,6 +6,7 @@ import { Separator } from "@/components/ui/separator";
 import { formatDate } from "@/services/orderService";
 import ActivityTimeline from "../ActivityTimeline";
 import TabContainer from "../TabContainer";
+import { tabColors } from "../TabColors";
 
 interface InstallTabProps {
   activities: ActivityItem[];
@@ -19,12 +20,6 @@ interface InstallTabProps {
 
 const InstallTab: React.FC<InstallTabProps> = ({ activities, vehicleDetails, installLocations }) => {
   const installActivities = activities.filter(a => a.type === "install");
-  
-  const colorScheme = {
-    activity: "bg-[#E5DEFF]",
-    collaborate: "bg-[#E5DEFF]",
-    detail: "bg-[#E5DEFF]",
-  };
   
   const activityContent = (
     <ActivityTimeline activities={installActivities} title="Activity" />
@@ -97,7 +92,7 @@ const InstallTab: React.FC<InstallTabProps> = ({ activities, vehicleDetails, ins
   return (
     <TabContainer
       mainTab="install"
-      colorScheme={colorScheme}
+      colorScheme={tabColors.install}
       children={{
         activity: activityContent,
         collaborate: collaborateContent,

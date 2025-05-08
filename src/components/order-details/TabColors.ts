@@ -1,28 +1,28 @@
 
 export const tabColors = {
   estimate: {
-    activity: "bg-[#F2FCE2]",
-    collaborate: "bg-[#F2FCE2]",
-    detail: "bg-[#F2FCE2]",
+    activity: "bg-[#33C3F0]",
+    collaborate: "bg-[#33C3F0]",
+    detail: "bg-[#33C3F0]",
   },
   design: {
-    activity: "bg-[#D3E4FD]",
-    collaborate: "bg-[#D3E4FD]",
-    detail: "bg-[#D3E4FD]",
+    activity: "bg-[#33C3F0]",
+    collaborate: "bg-[#33C3F0]",
+    detail: "bg-[#33C3F0]",
   },
   print: {
-    activity: "bg-[#FEF7CD]",
-    collaborate: "bg-[#FEF7CD]",
-    detail: "bg-[#FEF7CD]",
+    activity: "bg-[#33C3F0]",
+    collaborate: "bg-[#33C3F0]",
+    detail: "bg-[#33C3F0]",
   },
   install: {
-    activity: "bg-[#E5DEFF]",
-    collaborate: "bg-[#E5DEFF]",
-    detail: "bg-[#E5DEFF]",
+    activity: "bg-[#33C3F0]",
+    collaborate: "bg-[#33C3F0]",
+    detail: "bg-[#33C3F0]",
   },
   invoice: {
-    activity: "bg-[#FFDEE2]",
-    collaborate: "bg-[#FFDEE2]",
-    detail: "bg-[#FFDEE2]",
+    activity: "bg-[#33C3F0]",
+    collaborate: "bg-[#33C3F0]",
+    detail: "bg-[#33C3F0]",
   },
 };

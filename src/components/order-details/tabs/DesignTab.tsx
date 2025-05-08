@@ -6,6 +6,7 @@ import { Card, CardHeader, CardTitle, CardDescription, CardFooter } from "@/comp
 import { Button } from "@/components/ui/button";
 import ActivityTimeline from "../ActivityTimeline";
 import TabContainer from "../TabContainer";
+import { tabColors } from "../TabColors";
 
 interface DesignTabProps {
   activities: ActivityItem[];
@@ -14,12 +15,6 @@ interface DesignTabProps {
 
 const DesignTab: React.FC<DesignTabProps> = ({ activities, approvedDesigns }) => {
   const designActivities = activities.filter(a => a.type === "design");
-  
-  const colorScheme = {
-    activity: "bg-[#D3E4FD]",
-    collaborate: "bg-[#D3E4FD]",
-    detail: "bg-[#D3E4FD]",
-  };
   
   const activityContent = (
     <ActivityTimeline activities={designActivities} title="Activity" />
@@ -93,7 +88,7 @@ const DesignTab: React.FC<DesignTabProps> = ({ activities, approvedDesigns }) =>
   return (
     <TabContainer
       mainTab="design"
-      colorScheme={colorScheme}
+      colorScheme={tabColors.design}
       children={{
         activity: activityContent,
         collaborate: collaborateContent,
