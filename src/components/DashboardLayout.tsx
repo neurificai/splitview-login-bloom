@@ -58,11 +58,6 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({
         
         {/* Main content */}
         <main className="p-4 md:p-6 pb-16">
-          <div className="mb-6">
-            <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-500">
-              {title}
-            </h1>
-          </div>
           {children}
         </main>
       </div>
