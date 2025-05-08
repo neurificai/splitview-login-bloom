@@ -23,12 +23,8 @@ const TabContainer: React.FC<TabContainerProps> = ({ mainTab, children, colorSch
     setActiveSubTab(subTab);
   };
   
-  // Get the active color for the underline based on the main tab
-  const getActiveColor = () => {
-    return "border-[#33C3F0]";
-  };
-  
-  const activeColor = getActiveColor();
+  // Define the active color for the underline
+  const activeColor = "bg-[#33C3F0]";
   
   return (
     <div className="mb-6">
@@ -41,7 +37,7 @@ const TabContainer: React.FC<TabContainerProps> = ({ mainTab, children, colorSch
         >
           Activity
           {activeSubTab === "activity" && (
-            <span className={cn("absolute bottom-0 left-0 w-full h-0.5", activeColor, "-mb-[9px]")}></span>
+            <span className={cn("absolute bottom-0 left-0 right-0 h-0.5", activeColor)} style={{ bottom: '-9px' }}></span>
           )}
         </button>
         <button 
@@ -52,7 +48,7 @@ const TabContainer: React.FC<TabContainerProps> = ({ mainTab, children, colorSch
         >
           Collaborate
           {activeSubTab === "collaborate" && (
-            <span className={cn("absolute bottom-0 left-0 w-full h-0.5", activeColor, "-mb-[9px]")}></span>
+            <span className={cn("absolute bottom-0 left-0 right-0 h-0.5", activeColor)} style={{ bottom: '-9px' }}></span>
           )}
         </button>
         <button 
@@ -63,7 +59,7 @@ const TabContainer: React.FC<TabContainerProps> = ({ mainTab, children, colorSch
         >
           Detail
           {activeSubTab === "detail" && (
-            <span className={cn("absolute bottom-0 left-0 w-full h-0.5", activeColor, "-mb-[9px]")}></span>
+            <span className={cn("absolute bottom-0 left-0 right-0 h-0.5", activeColor)} style={{ bottom: '-9px' }}></span>
           )}
         </button>
       </div>
