@@ -2,7 +2,7 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Filter, Search, Plus, FileExport } from "lucide-react";
+import { Filter, Search, Plus, FileText } from "lucide-react";
 import { FilterOption } from "@/services/orderService";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
@@ -69,7 +69,7 @@ const OrdersToolbar: React.FC<OrdersToolbarProps> = ({
             className="flex items-center gap-1"
             onClick={handleExport}
           >
-            <FileExport className="h-3.5 w-3.5" />
+            <FileText className="h-3.5 w-3.5" />
             <span>Export</span>
           </Button>
           
