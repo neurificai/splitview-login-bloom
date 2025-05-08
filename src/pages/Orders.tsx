@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -236,7 +237,7 @@ const Orders = () => {
               <Button
                 variant="ghost"
                 size="sm"
-                className={`rounded-none h-8 px-3 ${viewMode === 'card' ? 'bg-primary text-white' : ''}`}
+                className={`rounded-none h-8 px-3 ${viewMode === 'card' ? 'bg-orange-500 text-white' : ''}`}
                 onClick={() => setViewMode('card')}
               >
                 Cards
@@ -244,14 +245,14 @@ const Orders = () => {
               <Button
                 variant="ghost"
                 size="sm"
-                className={`rounded-none h-8 px-3 ${viewMode === 'table' ? 'bg-primary text-white' : ''}`}
+                className={`rounded-none h-8 px-3 ${viewMode === 'table' ? 'bg-orange-500 text-white' : ''}`}
                 onClick={() => setViewMode('table')}
               >
                 Table
               </Button>
             </div>
             
-            <Button>+ New Order</Button>
+            <Button className="bg-orange-500 hover:bg-orange-600">+ New Order</Button>
           </div>
         </div>
         

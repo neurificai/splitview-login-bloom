@@ -16,12 +16,12 @@ const Logo: React.FC<LogoProps> = ({ size = "md", className = "" }) => {
   return (
     <div className={`flex items-center ${className}`}>
       <img 
-        src="/lovable-uploads/c42b608e-28fc-4689-a387-60954aa0a1cd.png" 
-        alt="Company Logo" 
+        src="/lovable-uploads/de760570-bd7b-4feb-be5b-7fde0578b566.png" 
+        alt="Vehicles Logo" 
         className={`${sizeClasses[size]} w-auto`} 
       />
-      <span className="ml-2 font-bold text-gray-800 text-lg hidden sm:inline-block">
-        ProAngular
+      <span className="ml-2 font-bold text-blue-600 text-lg hidden sm:inline-block">
+        Vehicles
       </span>
     </div>
   );
