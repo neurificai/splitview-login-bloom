@@ -5,7 +5,6 @@ import DashboardLayout from "@/components/DashboardLayout";
 import OrderDetailsTabs from "@/components/OrderDetailsTabs";
 import { getOrderById, getOrderDetailsById, OrderDetails as OrderDetailsType } from "@/services/orderService";
 import OrderDetailsHeader from "@/components/order-details/OrderDetailsHeader";
-import OrderProgressBar from "@/components/order-details/OrderProgressBar";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -72,9 +71,6 @@ const OrderDetails = () => {
       <div className="mb-6">
         {/* Header with back button and order info */}
         <OrderDetailsHeader order={order} />
-        
-        {/* Order progress bar */}
-        <OrderProgressBar order={order} />
         
         {/* Order details tabs */}
         <OrderDetailsTabs 
