@@ -18,31 +18,23 @@ export const useOrdersFiltering = ({
     return orders.filter((order) => {
       const matchesSearch =
         searchQuery === "" ||
-        order.avsoId.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        order.orderTitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        order.aeName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        order.pmName.toLowerCase().includes(searchQuery.toLowerCase());
+        order.AV_SO.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        order.Order_Title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        order.AE_Name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        order.PM_Name.toLowerCase().includes(searchQuery.toLowerCase());
 
       const matchesFilter =
         filterOption === "all" ||
-        (filterOption === "inProgress" && order.jobStatus === "In Progress") ||
-        (filterOption === "completed" && order.jobStatus === "Completed");
+        (filterOption === "inProgress" && order.Job_Status_Pct < 100) ||
+        (filterOption === "completed" && order.Job_Status_Pct === 100);
 
       return matchesSearch && matchesFilter;
     });
   }, [orders, searchQuery, filterOption]);
 
-  // Filter unique orders by removing child orders with the same base ID
+  // Create a set of unique orders
   const uniqueOrders = useMemo(() => {
-    const baseIds = new Set();
-    return filteredOrders.filter(order => {
-      const baseId = order.avsoId.split('-')[0];
-      if (!baseIds.has(baseId)) {
-        baseIds.add(baseId);
-        return true;
-      }
-      return false;
-    });
+    return filteredOrders;
   }, [filteredOrders]);
 
   return { filteredOrders, uniqueOrders };

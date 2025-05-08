@@ -4,17 +4,41 @@ import DashboardLayout from "@/components/DashboardLayout";
 import OrdersToolbar from "@/components/OrdersToolbar";
 import OrdersList from "@/components/OrdersList";
 import { orders, FilterOption, ViewMode } from "@/services/orderService";
-import { useOrdersFiltering } from "@/hooks/useOrdersFiltering";
 
 const Orders = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [viewMode, setViewMode] = useState<ViewMode>("card");
   const [filterOption, setFilterOption] = useState<FilterOption>("all");
+  const [filterJobType, setFilterJobType] = useState<string>("all");
+  const [filterAEName, setFilterAEName] = useState<string>("all");
 
-  const { uniqueOrders } = useOrdersFiltering({
-    orders,
-    searchQuery,
-    filterOption,
+  // Filter orders based on search query and filters
+  const filteredOrders = orders.filter((order) => {
+    // Search filter
+    const matchesSearch =
+      searchQuery === "" ||
+      order.AV_SO.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      order.Order_Title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      order.AE_Name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      order.PM_Name.toLowerCase().includes(searchQuery.toLowerCase());
+
+    // Job type filter
+    const matchesJobType = 
+      filterJobType === "all" || 
+      order.Job_Type === filterJobType;
+
+    // AE Name filter
+    const matchesAEName = 
+      filterAEName === "all" || 
+      order.AE_Name === filterAEName;
+
+    // Status filter
+    const matchesStatus =
+      filterOption === "all" ||
+      (filterOption === "inProgress" && order.Job_Status_Pct < 100) ||
+      (filterOption === "completed" && order.Job_Status_Pct === 100);
+
+    return matchesSearch && matchesJobType && matchesAEName && matchesStatus;
   });
 
   return (
@@ -25,9 +49,17 @@ const Orders = () => {
           onSearchChange={setSearchQuery}
           viewMode={viewMode}
           setViewMode={setViewMode}
+          filterOption={filterOption}
+          setFilterOption={setFilterOption}
+          filterJobType={filterJobType}
+          setFilterJobType={setFilterJobType}
+          filterAEName={filterAEName}
+          setFilterAEName={setFilterAEName}
+          jobTypes={[...new Set(orders.map(order => order.Job_Type))]}
+          aeNames={[...new Set(orders.map(order => order.AE_Name))]}
         />
         
-        <OrdersList orders={uniqueOrders} />
+        <OrdersList orders={filteredOrders} viewMode={viewMode} />
       </div>
     </DashboardLayout>
   );

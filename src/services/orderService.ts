@@ -1,170 +1,78 @@
 
 // Order model
 export interface Order {
-  avsoId: string;
-  orderTitle: string;
-  unitNo: string;
-  fmcUnitNo: string;
-  cvnUnitNo: string;
-  vinNo: string;
-  orderDate: string;
-  jobRequest: string;
-  aeName: string;
-  pmName: string;
-  jobType: string;
-  jobStatus: string;
-  frameInstallation: string;
-  bannerInstallation: string;
+  AV_SO: string;
+  Order_Title: string;
+  Unit_No: string;
+  FMC_Unit_No: string;
+  CVN_Unit_No: string;
+  VIN_No: string;
+  Order_Date: string;
+  Job_Request: string;
+  AE_Name: string;
+  PM_Name: string;
+  Job_Type: string;
+  Job_Status_Pct: number;
+  Frame_Installation: boolean;
+  Vinyl_Installation: boolean;
+  Customer_Notes: string;
 }
 
 // View mode and filter options
 export type ViewMode = "card" | "table";
 export type FilterOption = "all" | "inProgress" | "completed";
 
-// Sample data based on the image
+// Sample data based on the provided JSON
 export const orders: Order[] = [
   {
-    avsoId: "AVSO1793",
-    orderTitle: "#3306 Proforce | Qty 15 | Charlotte NC (Opportunity) SO# AVSO1793",
-    unitNo: "Multiple Units",
-    fmcUnitNo: "Multiple FMC Units",
-    cvnUnitNo: "Multiple CVN Units",
-    vinNo: "Multiple VINs",
-    orderDate: "05/07/2025",
-    jobRequest: "Print And Install",
-    aeName: "Adam Parrock",
-    pmName: "Michael Schultz",
-    jobType: "NA",
-    jobStatus: "In Progress",
-    frameInstallation: "NA",
-    bannerInstallation: "NA",
+    AV_SO: "AVSO1793",
+    Order_Title: "3306 Proforce | Qty 15 | Charlotte, NC",
+    Unit_No: "U-1204",
+    FMC_Unit_No: "FMC-332",
+    CVN_Unit_No: "CVN-987",
+    VIN_No: "1HGCM82633A004352",
+    Order_Date: "2025-05-07",
+    Job_Request: "Print And Install",
+    AE_Name: "Adam Parrock",
+    PM_Name: "Michael Schultz",
+    Job_Type: "Print & Install",
+    Job_Status_Pct: 45,
+    Frame_Installation: true,
+    Vinyl_Installation: false,
+    Customer_Notes: "Client prefers matte finish on all banners."
   },
   {
-    avsoId: "AVSO1793-10519",
-    orderTitle: "#3306 Proforce | Qty 15 | Charlotte NC (Opportunity) SO# AVSO1793",
-    unitNo: "Unit# 1",
-    fmcUnitNo: "",
-    cvnUnitNo: "",
-    vinNo: "3FTTW8BA3SRA84298",
-    orderDate: "05/07/2025",
-    jobRequest: "Print And Install",
-    aeName: "Adam Parrock",
-    pmName: "Michael Schultz",
-    jobType: "Full Wrap",
-    jobStatus: "In Progress",
-    frameInstallation: "NA",
-    bannerInstallation: "TBD",
-  },
-  {
-    avsoId: "AVSO1793-10524",
-    orderTitle: "#3306 Proforce | Qty 15 | Charlotte NC (Opportunity) SO# AVSO1793",
-    unitNo: "Unit# 2",
-    fmcUnitNo: "",
-    cvnUnitNo: "",
-    vinNo: "3FTTW8BA9SRA84547",
-    orderDate: "05/07/2025",
-    jobRequest: "Print And Install",
-    aeName: "Adam Parrock",
-    pmName: "Michael Schultz",
-    jobType: "Full Wrap",
-    jobStatus: "In Progress",
-    frameInstallation: "NA",
-    bannerInstallation: "TBD",
-  },
-  {
-    avsoId: "AVSO1793-10525",
-    orderTitle: "#3306 Proforce | Qty 15 | Charlotte NC (Opportunity) SO# AVSO1793",
-    unitNo: "Unit# 3",
-    fmcUnitNo: "",
-    cvnUnitNo: "",
-    vinNo: "3FTTW8BA5SRA84111",
-    orderDate: "05/07/2025",
-    jobRequest: "Print And Install",
-    aeName: "Adam Parrock",
-    pmName: "Michael Schultz",
-    jobType: "Full Wrap",
-    jobStatus: "In Progress",
-    frameInstallation: "NA",
-    bannerInstallation: "TBD",
-  },
-  {
-    avsoId: "AVSO1793-10526",
-    orderTitle: "#3306 Proforce | Qty 15 | Charlotte NC (Opportunity) SO# AVSO1793",
-    unitNo: "Unit# 4",
-    fmcUnitNo: "",
-    cvnUnitNo: "",
-    vinNo: "3FTTW8BA9SRA84516",
-    orderDate: "05/07/2025",
-    jobRequest: "Print And Install",
-    aeName: "Adam Parrock",
-    pmName: "Michael Schultz",
-    jobType: "Full Wrap",
-    jobStatus: "In Progress",
-    frameInstallation: "NA",
-    bannerInstallation: "TBD",
-  },
-  {
-    avsoId: "AVSO1793-10527",
-    orderTitle: "#3306 Proforce | Qty 15 | Charlotte NC (Opportunity) SO# AVSO1793",
-    unitNo: "Unit# 5",
-    fmcUnitNo: "",
-    cvnUnitNo: "",
-    vinNo: "3FTTW8BA8SRA84720",
-    orderDate: "05/07/2025",
-    jobRequest: "Print And Install",
-    aeName: "Adam Parrock",
-    pmName: "Michael Schultz",
-    jobType: "Full Wrap",
-    jobStatus: "In Progress",
-    frameInstallation: "NA",
-    bannerInstallation: "TBD",
-  },
-  {
-    avsoId: "AVSO1793-10513",
-    orderTitle: "#3306 Proforce | Qty 15 | Charlotte NC (Opportunity) SO# AVSO1793",
-    unitNo: "Unit# 6",
-    fmcUnitNo: "",
-    cvnUnitNo: "",
-    vinNo: "3FTTW8BA9SRA84290",
-    orderDate: "05/07/2025",
-    jobRequest: "Print And Install",
-    aeName: "Adam Parrock",
-    pmName: "Michael Schultz",
-    jobType: "Full Wrap",
-    jobStatus: "In Progress",
-    frameInstallation: "NA",
-    bannerInstallation: "TBD",
-  },
-  {
-    avsoId: "AVSO1793-10514",
-    orderTitle: "#3306 Proforce | Qty 15 | Charlotte NC (Opportunity) SO# AVSO1793",
-    unitNo: "Unit# 7",
-    fmcUnitNo: "",
-    cvnUnitNo: "",
-    vinNo: "3FTTW8BA7SRA84322",
-    orderDate: "05/07/2025",
-    jobRequest: "Print And Install",
-    aeName: "Adam Parrock",
-    pmName: "Michael Schultz",
-    jobType: "Full Wrap",
-    jobStatus: "In Progress",
-    frameInstallation: "NA",
-    bannerInstallation: "TBD",
-  },
-  {
-    avsoId: "AVSO1793-10515",
-    orderTitle: "#3306 Proforce | Qty 15 | Charlotte NC (Opportunity) SO# AVSO1793",
-    unitNo: "Unit# 8",
-    fmcUnitNo: "",
-    cvnUnitNo: "",
-    vinNo: "3FTTW8BA5SRA84349",
-    orderDate: "05/07/2025",
-    jobRequest: "Print And Install",
-    aeName: "Adam Parrock",
-    pmName: "Michael Schultz",
-    jobType: "Full Wrap",
-    jobStatus: "In Progress",
-    frameInstallation: "NA",
-    bannerInstallation: "TBD",
-  },
+    AV_SO: "AVSO1794",
+    Order_Title: "4221 Oak Street | Qty 8 | Austin, TX",
+    Unit_No: "U-1302",
+    FMC_Unit_No: "FMC-348",
+    CVN_Unit_No: "CVN-990",
+    VIN_No: "2FACP74W6PX109843",
+    Order_Date: "2025-05-10",
+    Job_Request: "Frame Only",
+    AE_Name: "Samantha Lee",
+    PM_Name: "Raj Patel",
+    Job_Type: "Framing",
+    Job_Status_Pct: 75,
+    Frame_Installation: true,
+    Vinyl_Installation: false,
+    Customer_Notes: "Install frames by May 20th."
+  }
 ];
+
+// Helper function to calculate due date (15 days from order date)
+export const calculateDueDate = (orderDate: string): Date => {
+  const date = new Date(orderDate);
+  date.setDate(date.getDate() + 15);
+  return date;
+};
+
+// Format date to "Month Day, Year" format
+export const formatDate = (dateString: string): string => {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-US', {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric'
+  });
+};
