@@ -1,8 +1,9 @@
-
-import React from "react";
-import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/ui/table";
-import { ChevronDown, ChevronUp, ArrowUpDown } from "lucide-react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Search, Filter } from "lucide-react";
+import DashboardLayout from "@/components/DashboardLayout";
+import OrderCard from "@/components/OrderCard";
 
 interface Order {
   avsoId: string;
@@ -169,212 +170,98 @@ const orders: Order[] = [
   },
 ];
 
-// Column type for sorting
-type SortDirection = "asc" | "desc" | null;
-type SortColumn = keyof Order | null;
+// State types
+type ViewMode = "card" | "table";
+type FilterOption = "all" | "inProgress" | "completed";
 
 const Orders = () => {
-  const [sortColumn, setSortColumn] = React.useState<SortColumn>(null);
-  const [sortDirection, setSortDirection] = React.useState<SortDirection>(null);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [viewMode, setViewMode] = useState<ViewMode>("card");
+  const [filterOption, setFilterOption] = useState<FilterOption>("all");
 
-  const handleSort = (column: keyof Order) => {
-    if (sortColumn === column) {
-      setSortDirection(sortDirection === "asc" ? "desc" : sortDirection === "desc" ? null : "asc");
-      if (sortDirection === "desc") {
-        setSortColumn(null);
-      }
-    } else {
-      setSortColumn(column);
-      setSortDirection("asc");
-    }
-  };
+  // Filter orders based on search query and filter option
+  const filteredOrders = React.useMemo(() => {
+    return orders.filter((order) => {
+      const matchesSearch =
+        searchQuery === "" ||
+        order.avsoId.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        order.orderTitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        order.aeName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        order.pmName.toLowerCase().includes(searchQuery.toLowerCase());
 
-  const sortedOrders = React.useMemo(() => {
-    if (!sortColumn || !sortDirection) return orders;
+      const matchesFilter =
+        filterOption === "all" ||
+        (filterOption === "inProgress" && order.jobStatus === "In Progress") ||
+        (filterOption === "completed" && order.jobStatus === "Completed");
 
-    return [...orders].sort((a, b) => {
-      const aValue = a[sortColumn];
-      const bValue = b[sortColumn];
-
-      if (aValue < bValue) return sortDirection === "asc" ? -1 : 1;
-      if (aValue > bValue) return sortDirection === "asc" ? 1 : -1;
-      return 0;
+      return matchesSearch && matchesFilter;
     });
-  }, [sortColumn, sortDirection, orders]);
+  }, [searchQuery, filterOption]);
 
-  // Render the sort icon based on sort state
-  const renderSortIcon = (column: keyof Order) => {
-    if (sortColumn !== column) return <ArrowUpDown className="ml-1 h-4 w-4 opacity-50" />;
-    if (sortDirection === "asc") return <ChevronUp className="ml-1 h-4 w-4" />;
-    return <ChevronDown className="ml-1 h-4 w-4" />;
-  };
+  // Filter unique orders by removing child orders with the same base ID
+  const uniqueOrders = React.useMemo(() => {
+    const baseIds = new Set();
+    return filteredOrders.filter(order => {
+      const baseId = order.avsoId.split('-')[0];
+      if (!baseIds.has(baseId)) {
+        baseIds.add(baseId);
+        return true;
+      }
+      return false;
+    });
+  }, [filteredOrders]);
 
   return (
-    <div className="container mx-auto py-10">
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-400">
-          Orders Dashboard
-        </h1>
-        <div className="flex space-x-2">
-          <Button variant="outline">Export</Button>
-          <Button>+ New Order</Button>
+    <DashboardLayout title="Orders Dashboard">
+      <div className="mb-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+          <div className="relative w-full sm:max-w-md">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Input
+              type="search"
+              placeholder="Search by order ID, title, or name..."
+              className="pl-9"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
+          
+          <div className="flex items-center gap-2">
+            <Button variant="outline" size="sm" className="flex items-center gap-1">
+              <Filter className="h-3.5 w-3.5" />
+              <span>Filter</span>
+            </Button>
+            
+            <div className="flex items-center border rounded-md overflow-hidden">
+              <Button
+                variant="ghost"
+                size="sm"
+                className={`rounded-none h-8 px-3 ${viewMode === 'card' ? 'bg-primary text-white' : ''}`}
+                onClick={() => setViewMode('card')}
+              >
+                Cards
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                className={`rounded-none h-8 px-3 ${viewMode === 'table' ? 'bg-primary text-white' : ''}`}
+                onClick={() => setViewMode('table')}
+              >
+                Table
+              </Button>
+            </div>
+            
+            <Button>+ New Order</Button>
+          </div>
+        </div>
+        
+        <div className="grid grid-cols-1 gap-4">
+          {uniqueOrders.map((order, index) => (
+            <OrderCard key={order.avsoId} order={order} index={index} />
+          ))}
         </div>
       </div>
-      
-      <div className="rounded-md border shadow-sm overflow-hidden">
-        <div className="overflow-x-auto">
-          <Table>
-            <TableHeader className="bg-muted/30">
-              <TableRow>
-                <TableHead 
-                  className="cursor-pointer hover:bg-muted/40 transition-colors"
-                  onClick={() => handleSort("avsoId")}
-                >
-                  <div className="flex items-center">
-                    AV SO # {renderSortIcon("avsoId")}
-                  </div>
-                </TableHead>
-                <TableHead 
-                  className="cursor-pointer hover:bg-muted/40 transition-colors"
-                  onClick={() => handleSort("orderTitle")}
-                >
-                  <div className="flex items-center">
-                    Order Title {renderSortIcon("orderTitle")}
-                  </div>
-                </TableHead>
-                <TableHead 
-                  className="cursor-pointer hover:bg-muted/40 transition-colors"
-                  onClick={() => handleSort("unitNo")}
-                >
-                  <div className="flex items-center">
-                    Unit No {renderSortIcon("unitNo")}
-                  </div>
-                </TableHead>
-                <TableHead 
-                  className="cursor-pointer hover:bg-muted/40 transition-colors"
-                  onClick={() => handleSort("fmcUnitNo")}
-                >
-                  <div className="flex items-center">
-                    FMC Unit No {renderSortIcon("fmcUnitNo")}
-                  </div>
-                </TableHead>
-                <TableHead 
-                  className="cursor-pointer hover:bg-muted/40 transition-colors"
-                  onClick={() => handleSort("cvnUnitNo")}
-                >
-                  <div className="flex items-center">
-                    CVN Unit No {renderSortIcon("cvnUnitNo")}
-                  </div>
-                </TableHead>
-                <TableHead 
-                  className="cursor-pointer hover:bg-muted/40 transition-colors"
-                  onClick={() => handleSort("vinNo")}
-                >
-                  <div className="flex items-center">
-                    VIN No {renderSortIcon("vinNo")}
-                  </div>
-                </TableHead>
-                <TableHead 
-                  className="cursor-pointer hover:bg-muted/40 transition-colors"
-                  onClick={() => handleSort("orderDate")}
-                >
-                  <div className="flex items-center">
-                    Order Date {renderSortIcon("orderDate")}
-                  </div>
-                </TableHead>
-                <TableHead 
-                  className="cursor-pointer hover:bg-muted/40 transition-colors"
-                  onClick={() => handleSort("jobRequest")}
-                >
-                  <div className="flex items-center">
-                    Job Request {renderSortIcon("jobRequest")}
-                  </div>
-                </TableHead>
-                <TableHead 
-                  className="cursor-pointer hover:bg-muted/40 transition-colors"
-                  onClick={() => handleSort("aeName")}
-                >
-                  <div className="flex items-center">
-                    AE Name {renderSortIcon("aeName")}
-                  </div>
-                </TableHead>
-                <TableHead 
-                  className="cursor-pointer hover:bg-muted/40 transition-colors"
-                  onClick={() => handleSort("pmName")}
-                >
-                  <div className="flex items-center">
-                    PM Name {renderSortIcon("pmName")}
-                  </div>
-                </TableHead>
-                <TableHead 
-                  className="cursor-pointer hover:bg-muted/40 transition-colors"
-                  onClick={() => handleSort("jobType")}
-                >
-                  <div className="flex items-center">
-                    Job Type {renderSortIcon("jobType")}
-                  </div>
-                </TableHead>
-                <TableHead 
-                  className="cursor-pointer hover:bg-muted/40 transition-colors"
-                  onClick={() => handleSort("jobStatus")}
-                >
-                  <div className="flex items-center">
-                    Job Status {renderSortIcon("jobStatus")}
-                  </div>
-                </TableHead>
-                <TableHead 
-                  className="cursor-pointer hover:bg-muted/40 transition-colors"
-                  onClick={() => handleSort("frameInstallation")}
-                >
-                  <div className="flex items-center">
-                    Frame Installation {renderSortIcon("frameInstallation")}
-                  </div>
-                </TableHead>
-                <TableHead 
-                  className="cursor-pointer hover:bg-muted/40 transition-colors"
-                  onClick={() => handleSort("bannerInstallation")}
-                >
-                  <div className="flex items-center">
-                    Banner/Vinyl Installation {renderSortIcon("bannerInstallation")}
-                  </div>
-                </TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {sortedOrders.map((order) => (
-                <TableRow 
-                  key={order.avsoId}
-                  className="hover:bg-muted/30 cursor-pointer"
-                >
-                  <TableCell className="font-medium">
-                    <span className="text-primary hover:underline">{order.avsoId}</span>
-                  </TableCell>
-                  <TableCell className="max-w-[200px] truncate" title={order.orderTitle}>
-                    {order.orderTitle}
-                  </TableCell>
-                  <TableCell>{order.unitNo}</TableCell>
-                  <TableCell>{order.fmcUnitNo}</TableCell>
-                  <TableCell>{order.cvnUnitNo}</TableCell>
-                  <TableCell>{order.vinNo}</TableCell>
-                  <TableCell>{order.orderDate}</TableCell>
-                  <TableCell>{order.jobRequest}</TableCell>
-                  <TableCell>{order.aeName}</TableCell>
-                  <TableCell>{order.pmName}</TableCell>
-                  <TableCell>{order.jobType}</TableCell>
-                  <TableCell>
-                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                      {order.jobStatus}
-                    </span>
-                  </TableCell>
-                  <TableCell>{order.frameInstallation}</TableCell>
-                  <TableCell>{order.bannerInstallation}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </div>
-      </div>
-    </div>
+    </DashboardLayout>
   );
 };
 
