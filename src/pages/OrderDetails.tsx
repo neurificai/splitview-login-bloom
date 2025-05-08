@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import DashboardLayout from "@/components/DashboardLayout";
@@ -106,33 +105,28 @@ const OrderDetails = () => {
         {/* Header with back button and order info */}
         <OrderDetailsHeader order={order} />
         
-        <div className="flex flex-col md:flex-row">
-          {/* Main content area - tabs section */}
-          <div className="flex-1 md:pr-4">
-            <OrderDetailsTabs 
-              activities={orderDetails.activities}
-              shippingAddresses={orderDetails.shippingAddresses}
-              vehicleDetails={orderDetails.vehicleDetails}
-              installLocations={orderDetails.installLocations}
-              approvedDesigns={orderDetails.approvedDesigns}
-              invoices={orderDetails.invoices}
-            />
+        <OrderDetailsTabs 
+          activities={orderDetails.activities}
+          shippingAddresses={orderDetails.shippingAddresses}
+          vehicleDetails={orderDetails.vehicleDetails}
+          installLocations={orderDetails.installLocations}
+          approvedDesigns={orderDetails.approvedDesigns}
+          invoices={orderDetails.invoices}
+        />
+        
+        {/* Side info row - now below the tabs */}
+        <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <h3 className="font-medium text-xs mb-1 text-gray-700 uppercase tracking-wide">Contacts</h3>
+            <ContactBox contacts={contacts} />
           </div>
           
-          {/* Right sidebar */}
-          <div className="w-full md:w-80 flex flex-col gap-4 mt-4 md:mt-0">
-            <div className="mb-4">
-              <h3 className="font-medium text-base mb-2 text-gray-700 uppercase tracking-wide">Contacts</h3>
-              <ContactBox contacts={contacts} />
-            </div>
-            
-            <div className="mt-4">
-              <ShortcutsBox 
-                hasEstimate={true}
-                hasApprovedDesign={hasApprovedDesign}
-                hasInstallPictures={hasInstallPictures}
-              />
-            </div>
+          <div>
+            <ShortcutsBox 
+              hasEstimate={true}
+              hasApprovedDesign={hasApprovedDesign}
+              hasInstallPictures={hasInstallPictures}
+            />
           </div>
         </div>
       </div>
