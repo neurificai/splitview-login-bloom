@@ -14,10 +14,25 @@ interface DesignTabProps {
 }
 
 const DesignTab: React.FC<DesignTabProps> = ({ activities, approvedDesigns }) => {
-  const designActivities = activities.filter(a => a.type === "design" && a.status === "completed");
+  const designActivities = activities.filter(a => a.type === "design");
+  const completedActivities = designActivities.filter(a => a.status === "completed");
   
-  // Mock next steps based on the creative process
+  // Create mock next steps based on the creative process
   const nextSteps: ActivityItem[] = [
+    {
+      date: "",
+      title: "Creative Brief Meeting",
+      description: "Account Executive will hold a meeting with the client to discuss design requirements.",
+      type: "design",
+      status: "upcoming"
+    },
+    {
+      date: "",
+      title: "Initial Design Creation",
+      description: "Designer will create the first draft based on the creative brief.",
+      type: "design",
+      status: "upcoming"
+    },
     {
       date: "",
       title: "Share Proof with Client",
@@ -41,13 +56,28 @@ const DesignTab: React.FC<DesignTabProps> = ({ activities, approvedDesigns }) =>
     }
   ];
   
-  // Only show next steps if there's at least one design activity but no approved designs yet
-  const showNextSteps = designActivities.length > 0 && (!approvedDesigns || approvedDesigns.length === 0);
+  // Determine which next steps to show based on the current progress
+  const getRelevantNextSteps = () => {
+    if (completedActivities.length === 0) {
+      // No activity yet, start from beginning
+      return nextSteps.slice(0, 3);
+    } else if (!completedActivities.some(a => a.title.includes("Design Approved"))) {
+      // Design not approved yet, show revision steps
+      return nextSteps.slice(2, 5);
+    }
+    
+    // Design is approved, no next steps
+    return [];
+  };
+  
+  // Only show next steps if there are no approved designs yet
+  const showNextSteps = !approvedDesigns || approvedDesigns.length === 0;
+  const relevantNextSteps = showNextSteps ? getRelevantNextSteps() : [];
   
   const activityContent = (
     <ActivityTimeline 
-      activities={designActivities} 
-      nextSteps={showNextSteps ? nextSteps : []} 
+      activities={completedActivities} 
+      nextSteps={relevantNextSteps} 
       title="Design Process" 
     />
   );
