@@ -52,15 +52,6 @@ const ShortcutsBox: React.FC<ShortcutsBoxProps> = ({
               View Install Pictures
             </Button>
           )}
-
-          <Button 
-            variant="outline" 
-            className="w-full justify-start text-purple-600 border-purple-200 hover:bg-purple-50 transition-all"
-            size="sm"
-          >
-            <FileText className="h-4 w-4 mr-2" />
-            Download Documentation
-          </Button>
         </CardContent>
       </Card>
     </div>
