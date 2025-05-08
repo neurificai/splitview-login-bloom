@@ -14,10 +14,42 @@ interface DesignTabProps {
 }
 
 const DesignTab: React.FC<DesignTabProps> = ({ activities, approvedDesigns }) => {
-  const designActivities = activities.filter(a => a.type === "design");
+  const designActivities = activities.filter(a => a.type === "design" && a.status === "completed");
+  
+  // Mock next steps based on the creative process
+  const nextSteps: ActivityItem[] = [
+    {
+      date: "",
+      title: "Share Proof with Client",
+      description: "The Account Executive will share the proof with the client and collect desired revisions.",
+      type: "design",
+      status: "upcoming"
+    },
+    {
+      date: "",
+      title: "Review Client Feedback",
+      description: "Designer will review client feedback and make necessary adjustments.",
+      type: "design",
+      status: "upcoming"
+    },
+    {
+      date: "",
+      title: "Final Approval",
+      description: "Client provides final approval for the design.",
+      type: "design",
+      status: "upcoming"
+    }
+  ];
+  
+  // Only show next steps if there's at least one design activity but no approved designs yet
+  const showNextSteps = designActivities.length > 0 && (!approvedDesigns || approvedDesigns.length === 0);
   
   const activityContent = (
-    <ActivityTimeline activities={designActivities} title="Activity" />
+    <ActivityTimeline 
+      activities={designActivities} 
+      nextSteps={showNextSteps ? nextSteps : []} 
+      title="Design Process" 
+    />
   );
   
   const collaborateContent = (

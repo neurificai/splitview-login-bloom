@@ -25,11 +25,11 @@ const TabContainer: React.FC<TabContainerProps> = ({ mainTab, children, colorSch
   
   return (
     <div className="mb-6">
-      <div className="inline-flex h-9 items-center justify-center rounded-lg bg-white border p-1 text-muted-foreground mb-4 w-full sm:w-auto gap-2">
+      <div className="inline-flex h-10 items-center justify-center rounded-lg bg-white border p-1 text-muted-foreground mb-4 w-full sm:w-auto gap-3">
         <button 
           onClick={() => handleSubTabChange("activity")}
           className={cn(
-            "px-4 py-1.5 text-sm font-medium rounded-md transition-colors",
+            "px-5 py-2 text-sm font-medium rounded-md transition-colors",
             activeSubTab === "activity" 
               ? `${colorScheme.activity} text-gray-800 shadow-sm` 
               : "bg-blue-50 text-gray-600 hover:bg-blue-100"
@@ -40,7 +40,7 @@ const TabContainer: React.FC<TabContainerProps> = ({ mainTab, children, colorSch
         <button 
           onClick={() => handleSubTabChange("collaborate")}
           className={cn(
-            "px-4 py-1.5 text-sm font-medium rounded-md transition-colors",
+            "px-5 py-2 text-sm font-medium rounded-md transition-colors",
             activeSubTab === "collaborate" 
               ? `${colorScheme.collaborate} text-gray-800 shadow-sm` 
               : "bg-blue-50 text-gray-600 hover:bg-blue-100"
@@ -51,7 +51,7 @@ const TabContainer: React.FC<TabContainerProps> = ({ mainTab, children, colorSch
         <button 
           onClick={() => handleSubTabChange("detail")}
           className={cn(
-            "px-4 py-1.5 text-sm font-medium rounded-md transition-colors",
+            "px-5 py-2 text-sm font-medium rounded-md transition-colors",
             activeSubTab === "detail" 
               ? `${colorScheme.detail} text-gray-800 shadow-sm` 
               : "bg-blue-50 text-gray-600 hover:bg-blue-100"
