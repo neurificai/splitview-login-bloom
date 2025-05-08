@@ -1,4 +1,3 @@
-
 import React from "react";
 import { ActivityItem } from "@/services/orderService";
 import { MessageSquare, FileText, Edit, Download } from "lucide-react";
@@ -17,67 +16,114 @@ const DesignTab: React.FC<DesignTabProps> = ({ activities, approvedDesigns }) =>
   const designActivities = activities.filter(a => a.type === "design");
   const completedActivities = designActivities.filter(a => a.status === "completed");
   
-  // Create mock next steps based on the creative process
-  const nextSteps: ActivityItem[] = [
+  // Create enhanced mock design activities
+  const mockPastActivities: ActivityItem[] = [
+    {
+      date: "2025-04-24",
+      title: "First Design Mockup Sent",
+      description: "Initial design concepts shared with client",
+      type: "design",
+      status: "completed"
+    },
+    {
+      date: "2025-04-26",
+      title: "Client Requested Color Scheme Changes",
+      description: "Client requested adjustments to the color palette",
+      type: "design",
+      status: "completed"
+    },
+    {
+      date: "2025-04-28",
+      title: "Second Mockup Sent",
+      description: "Updated design with revised color scheme",
+      type: "design",
+      status: "completed"
+    },
+    {
+      date: "2025-04-30",
+      title: "Client Requested Font Change",
+      description: "Client requested alternative typography options",
+      type: "design",
+      status: "completed"
+    },
+    {
+      date: "2025-05-02",
+      title: "Third Mockup Sent",
+      description: "Final design revision with updated typography",
+      type: "design",
+      status: "completed"
+    }
+  ];
+  
+  // Enhanced mock next steps
+  const mockNextSteps: ActivityItem[] = [
     {
       date: "",
-      title: "Creative Brief Meeting",
-      description: "Account Executive will hold a meeting with the client to discuss design requirements.",
+      title: "Await Approval From Client",
+      description: "Waiting for client to review final design mockup",
       type: "design",
       status: "upcoming"
     },
     {
       date: "",
-      title: "Initial Design Creation",
-      description: "Designer will create the first draft based on the creative brief.",
+      title: "Implement Changes Requested By Client",
+      description: "Make any final adjustments based on client feedback",
       type: "design",
       status: "upcoming"
     },
     {
       date: "",
-      title: "Share Proof with Client",
-      description: "The Account Executive will share the proof with the client and collect desired revisions.",
+      title: "Send For Approval",
+      description: "Submit final design for client approval",
       type: "design",
       status: "upcoming"
     },
     {
       date: "",
-      title: "Review Client Feedback",
-      description: "Designer will review client feedback and make necessary adjustments.",
-      type: "design",
-      status: "upcoming"
-    },
-    {
-      date: "",
-      title: "Final Approval",
-      description: "Client provides final approval for the design.",
+      title: "Design Approved",
+      description: "Obtain final sign-off from client",
       type: "design",
       status: "upcoming"
     }
   ];
   
-  // Determine which next steps to show based on the current progress
-  const getRelevantNextSteps = () => {
-    if (completedActivities.length === 0) {
-      // No activity yet, start from beginning
-      return nextSteps.slice(0, 3);
-    } else if (!completedActivities.some(a => a.title.includes("Design Approved"))) {
-      // Design not approved yet, show revision steps
-      return nextSteps.slice(2, 5);
+  // Determine which activities to display based on the current order state
+  const displayPastActivities = () => {
+    // If we already have real completed activities, use those
+    if (completedActivities.length > 0) {
+      return completedActivities;
     }
     
-    // Design is approved, no next steps
-    return [];
+    // Otherwise use our enhanced mock activities
+    return mockPastActivities;
   };
   
-  // Only show next steps if there are no approved designs yet
-  const showNextSteps = !approvedDesigns || approvedDesigns.length === 0;
-  const relevantNextSteps = showNextSteps ? getRelevantNextSteps() : [];
+  // Determine next steps based on order progress
+  const displayNextSteps = () => {
+    // Only show next steps if there are no approved designs
+    if (approvedDesigns && approvedDesigns.length > 0) {
+      return [];
+    }
+    
+    // If design is in progress, show appropriate next steps
+    if (completedActivities.length > 0) {
+      // If final approval is already done, show no next steps
+      if (completedActivities.some(a => a.title.includes("Design Approved"))) {
+        return [];
+      }
+      
+      // Otherwise show next steps
+      return mockNextSteps;
+    }
+    
+    // If no design activities yet, show the full process
+    return mockNextSteps;
+  };
   
   const activityContent = (
     <ActivityTimeline 
-      activities={completedActivities} 
-      nextSteps={relevantNextSteps} 
+      activities={displayPastActivities()} 
+      nextSteps={displayNextSteps()} 
       title="Design Process" 
     />
   );
