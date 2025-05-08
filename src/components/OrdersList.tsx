@@ -69,19 +69,25 @@ const OrdersList: React.FC<OrdersListProps> = ({ orders, viewMode }) => {
                   <p className="text-sm text-gray-600 mt-1">{order.Order_Title}</p>
                 </div>
 
-                <div className="flex items-center gap-2">
-                  <div className="text-right">
+                <div className="flex items-center gap-4">
+                  {/* Vertical progress bar */}
+                  <div className="flex flex-col items-center gap-1">
                     <div className="text-xs text-gray-500">Progress</div>
-                    <div className="text-sm font-medium text-[#007AFF]">{order.Job_Status_Pct}%</div>
-                  </div>
-                  <div className="w-24">
-                    <Progress
-                      value={order.Job_Status_Pct}
-                      className="h-2 bg-[#E0E4EA]"
-                      aria-valuenow={order.Job_Status_Pct}
-                      aria-valuemin={0}
-                      aria-valuemax={100}
-                    />
+                    <div className="flex items-center gap-3">
+                      <div className="h-32 relative">
+                        <div className="w-2 bg-[#E0E4EA] rounded-full h-full absolute">
+                          <div 
+                            className="w-2 bg-[#007AFF] rounded-full absolute bottom-0 transition-all duration-500 ease-out"
+                            style={{ height: `${order.Job_Status_Pct}%` }}
+                            aria-valuenow={order.Job_Status_Pct}
+                            aria-valuemin={0}
+                            aria-valuemax={100}
+                            role="progressbar"
+                          ></div>
+                        </div>
+                      </div>
+                      <div className="text-sm font-medium text-[#007AFF]">{order.Job_Status_Pct}%</div>
+                    </div>
                   </div>
                 </div>
               </div>
