@@ -2,15 +2,13 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Filter, Search, Plus } from "lucide-react";
-import { ViewMode, FilterOption } from "@/services/orderService";
+import { Filter, Search, Plus, FileExport } from "lucide-react";
+import { FilterOption } from "@/services/orderService";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 interface OrdersToolbarProps {
   searchQuery: string;
   onSearchChange: (value: string) => void;
-  viewMode: ViewMode;
-  setViewMode: (mode: ViewMode) => void;
   filterOption: FilterOption;
   setFilterOption: (option: FilterOption) => void;
   filterJobType: string;
@@ -24,8 +22,6 @@ interface OrdersToolbarProps {
 const OrdersToolbar: React.FC<OrdersToolbarProps> = ({
   searchQuery,
   onSearchChange,
-  viewMode,
-  setViewMode,
   filterOption,
   setFilterOption,
   filterJobType,
@@ -36,6 +32,11 @@ const OrdersToolbar: React.FC<OrdersToolbarProps> = ({
   aeNames,
 }) => {
   const [showFilters, setShowFilters] = React.useState(false);
+
+  const handleExport = () => {
+    console.log("Exporting orders data");
+    // Export functionality would be implemented here
+  };
 
   return (
     <div className="space-y-4 mb-6">
@@ -62,24 +63,15 @@ const OrdersToolbar: React.FC<OrdersToolbarProps> = ({
             <span>Filter</span>
           </Button>
           
-          <div className="flex items-center border rounded-md overflow-hidden">
-            <Button
-              variant="ghost"
-              size="sm"
-              className={`rounded-none h-8 px-3 ${viewMode === 'card' ? 'bg-[#007AFF] text-white' : ''}`}
-              onClick={() => setViewMode('card')}
-            >
-              Cards
-            </Button>
-            <Button
-              variant="ghost"
-              size="sm"
-              className={`rounded-none h-8 px-3 ${viewMode === 'table' ? 'bg-[#007AFF] text-white' : ''}`}
-              onClick={() => setViewMode('table')}
-            >
-              Table
-            </Button>
-          </div>
+          <Button 
+            variant="outline"
+            size="sm"
+            className="flex items-center gap-1"
+            onClick={handleExport}
+          >
+            <FileExport className="h-3.5 w-3.5" />
+            <span>Export</span>
+          </Button>
           
           <Button className="bg-[#007AFF] hover:bg-blue-600">
             <Plus className="h-4 w-4 mr-1" /> New Order

@@ -2,9 +2,8 @@
 import React from "react";
 import DashboardSidebar from "./DashboardSidebar";
 import Logo from "./Logo";
-import { Menu, Bell, Search } from "lucide-react";
+import { Menu, Bell } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -35,17 +34,6 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({
               <Menu className="h-5 w-5" />
             </Button>
             <Logo size="sm" />
-          </div>
-          
-          <div className="hidden md:flex items-center gap-2 flex-1">
-            <div className="relative flex-1 max-w-md">
-              <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-              <Input
-                type="search"
-                placeholder="Search orders..."
-                className="pl-8 bg-muted/30 border-none"
-              />
-            </div>
           </div>
           
           <div className="flex items-center gap-2 ml-auto">

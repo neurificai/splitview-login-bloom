@@ -11,10 +11,9 @@ import { cn } from "@/lib/utils";
 
 interface OrdersListProps {
   orders: Order[];
-  viewMode: "card" | "table";
 }
 
-const OrdersList: React.FC<OrdersListProps> = ({ orders, viewMode }) => {
+const OrdersList: React.FC<OrdersListProps> = ({ orders }) => {
   const [expandedOrder, setExpandedOrder] = React.useState<string | null>(null);
 
   if (orders.length === 0) {
@@ -33,7 +32,6 @@ const OrdersList: React.FC<OrdersListProps> = ({ orders, viewMode }) => {
     }
   };
 
-  // Always use the row style, regardless of viewMode
   return (
     <div className="space-y-4">
       {orders.map((order) => {

@@ -3,11 +3,10 @@ import React, { useState } from "react";
 import DashboardLayout from "@/components/DashboardLayout";
 import OrdersToolbar from "@/components/OrdersToolbar";
 import OrdersList from "@/components/OrdersList";
-import { orders, FilterOption, ViewMode } from "@/services/orderService";
+import { orders, FilterOption } from "@/services/orderService";
 
 const Orders = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [viewMode, setViewMode] = useState<ViewMode>("card");
   const [filterOption, setFilterOption] = useState<FilterOption>("all");
   const [filterJobType, setFilterJobType] = useState<string>("all");
   const [filterAEName, setFilterAEName] = useState<string>("all");
@@ -47,8 +46,6 @@ const Orders = () => {
         <OrdersToolbar 
           searchQuery={searchQuery}
           onSearchChange={setSearchQuery}
-          viewMode={viewMode}
-          setViewMode={setViewMode}
           filterOption={filterOption}
           setFilterOption={setFilterOption}
           filterJobType={filterJobType}
@@ -59,7 +56,7 @@ const Orders = () => {
           aeNames={[...new Set(orders.map(order => order.AE_Name))]}
         />
         
-        <OrdersList orders={filteredOrders} viewMode={viewMode} />
+        <OrdersList orders={filteredOrders} />
       </div>
     </DashboardLayout>
   );
