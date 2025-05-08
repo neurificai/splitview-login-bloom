@@ -72,15 +72,18 @@ const OrderDetailsTabs: React.FC<OrderDetailsTabsProps> = ({
     setActiveTab(tabValue);
   };
 
+  // Define sky blue color for completed tabs
+  const completedTabColor = "bg-[#8DE3FD]";
+
   return (
     <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
       <div className="relative flex mb-10 gap-2">
-        {/* Arrow-shaped tabs with improved styling */}
+        {/* Estimate Tab */}
         <div 
           className={cn(
             "flex-1 py-3 px-4 text-center relative arrow-tab first-tab font-medium transition-all duration-300",
             activeTab === "estimate" ? "bg-[#33C3F0] text-white" : 
-            tabStatus.estimate ? "bg-[#8DE3FD] text-white" : "bg-gray-200 text-gray-600",
+            tabStatus.estimate ? completedTabColor + " text-white" : "bg-gray-200 text-gray-600",
             "hover:brightness-105"
           )}
           data-state={activeTab === "estimate" ? "active" : tabStatus.estimate ? "completed" : "inactive"}
@@ -88,11 +91,13 @@ const OrderDetailsTabs: React.FC<OrderDetailsTabsProps> = ({
         >
           Estimate
         </div>
+
+        {/* Design Tab */}
         <div 
           className={cn(
             "flex-1 py-3 px-4 text-center relative arrow-tab font-medium transition-all duration-300",
             activeTab === "design" ? "bg-[#33C3F0] text-white" : 
-            tabStatus.design ? "bg-[#8DE3FD] text-white" : "bg-gray-200 text-gray-600",
+            tabStatus.design ? completedTabColor + " text-white" : "bg-gray-200 text-gray-600",
             "hover:brightness-105"
           )}
           data-state={activeTab === "design" ? "active" : tabStatus.design ? "completed" : "inactive"}
@@ -100,11 +105,13 @@ const OrderDetailsTabs: React.FC<OrderDetailsTabsProps> = ({
         >
           Design
         </div>
+
+        {/* Print Tab */}
         <div 
           className={cn(
             "flex-1 py-3 px-4 text-center relative arrow-tab font-medium transition-all duration-300",
             activeTab === "print" ? "bg-[#33C3F0] text-white" : 
-            tabStatus.print ? "bg-[#8DE3FD] text-white" : "bg-gray-200 text-gray-600",
+            tabStatus.print ? completedTabColor + " text-white" : "bg-gray-200 text-gray-600",
             "hover:brightness-105"
           )}
           data-state={activeTab === "print" ? "active" : tabStatus.print ? "completed" : "inactive"}
@@ -112,11 +119,13 @@ const OrderDetailsTabs: React.FC<OrderDetailsTabsProps> = ({
         >
           Print
         </div>
+
+        {/* Install Tab */}
         <div 
           className={cn(
             "flex-1 py-3 px-4 text-center relative arrow-tab font-medium transition-all duration-300",
             activeTab === "install" ? "bg-[#33C3F0] text-white" : 
-            tabStatus.install ? "bg-[#8DE3FD] text-white" : "bg-gray-200 text-gray-600",
+            tabStatus.install ? completedTabColor + " text-white" : "bg-gray-200 text-gray-600",
             "hover:brightness-105"
           )}
           data-state={activeTab === "install" ? "active" : tabStatus.install ? "completed" : "inactive"}
@@ -124,11 +133,13 @@ const OrderDetailsTabs: React.FC<OrderDetailsTabsProps> = ({
         >
           Install
         </div>
+
+        {/* Invoice Tab */}
         <div 
           className={cn(
             "flex-1 py-3 px-4 text-center relative arrow-tab last-tab font-medium transition-all duration-300",
             activeTab === "invoice" ? "bg-[#33C3F0] text-white" : 
-            tabStatus.invoice ? "bg-[#8DE3FD] text-white" : "bg-gray-200 text-gray-600",
+            tabStatus.invoice ? completedTabColor + " text-white" : "bg-gray-200 text-gray-600",
             "hover:brightness-105"
           )}
           data-state={activeTab === "invoice" ? "active" : tabStatus.invoice ? "completed" : "inactive"}
@@ -147,12 +158,11 @@ const OrderDetailsTabs: React.FC<OrderDetailsTabsProps> = ({
         <TabsTrigger value="invoice">Invoice</TabsTrigger>
       </TabsList>
       
-      {/* ESTIMATE TAB */}
+      {/* Tab content */}
       <TabsContent value="estimate">
         <EstimateTab activities={activities} />
       </TabsContent>
       
-      {/* DESIGN TAB */}
       <TabsContent value="design">
         <DesignTab 
           activities={activities}
@@ -160,7 +170,6 @@ const OrderDetailsTabs: React.FC<OrderDetailsTabsProps> = ({
         />
       </TabsContent>
       
-      {/* PRINT TAB */}
       <TabsContent value="print">
         <PrintTab 
           activities={activities}
@@ -168,7 +177,6 @@ const OrderDetailsTabs: React.FC<OrderDetailsTabsProps> = ({
         />
       </TabsContent>
       
-      {/* INSTALL TAB */}
       <TabsContent value="install">
         <InstallTab 
           activities={activities}
@@ -177,7 +185,6 @@ const OrderDetailsTabs: React.FC<OrderDetailsTabsProps> = ({
         />
       </TabsContent>
       
-      {/* INVOICE TAB */}
       <TabsContent value="invoice">
         <InvoiceTab 
           activities={activities}
