@@ -74,7 +74,7 @@ const OrderDetailsTabs: React.FC<OrderDetailsTabsProps> = ({
 
   return (
     <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-      <div className="relative flex mb-10">
+      <div className="relative flex mb-10 gap-2">
         {/* Arrow-shaped tabs with improved styling */}
         <div 
           className={cn(

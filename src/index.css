@@ -127,7 +127,7 @@
 .arrow-tab {
   cursor: pointer;
   clip-path: polygon(0% 0%, 90% 0%, 100% 50%, 90% 100%, 0% 100%);
-  margin-right: -15px;
+  margin-right: -5px; /* Reduced from -15px for more spacing between tabs */
   z-index: 1;
   transition: all 0.3s ease;
   font-weight: 500;
@@ -157,6 +157,6 @@
 .last-tab {
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
-  clip-path: polygon(10% 0%, 100% 0%, 100% 100%, 10% 100%, 0% 50%);
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 10% 50%);
   margin-right: 0;
 }
