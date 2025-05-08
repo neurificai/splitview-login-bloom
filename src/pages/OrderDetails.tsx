@@ -126,27 +126,6 @@ const OrderDetails = () => {
               <ContactBox contacts={contacts} />
             </div>
             
-            <div>
-              <h3 className="font-medium text-base mb-2 text-gray-700 uppercase tracking-wide">Notes</h3>
-              <div className="bg-white rounded-lg border p-4 shadow-sm">
-                <div className="mb-4">
-                  <div className="flex justify-between mb-2">
-                    <span className="text-sm font-medium">Justin Leblanc</span>
-                    <span className="text-xs text-gray-500">10 Jan</span>
-                  </div>
-                  <p className="text-sm text-gray-600">We need to prepare for the presentation next week. Please review the materials.</p>
-                </div>
-                
-                <div>
-                  <div className="flex justify-between mb-2">
-                    <span className="text-sm font-medium">Fernand Naudé</span>
-                    <span className="text-xs text-gray-500">14 Jan</span>
-                  </div>
-                  <p className="text-sm text-gray-600">Documentation is complete, awaiting final approval from the client.</p>
-                </div>
-              </div>
-            </div>
-            
             <div className="mt-4">
               <ShortcutsBox 
                 hasEstimate={true}
