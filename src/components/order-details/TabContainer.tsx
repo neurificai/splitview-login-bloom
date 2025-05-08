@@ -37,7 +37,7 @@ const TabContainer: React.FC<TabContainerProps> = ({ mainTab, children, colorSch
         >
           Activity
           {activeSubTab === "activity" && (
-            <span className={cn("absolute bottom-0 left-0 right-0 h-0.5", activeColor)} style={{ bottom: '-9px' }}></span>
+            <span className={cn("absolute inset-x-0 bottom-0 h-0.5", activeColor)}></span>
           )}
         </button>
         <button 
@@ -48,7 +48,7 @@ const TabContainer: React.FC<TabContainerProps> = ({ mainTab, children, colorSch
         >
           Collaborate
           {activeSubTab === "collaborate" && (
-            <span className={cn("absolute bottom-0 left-0 right-0 h-0.5", activeColor)} style={{ bottom: '-9px' }}></span>
+            <span className={cn("absolute inset-x-0 bottom-0 h-0.5", activeColor)}></span>
           )}
         </button>
         <button 
@@ -59,7 +59,7 @@ const TabContainer: React.FC<TabContainerProps> = ({ mainTab, children, colorSch
         >
           Detail
           {activeSubTab === "detail" && (
-            <span className={cn("absolute bottom-0 left-0 right-0 h-0.5", activeColor)} style={{ bottom: '-9px' }}></span>
+            <span className={cn("absolute inset-x-0 bottom-0 h-0.5", activeColor)}></span>
           )}
         </button>
       </div>
