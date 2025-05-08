@@ -160,8 +160,8 @@ const OrderDetailsTabs: React.FC<OrderDetailsTabsProps> = ({
         <TabsTrigger value="invoice">Invoice</TabsTrigger>
       </TabsList>
       
-      {/* Content area with sidebar layout */}
-      <div className="flex gap-4">
+      {/* Content area with sidebar layout - now aligning vertically */}
+      <div className="flex">
         <div className="flex-1">
           <TabsContent value="estimate">
             <EstimateTab activities={activities} />
@@ -197,9 +197,9 @@ const OrderDetailsTabs: React.FC<OrderDetailsTabsProps> = ({
           </TabsContent>
         </div>
         
-        {/* Sidebar with contacts and shortcuts */}
+        {/* Sidebar with contacts and shortcuts - now in proper alignment */}
         {sidebarContent && (
-          <div className="w-64 shrink-0">
+          <div className="w-64 shrink-0 mt-[39px]">
             {sidebarContent}
           </div>
         )}
