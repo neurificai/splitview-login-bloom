@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import DashboardLayout from "@/components/DashboardLayout";
@@ -80,18 +81,6 @@ const OrderDetails = () => {
       role: "Design Lead",
       email: "mike.p@example.com",
       phone: "(555) 987-6543"
-    },
-    {
-      name: "George Abdibal",
-      role: "Executive Director",
-      email: "george.a@example.com",
-      phone: "(555) 234-5678"
-    },
-    {
-      name: "Noel Fischer",
-      role: "Project Manager",
-      email: "noel.f@example.com", 
-      phone: "(555) 345-6789"
     }
   ];
 
@@ -105,28 +94,31 @@ const OrderDetails = () => {
         {/* Header with back button and order info */}
         <OrderDetailsHeader order={order} />
         
-        <OrderDetailsTabs 
-          activities={orderDetails.activities}
-          shippingAddresses={orderDetails.shippingAddresses}
-          vehicleDetails={orderDetails.vehicleDetails}
-          installLocations={orderDetails.installLocations}
-          approvedDesigns={orderDetails.approvedDesigns}
-          invoices={orderDetails.invoices}
-        />
-        
-        {/* Side info row - now below the tabs */}
-        <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <h3 className="font-medium text-xs mb-1 text-gray-700 uppercase tracking-wide">Contacts</h3>
-            <ContactBox contacts={contacts} />
+        <div className="flex flex-col md:flex-row gap-4 mt-4">
+          <div className="w-full md:w-3/4">
+            <OrderDetailsTabs 
+              activities={orderDetails.activities}
+              shippingAddresses={orderDetails.shippingAddresses}
+              vehicleDetails={orderDetails.vehicleDetails}
+              installLocations={orderDetails.installLocations}
+              approvedDesigns={orderDetails.approvedDesigns}
+              invoices={orderDetails.invoices}
+            />
           </div>
           
-          <div>
-            <ShortcutsBox 
-              hasEstimate={true}
-              hasApprovedDesign={hasApprovedDesign}
-              hasInstallPictures={hasInstallPictures}
-            />
+          <div className="w-full md:w-1/4 space-y-4">
+            <div>
+              <h3 className="font-medium text-xs mb-1 text-gray-700 uppercase tracking-wide">Contacts</h3>
+              <ContactBox contacts={contacts} />
+            </div>
+            
+            <div>
+              <ShortcutsBox 
+                hasEstimate={true}
+                hasApprovedDesign={hasApprovedDesign}
+                hasInstallPictures={hasInstallPictures}
+              />
+            </div>
           </div>
         </div>
       </div>

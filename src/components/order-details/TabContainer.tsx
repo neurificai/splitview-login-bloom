@@ -27,12 +27,12 @@ const TabContainer: React.FC<TabContainerProps> = ({ mainTab, children, colorSch
   const activeColor = "bg-[#33C3F0]";
   
   return (
-    <div className="mb-6 w-full">
-      <div className="inline-flex h-10 items-center justify-center rounded-lg p-1 text-muted-foreground mb-4 w-full sm:w-auto gap-8 border-b">
+    <div className="mb-4 w-full">
+      <div className="inline-flex h-9 items-center justify-center rounded-lg p-1 text-muted-foreground mb-3 w-full sm:w-auto gap-6 border-b">
         <button 
           onClick={() => handleSubTabChange("activity")}
           className={cn(
-            "px-5 py-2 text-sm font-medium transition-colors relative text-gray-700",
+            "px-4 py-1.5 text-sm font-medium transition-colors relative text-gray-700",
           )}
         >
           Activity
@@ -43,7 +43,7 @@ const TabContainer: React.FC<TabContainerProps> = ({ mainTab, children, colorSch
         <button 
           onClick={() => handleSubTabChange("collaborate")}
           className={cn(
-            "px-5 py-2 text-sm font-medium transition-colors relative text-gray-700",
+            "px-4 py-1.5 text-sm font-medium transition-colors relative text-gray-700",
           )}
         >
           Collaborate
@@ -54,7 +54,7 @@ const TabContainer: React.FC<TabContainerProps> = ({ mainTab, children, colorSch
         <button 
           onClick={() => handleSubTabChange("detail")}
           className={cn(
-            "px-5 py-2 text-sm font-medium transition-colors relative text-gray-700",
+            "px-4 py-1.5 text-sm font-medium transition-colors relative text-gray-700",
           )}
         >
           Detail
@@ -64,7 +64,7 @@ const TabContainer: React.FC<TabContainerProps> = ({ mainTab, children, colorSch
         </button>
       </div>
       
-      <div className="mt-4">
+      <div className="mt-3">
         {children[activeSubTab as keyof typeof children]}
       </div>
     </div>

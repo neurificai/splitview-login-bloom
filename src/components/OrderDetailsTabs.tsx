@@ -77,7 +77,7 @@ const OrderDetailsTabs: React.FC<OrderDetailsTabsProps> = ({
 
   return (
     <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-      <div className="relative flex mb-10 gap-2">
+      <div className="relative flex mb-4 gap-2">
         {/* Estimate Tab */}
         <div 
           className={cn(
