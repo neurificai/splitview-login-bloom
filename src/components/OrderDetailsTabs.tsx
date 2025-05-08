@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { ActivityItem } from "@/services/orderService";
 import { 
@@ -23,6 +23,7 @@ import { Button } from "@/components/ui/button";
 import { formatDate } from "@/services/orderService";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
 
 interface OrderDetailsTabsProps {
   activities: ActivityItem[];
@@ -57,6 +58,90 @@ const OrderDetailsTabs: React.FC<OrderDetailsTabsProps> = ({
   const installActivities = activities.filter(a => a.type === "install");
   const invoiceActivities = activities.filter(a => a.type === "invoice");
   
+  // State for nested tabs
+  const [activeSubTab, setActiveSubTab] = useState<Record<string, string>>({
+    estimate: "activity",
+    design: "activity",
+    print: "activity",
+    install: "activity",
+    invoice: "activity",
+  });
+  
+  // Handle nested tab changes
+  const handleSubTabChange = (mainTab: string, subTab: string) => {
+    setActiveSubTab(prev => ({
+      ...prev,
+      [mainTab]: subTab
+    }));
+  };
+  
+  // Subtle color variations for each section
+  const tabColors = {
+    estimate: {
+      activity: "bg-[#F2FCE2]",
+      collaborate: "bg-[#F2FCE2]",
+      detail: "bg-[#F2FCE2]",
+    },
+    design: {
+      activity: "bg-[#D3E4FD]",
+      collaborate: "bg-[#D3E4FD]",
+      detail: "bg-[#D3E4FD]",
+    },
+    print: {
+      activity: "bg-[#FEF7CD]",
+      collaborate: "bg-[#FEF7CD]",
+      detail: "bg-[#FEF7CD]",
+    },
+    install: {
+      activity: "bg-[#E5DEFF]",
+      collaborate: "bg-[#E5DEFF]",
+      detail: "bg-[#E5DEFF]",
+    },
+    invoice: {
+      activity: "bg-[#FFDEE2]",
+      collaborate: "bg-[#FFDEE2]",
+      detail: "bg-[#FFDEE2]",
+    },
+  };
+  
+  // Render nested tabs for a main tab
+  const renderNestedTabs = (mainTab: string, content: Record<string, React.ReactNode>) => {
+    return (
+      <div className="mb-6">
+        <TabsList className="inline-flex h-9 items-center justify-center rounded-lg bg-white border p-1 text-muted-foreground mb-4 w-full sm:w-auto">
+          <TabsTrigger 
+            value="activity" 
+            onClick={() => handleSubTabChange(mainTab, "activity")}
+            className={activeSubTab[mainTab] === "activity" ? `${tabColors[mainTab as keyof typeof tabColors].activity} text-gray-800` : ""}
+            data-state={activeSubTab[mainTab] === "activity" ? "active" : ""}
+          >
+            Activity
+          </TabsTrigger>
+          <TabsTrigger 
+            value="collaborate" 
+            onClick={() => handleSubTabChange(mainTab, "collaborate")}
+            className={activeSubTab[mainTab] === "collaborate" ? `${tabColors[mainTab as keyof typeof tabColors].collaborate} text-gray-800` : ""}
+            data-state={activeSubTab[mainTab] === "collaborate" ? "active" : ""}
+          >
+            Collaborate
+          </TabsTrigger>
+          <TabsTrigger 
+            value="detail" 
+            onClick={() => handleSubTabChange(mainTab, "detail")}
+            className={activeSubTab[mainTab] === "detail" ? `${tabColors[mainTab as keyof typeof tabColors].detail} text-gray-800` : ""}
+            data-state={activeSubTab[mainTab] === "detail" ? "active" : ""}
+          >
+            Detail
+          </TabsTrigger>
+        </TabsList>
+        
+        <div className="mt-4">
+          {content[activeSubTab[mainTab]]}
+        </div>
+      </div>
+    );
+  };
+  
   return (
     <Tabs defaultValue="estimate" className="w-full">
       <TabsList className="grid grid-cols-5 mb-8">
@@ -69,62 +154,60 @@ const OrderDetailsTabs: React.FC<OrderDetailsTabsProps> = ({
       
       {/* ESTIMATE TAB */}
       <TabsContent value="estimate">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Activity Section */}
-          <div className="md:col-span-2 bg-white rounded-xl border p-6 shadow-sm">
-            <h3 className="text-lg font-medium mb-6 flex items-center gap-2">
-              <Activity size={18} className="text-green-500" />
-              Activity
-            </h3>
-            
-            <div className="space-y-6">
-              {estimateActivities.length > 0 ? (
-                <div className="relative">
-                  {estimateActivities.map((activity, index) => (
-                    <div key={index} className="mb-6 relative">
-                      {/* Timeline connector */}
-                      {index < estimateActivities.length - 1 && (
-                        <div className="absolute left-4 top-6 h-full w-0.5 bg-gray-200"></div>
-                      )}
-                      
-                      <div className="flex items-start">
-                        <div className="mr-4 bg-green-100 rounded-full p-1 z-10">
-                          {activity.status === "completed" ? (
-                            <Check className="h-6 w-6 text-green-500" />
-                          ) : (
-                            <Clock className="h-6 w-6 text-amber-500" />
-                          )}
-                        </div>
-                        <div>
-                          <h4 className="font-medium">{activity.title}</h4>
-                          <p className="text-sm text-gray-600 mt-1">{activity.description}</p>
-                          <div className="text-xs text-gray-500 mt-1">{formatDate(activity.date)}</div>
+        {renderNestedTabs("estimate", {
+          activity: (
+            <div className="bg-white rounded-xl border p-6 shadow-sm">
+              <h3 className="text-lg font-medium mb-6 flex items-center gap-2">
+                <Activity size={18} className="text-green-500" />
+                Activity
+              </h3>
+              
+              <div className="space-y-6">
+                {estimateActivities.length > 0 ? (
+                  <div className="relative">
+                    {estimateActivities.map((activity, index) => (
+                      <div key={index} className="mb-6 relative">
+                        {/* Timeline connector */}
+                        {index < estimateActivities.length - 1 && (
+                          <div className="absolute left-4 top-6 h-full w-0.5 bg-gray-200"></div>
+                        )}
+                        
+                        <div className="flex items-start">
+                          <div className="mr-4 bg-green-100 rounded-full p-1 z-10">
+                            {activity.status === "completed" ? (
+                              <Check className="h-6 w-6 text-green-500" />
+                            ) : (
+                              <Clock className="h-6 w-6 text-amber-500" />
+                            )}
+                          </div>
+                          <div>
+                            <h4 className="font-medium">{activity.title}</h4>
+                            <p className="text-sm text-gray-600 mt-1">{activity.description}</p>
+                            <div className="text-xs text-gray-500 mt-1">{formatDate(activity.date)}</div>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <p className="text-gray-500">No estimate activities yet.</p>
-              )}
-              
-              <div className="pt-4">
-                <h4 className="font-medium mb-2">Next Steps</h4>
-                {estimateActivities.some(a => a.status === "pending") ? (
-                  <div className="flex items-center gap-2 text-gray-600 text-sm">
-                    <ArrowRight size={16} className="text-green-500" />
-                    <span>Pending estimate approval</span>
+                    ))}
                   </div>
                 ) : (
-                  <p className="text-gray-500 text-sm">No pending actions</p>
+                  <p className="text-gray-500">No estimate activities yet.</p>
                 )}
+                
+                <div className="pt-4">
+                  <h4 className="font-medium mb-2">Next Steps</h4>
+                  {estimateActivities.some(a => a.status === "pending") ? (
+                    <div className="flex items-center gap-2 text-gray-600 text-sm">
+                      <ArrowRight size={16} className="text-green-500" />
+                      <span>Pending estimate approval</span>
+                    </div>
+                  ) : (
+                    <p className="text-gray-500 text-sm">No pending actions</p>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
-          
-          {/* Collaborate & Detail Sections */}
-          <div className="space-y-6">
-            {/* Collaborate Section */}
+          ),
+          collaborate: (
             <div className="bg-white rounded-xl border p-6 shadow-sm">
               <h3 className="text-lg font-medium mb-4 flex items-center gap-2">
                 <MessageSquare size={18} className="text-blue-500" />
@@ -152,8 +235,8 @@ const OrderDetailsTabs: React.FC<OrderDetailsTabsProps> = ({
                   : "Your signature is required to proceed."}
               </div>
             </div>
-            
-            {/* Detail Section */}
+          ),
+          detail: (
             <div className="bg-white rounded-xl border p-6 shadow-sm">
               <h3 className="text-lg font-medium mb-4 flex items-center gap-2">
                 <FileText size={18} className="text-blue-500" />
@@ -165,56 +248,54 @@ const OrderDetailsTabs: React.FC<OrderDetailsTabsProps> = ({
                 Download Estimate PDF
               </Button>
             </div>
-          </div>
-        </div>
+          )
+        })}
       </TabsContent>
       
       {/* DESIGN TAB */}
       <TabsContent value="design">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Activity Section */}
-          <div className="md:col-span-2 bg-white rounded-xl border p-6 shadow-sm">
-            <h3 className="text-lg font-medium mb-6 flex items-center gap-2">
-              <Activity size={18} className="text-green-500" />
-              Activity
-            </h3>
-            
-            <div className="space-y-6">
-              {designActivities.length > 0 ? (
-                <div className="relative">
-                  {designActivities.map((activity, index) => (
-                    <div key={index} className="mb-6 relative">
-                      {/* Timeline connector */}
-                      {index < designActivities.length - 1 && (
-                        <div className="absolute left-4 top-6 h-full w-0.5 bg-gray-200"></div>
-                      )}
-                      
-                      <div className="flex items-start">
-                        <div className="mr-4 bg-green-100 rounded-full p-1 z-10">
-                          {activity.status === "completed" ? (
-                            <Check className="h-6 w-6 text-green-500" />
-                          ) : (
-                            <Clock className="h-6 w-6 text-amber-500" />
-                          )}
-                        </div>
-                        <div>
-                          <h4 className="font-medium">{activity.title}</h4>
-                          <p className="text-sm text-gray-600 mt-1">{activity.description}</p>
-                          <div className="text-xs text-gray-500 mt-1">{formatDate(activity.date)}</div>
+        {renderNestedTabs("design", {
+          activity: (
+            <div className="bg-white rounded-xl border p-6 shadow-sm">
+              <h3 className="text-lg font-medium mb-6 flex items-center gap-2">
+                <Activity size={18} className="text-green-500" />
+                Activity
+              </h3>
+              
+              <div className="space-y-6">
+                {designActivities.length > 0 ? (
+                  <div className="relative">
+                    {designActivities.map((activity, index) => (
+                      <div key={index} className="mb-6 relative">
+                        {/* Timeline connector */}
+                        {index < designActivities.length - 1 && (
+                          <div className="absolute left-4 top-6 h-full w-0.5 bg-gray-200"></div>
+                        )}
+                        
+                        <div className="flex items-start">
+                          <div className="mr-4 bg-green-100 rounded-full p-1 z-10">
+                            {activity.status === "completed" ? (
+                              <Check className="h-6 w-6 text-green-500" />
+                            ) : (
+                              <Clock className="h-6 w-6 text-amber-500" />
+                            )}
+                          </div>
+                          <div>
+                            <h4 className="font-medium">{activity.title}</h4>
+                            <p className="text-sm text-gray-600 mt-1">{activity.description}</p>
+                            <div className="text-xs text-gray-500 mt-1">{formatDate(activity.date)}</div>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <p className="text-gray-500">No design activities yet.</p>
-              )}
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-gray-500">No design activities yet.</p>
+                )}
+              </div>
             </div>
-          </div>
-          
-          {/* Collaborate & Detail Sections */}
-          <div className="space-y-6">
-            {/* Collaborate Section */}
+          ),
+          collaborate: (
             <div className="bg-white rounded-xl border p-6 shadow-sm">
               <h3 className="text-lg font-medium mb-4 flex items-center gap-2">
                 <MessageSquare size={18} className="text-blue-500" />
@@ -253,8 +334,8 @@ const OrderDetailsTabs: React.FC<OrderDetailsTabsProps> = ({
                 </div>
               </div>
             </div>
-            
-            {/* Detail Section */}
+          ),
+          detail: (
             <div className="bg-white rounded-xl border p-6 shadow-sm">
               <h3 className="text-lg font-medium mb-4 flex items-center gap-2">
                 <FileText size={18} className="text-blue-500" />
@@ -276,56 +357,54 @@ const OrderDetailsTabs: React.FC<OrderDetailsTabsProps> = ({
                 <p className="text-sm text-gray-500">No approved designs yet.</p>
               )}
             </div>
-          </div>
-        </div>
+          )
+        })}
       </TabsContent>
       
       {/* PRINT TAB */}
       <TabsContent value="print">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Activity Section */}
-          <div className="md:col-span-2 bg-white rounded-xl border p-6 shadow-sm">
-            <h3 className="text-lg font-medium mb-6 flex items-center gap-2">
-              <Activity size={18} className="text-green-500" />
-              Activity
-            </h3>
-            
-            <div className="space-y-6">
-              {printActivities.length > 0 ? (
-                <div className="relative">
-                  {printActivities.map((activity, index) => (
-                    <div key={index} className="mb-6 relative">
-                      {/* Timeline connector */}
-                      {index < printActivities.length - 1 && (
-                        <div className="absolute left-4 top-6 h-full w-0.5 bg-gray-200"></div>
-                      )}
-                      
-                      <div className="flex items-start">
-                        <div className="mr-4 bg-green-100 rounded-full p-1 z-10">
-                          {activity.status === "completed" ? (
-                            <Check className="h-6 w-6 text-green-500" />
-                          ) : (
-                            <Clock className="h-6 w-6 text-amber-500" />
-                          )}
-                        </div>
-                        <div>
-                          <h4 className="font-medium">{activity.title}</h4>
-                          <p className="text-sm text-gray-600 mt-1">{activity.description}</p>
-                          <div className="text-xs text-gray-500 mt-1">{formatDate(activity.date)}</div>
+        {renderNestedTabs("print", {
+          activity: (
+            <div className="bg-white rounded-xl border p-6 shadow-sm">
+              <h3 className="text-lg font-medium mb-6 flex items-center gap-2">
+                <Activity size={18} className="text-green-500" />
+                Activity
+              </h3>
+              
+              <div className="space-y-6">
+                {printActivities.length > 0 ? (
+                  <div className="relative">
+                    {printActivities.map((activity, index) => (
+                      <div key={index} className="mb-6 relative">
+                        {/* Timeline connector */}
+                        {index < printActivities.length - 1 && (
+                          <div className="absolute left-4 top-6 h-full w-0.5 bg-gray-200"></div>
+                        )}
+                        
+                        <div className="flex items-start">
+                          <div className="mr-4 bg-green-100 rounded-full p-1 z-10">
+                            {activity.status === "completed" ? (
+                              <Check className="h-6 w-6 text-green-500" />
+                            ) : (
+                              <Clock className="h-6 w-6 text-amber-500" />
+                            )}
+                          </div>
+                          <div>
+                            <h4 className="font-medium">{activity.title}</h4>
+                            <p className="text-sm text-gray-600 mt-1">{activity.description}</p>
+                            <div className="text-xs text-gray-500 mt-1">{formatDate(activity.date)}</div>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <p className="text-gray-500">No print activities yet.</p>
-              )}
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-gray-500">No print activities yet.</p>
+                )}
+              </div>
             </div>
-          </div>
-          
-          {/* Collaborate & Detail Sections */}
-          <div className="space-y-6">
-            {/* Collaborate Section */}
+          ),
+          collaborate: (
             <div className="bg-white rounded-xl border p-6 shadow-sm">
               <h3 className="text-lg font-medium mb-4 flex items-center gap-2">
                 <Truck size={18} className="text-blue-500" />
@@ -347,8 +426,8 @@ const OrderDetailsTabs: React.FC<OrderDetailsTabsProps> = ({
                 <p className="text-sm text-gray-500">No shipping addresses provided.</p>
               )}
             </div>
-            
-            {/* Detail Section */}
+          ),
+          detail: (
             <div className="bg-white rounded-xl border p-6 shadow-sm">
               <h3 className="text-lg font-medium mb-4 flex items-center gap-2">
                 <FileText size={18} className="text-blue-500" />
@@ -368,56 +447,54 @@ const OrderDetailsTabs: React.FC<OrderDetailsTabsProps> = ({
                 <div>{(shippingAddresses?.length || 1) * 5} pieces</div>
               </div>
             </div>
-          </div>
-        </div>
+          )
+        })}
       </TabsContent>
       
       {/* INSTALL TAB */}
       <TabsContent value="install">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Activity Section */}
-          <div className="md:col-span-2 bg-white rounded-xl border p-6 shadow-sm">
-            <h3 className="text-lg font-medium mb-6 flex items-center gap-2">
-              <Activity size={18} className="text-green-500" />
-              Activity
-            </h3>
-            
-            <div className="space-y-6">
-              {installActivities.length > 0 ? (
-                <div className="relative">
-                  {installActivities.map((activity, index) => (
-                    <div key={index} className="mb-6 relative">
-                      {/* Timeline connector */}
-                      {index < installActivities.length - 1 && (
-                        <div className="absolute left-4 top-6 h-full w-0.5 bg-gray-200"></div>
-                      )}
-                      
-                      <div className="flex items-start">
-                        <div className="mr-4 bg-green-100 rounded-full p-1 z-10">
-                          {activity.status === "completed" ? (
-                            <Check className="h-6 w-6 text-green-500" />
-                          ) : (
-                            <Clock className="h-6 w-6 text-amber-500" />
-                          )}
-                        </div>
-                        <div>
-                          <h4 className="font-medium">{activity.title}</h4>
-                          <p className="text-sm text-gray-600 mt-1">{activity.description}</p>
-                          <div className="text-xs text-gray-500 mt-1">{formatDate(activity.date)}</div>
+        {renderNestedTabs("install", {
+          activity: (
+            <div className="bg-white rounded-xl border p-6 shadow-sm">
+              <h3 className="text-lg font-medium mb-6 flex items-center gap-2">
+                <Activity size={18} className="text-green-500" />
+                Activity
+              </h3>
+              
+              <div className="space-y-6">
+                {installActivities.length > 0 ? (
+                  <div className="relative">
+                    {installActivities.map((activity, index) => (
+                      <div key={index} className="mb-6 relative">
+                        {/* Timeline connector */}
+                        {index < installActivities.length - 1 && (
+                          <div className="absolute left-4 top-6 h-full w-0.5 bg-gray-200"></div>
+                        )}
+                        
+                        <div className="flex items-start">
+                          <div className="mr-4 bg-green-100 rounded-full p-1 z-10">
+                            {activity.status === "completed" ? (
+                              <Check className="h-6 w-6 text-green-500" />
+                            ) : (
+                              <Clock className="h-6 w-6 text-amber-500" />
+                            )}
+                          </div>
+                          <div>
+                            <h4 className="font-medium">{activity.title}</h4>
+                            <p className="text-sm text-gray-600 mt-1">{activity.description}</p>
+                            <div className="text-xs text-gray-500 mt-1">{formatDate(activity.date)}</div>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <p className="text-gray-500">No installation activities yet.</p>
-              )}
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-gray-500">No installation activities yet.</p>
+                )}
+              </div>
             </div>
-          </div>
-          
-          {/* Collaborate & Detail Sections */}
-          <div className="space-y-6">
-            {/* Collaborate Section */}
+          ),
+          collaborate: (
             <div className="bg-white rounded-xl border p-6 shadow-sm">
               <h3 className="text-lg font-medium mb-4 flex items-center gap-2">
                 <Car size={18} className="text-blue-500" />
@@ -459,8 +536,8 @@ const OrderDetailsTabs: React.FC<OrderDetailsTabsProps> = ({
                 <p className="text-sm text-gray-500">No installation locations specified.</p>
               )}
             </div>
-            
-            {/* Detail Section */}
+          ),
+          detail: (
             <div className="bg-white rounded-xl border p-6 shadow-sm">
               <h3 className="text-lg font-medium mb-4 flex items-center gap-2">
                 <FileText size={18} className="text-blue-500" />
@@ -478,66 +555,64 @@ const OrderDetailsTabs: React.FC<OrderDetailsTabsProps> = ({
                 <div>Weather-resistant application needed</div>
               </div>
             </div>
-          </div>
-        </div>
+          )
+        })}
       </TabsContent>
       
       {/* INVOICE TAB */}
       <TabsContent value="invoice">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Activity Section */}
-          <div className="md:col-span-2 bg-white rounded-xl border p-6 shadow-sm">
-            <h3 className="text-lg font-medium mb-6 flex items-center gap-2">
-              <Activity size={18} className="text-green-500" />
-              Activity
-            </h3>
-            
-            <div className="space-y-6">
-              {invoiceActivities.length > 0 ? (
-                <div className="relative">
-                  {invoiceActivities.map((activity, index) => (
-                    <div key={index} className="mb-6 relative">
-                      {/* Timeline connector */}
-                      {index < invoiceActivities.length - 1 && (
-                        <div className="absolute left-4 top-6 h-full w-0.5 bg-gray-200"></div>
-                      )}
-                      
-                      <div className="flex items-start">
-                        <div className="mr-4 bg-green-100 rounded-full p-1 z-10">
-                          {activity.status === "completed" ? (
-                            <Check className="h-6 w-6 text-green-500" />
-                          ) : (
-                            <Clock className="h-6 w-6 text-amber-500" />
-                          )}
-                        </div>
-                        <div>
-                          <h4 className="font-medium">{activity.title}</h4>
-                          <p className="text-sm text-gray-600 mt-1">{activity.description}</p>
-                          <div className="text-xs text-gray-500 mt-1">{formatDate(activity.date)}</div>
+        {renderNestedTabs("invoice", {
+          activity: (
+            <div className="bg-white rounded-xl border p-6 shadow-sm">
+              <h3 className="text-lg font-medium mb-6 flex items-center gap-2">
+                <Activity size={18} className="text-green-500" />
+                Activity
+              </h3>
+              
+              <div className="space-y-6">
+                {invoiceActivities.length > 0 ? (
+                  <div className="relative">
+                    {invoiceActivities.map((activity, index) => (
+                      <div key={index} className="mb-6 relative">
+                        {/* Timeline connector */}
+                        {index < invoiceActivities.length - 1 && (
+                          <div className="absolute left-4 top-6 h-full w-0.5 bg-gray-200"></div>
+                        )}
+                        
+                        <div className="flex items-start">
+                          <div className="mr-4 bg-green-100 rounded-full p-1 z-10">
+                            {activity.status === "completed" ? (
+                              <Check className="h-6 w-6 text-green-500" />
+                            ) : (
+                              <Clock className="h-6 w-6 text-amber-500" />
+                            )}
+                          </div>
+                          <div>
+                            <h4 className="font-medium">{activity.title}</h4>
+                            <p className="text-sm text-gray-600 mt-1">{activity.description}</p>
+                            <div className="text-xs text-gray-500 mt-1">{formatDate(activity.date)}</div>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <p className="text-gray-500">No invoice activities yet.</p>
-              )}
-              
-              {invoices && invoices.some(inv => inv.status === "pending") && (
-                <div className="pt-4">
-                  <h4 className="font-medium mb-2">Next Steps</h4>
-                  <div className="flex items-center gap-2 text-gray-600 text-sm">
-                    <ArrowRight size={16} className="text-green-500" />
-                    <span>Complete payment for pending invoice</span>
+                    ))}
                   </div>
-                </div>
-              )}
+                ) : (
+                  <p className="text-gray-500">No invoice activities yet.</p>
+                )}
+                
+                {invoices && invoices.some(inv => inv.status === "pending") && (
+                  <div className="pt-4">
+                    <h4 className="font-medium mb-2">Next Steps</h4>
+                    <div className="flex items-center gap-2 text-gray-600 text-sm">
+                      <ArrowRight size={16} className="text-green-500" />
+                      <span>Complete payment for pending invoice</span>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
-          
-          {/* Collaborate & Detail Sections */}
-          <div className="space-y-6">
-            {/* Collaborate Section */}
+          ),
+          collaborate: (
             <div className="bg-white rounded-xl border p-6 shadow-sm">
               <h3 className="text-lg font-medium mb-4 flex items-center gap-2">
                 <CreditCard size={18} className="text-blue-500" />
@@ -568,8 +643,8 @@ const OrderDetailsTabs: React.FC<OrderDetailsTabsProps> = ({
                   : "No payments due at this time."}
               </div>
             </div>
-            
-            {/* Detail Section */}
+          ),
+          detail: (
             <div className="bg-white rounded-xl border p-6 shadow-sm">
               <h3 className="text-lg font-medium mb-4 flex items-center gap-2">
                 <FileText size={18} className="text-blue-500" />
@@ -600,8 +675,8 @@ const OrderDetailsTabs: React.FC<OrderDetailsTabsProps> = ({
                 <p className="text-sm text-gray-500">No invoices available.</p>
               )}
             </div>
-          </div>
-        </div>
+          )
+        })}
       </TabsContent>
     </Tabs>
   );
