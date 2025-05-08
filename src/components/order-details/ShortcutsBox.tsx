@@ -2,7 +2,7 @@
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Image, Eye, Download } from "lucide-react";
+import { Image, Eye, Download, Package } from "lucide-react";
 
 interface ShortcutsBoxProps {
   hasEstimate?: boolean;
@@ -39,6 +39,16 @@ const ShortcutsBox: React.FC<ShortcutsBoxProps> = ({
           >
             <Eye className="h-3.5 w-3.5 mr-1.5" />
             View Designs
+          </Button>
+          
+          {/* Always show View Installs shortcut */}
+          <Button 
+            variant="outline" 
+            className="w-full justify-start text-amber-600 border-amber-200 hover:bg-amber-50 transition-all"
+            size="sm"
+          >
+            <Package className="h-3.5 w-3.5 mr-1.5" />
+            View Installs
           </Button>
           
           {hasApprovedDesign && (
