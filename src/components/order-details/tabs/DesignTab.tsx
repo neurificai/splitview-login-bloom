@@ -1,3 +1,4 @@
+
 import React from "react";
 import { ActivityItem } from "@/services/orderService";
 import { MessageSquare, FileText, Edit, Download } from "lucide-react";
@@ -125,6 +126,7 @@ const DesignTab: React.FC<DesignTabProps> = ({ activities, approvedDesigns }) =>
       activities={displayPastActivities()} 
       nextSteps={displayNextSteps()} 
       title="Design Process" 
+      showNextStepsFirst={true}
     />
   );
   
