@@ -57,6 +57,40 @@ export const orders: Order[] = [
     Frame_Installation: true,
     Vinyl_Installation: false,
     Customer_Notes: "Install frames by May 20th."
+  },
+  {
+    AV_SO: "AVSO1795",
+    Order_Title: "Millennium Fleet | Qty 22 | Denver, CO",
+    Unit_No: "U-1405",
+    FMC_Unit_No: "FMC-350",
+    CVN_Unit_No: "CVN-1010",
+    VIN_No: "3VWSA29M71M078742",
+    Order_Date: "2025-05-01",
+    Job_Request: "Full Installation",
+    AE_Name: "Thomas Wright",
+    PM_Name: "Jennifer Lopez",
+    Job_Type: "Design & Install",
+    Job_Status_Pct: 90,
+    Frame_Installation: true,
+    Vinyl_Installation: true,
+    Customer_Notes: "Customer requests weather-resistant materials for outdoor application. Previous installation was damaged in harsh conditions."
+  },
+  {
+    AV_SO: "AVSO1796",
+    Order_Title: "NewTech Industries | Qty 5 | Seattle, WA",
+    Unit_No: "U-1502",
+    FMC_Unit_No: "FMC-401",
+    CVN_Unit_No: "CVN-1100",
+    VIN_No: "5FNRL38409B408100",
+    Order_Date: "2025-05-05",
+    Job_Request: "Vinyl Only",
+    AE_Name: "Sarah Johnson",
+    PM_Name: "David Chen",
+    Job_Type: "Print Only",
+    Job_Status_Pct: 30,
+    Frame_Installation: false,
+    Vinyl_Installation: true,
+    Customer_Notes: "High-visibility reflective material requested for night visibility. Contact client for installation approval before proceeding."
   }
 ];
 
