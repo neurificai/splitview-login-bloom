@@ -126,7 +126,7 @@
 /* Arrow-shaped tabs styling with improved aesthetics */
 .arrow-tab {
   cursor: pointer;
-  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 10% 50%);
+  clip-path: polygon(0% 0%, 90% 0%, 100% 50%, 90% 100%, 0% 100%, 10% 50%);
   margin-right: -5px; /* Reduced from -15px for more spacing between tabs */
   z-index: 1;
   transition: all 0.3s ease;
@@ -150,13 +150,13 @@
 .first-tab {
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
-  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  clip-path: polygon(0% 0%, 90% 0%, 100% 50%, 90% 100%, 0% 100%);
   margin-left: 1px;
 }
 
 .last-tab {
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
-  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 10% 50%);
+  clip-path: polygon(0% 0%, 90% 0%, 100% 50%, 90% 100%, 0% 100%, 10% 50%);
   margin-right: 0;
 }
