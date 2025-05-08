@@ -49,18 +49,18 @@ const OrderDetailsTabs: React.FC<OrderDetailsTabsProps> = ({
     };
     
     // Check for activities that indicate completion of each stage
-    const estimateCompleted = activities.some(a => a.type === "estimate" && a.title === "Estimate Signed");
+    const estimateCompleted = activities.some(a => a.type === "estimate" && a.title.includes("Signed"));
     const designCompleted = activities.some(a => a.type === "design" && a.title.includes("Approved"));
-    const printCompleted = activities.some(a => a.type === "print" && a.title.includes("Shipped"));
-    const installCompleted = activities.some(a => a.type === "install" && a.title.includes("Completed"));
+    const printCompleted = activities.some(a => a.type === "print" && (a.title.includes("Shipped") || a.title.includes("Production")));
+    const installCompleted = activities.some(a => a.type === "install" && (a.title.includes("Complete") || a.title.includes("Preparation")));
     const invoiceCompleted = activities.some(a => a.type === "invoice" && a.title.includes("Paid"));
     
     // Set status based on completion
     stages.estimate = estimateCompleted;
     stages.design = estimateCompleted && designCompleted;
     stages.print = estimateCompleted && designCompleted && printCompleted;
-    stages.install = estimateCompleted && designCompleted && printCompleted && installCompleted;
-    stages.invoice = estimateCompleted && designCompleted && printCompleted && installCompleted && invoiceCompleted;
+    stages.install = stages.print && installCompleted;
+    stages.invoice = stages.install && invoiceCompleted;
     
     return stages;
   };
