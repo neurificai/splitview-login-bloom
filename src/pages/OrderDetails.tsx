@@ -81,6 +81,18 @@ const OrderDetails = () => {
       role: "Design Lead",
       email: "mike.p@example.com",
       phone: "(555) 987-6543"
+    },
+    {
+      name: "George Abdibal",
+      role: "Executive Director",
+      email: "george.a@example.com",
+      phone: "(555) 234-5678"
+    },
+    {
+      name: "Noel Fischer",
+      role: "Project Manager",
+      email: "noel.f@example.com", 
+      phone: "(555) 345-6789"
     }
   ];
 
@@ -94,9 +106,9 @@ const OrderDetails = () => {
         {/* Header with back button and order info */}
         <OrderDetailsHeader order={order} />
         
-        <div className="flex gap-6">
+        <div className="flex flex-col md:flex-row">
           {/* Main content area - tabs section */}
-          <div className="flex-1">
+          <div className="flex-1 md:pr-4">
             <OrderDetailsTabs 
               activities={orderDetails.activities}
               shippingAddresses={orderDetails.shippingAddresses}
@@ -107,12 +119,35 @@ const OrderDetails = () => {
             />
           </div>
           
-          {/* Sidebar with equal height cards */}
-          <div className="w-80 flex flex-col gap-4">
-            <div className="h-1/2">
+          {/* Right sidebar */}
+          <div className="w-full md:w-80 flex flex-col gap-4 mt-4 md:mt-0">
+            <div className="mb-4">
+              <h3 className="font-medium text-base mb-2 text-gray-700 uppercase tracking-wide">Contacts</h3>
               <ContactBox contacts={contacts} />
             </div>
-            <div className="h-1/2">
+            
+            <div>
+              <h3 className="font-medium text-base mb-2 text-gray-700 uppercase tracking-wide">Notes</h3>
+              <div className="bg-white rounded-lg border p-4 shadow-sm">
+                <div className="mb-4">
+                  <div className="flex justify-between mb-2">
+                    <span className="text-sm font-medium">Justin Leblanc</span>
+                    <span className="text-xs text-gray-500">10 Jan</span>
+                  </div>
+                  <p className="text-sm text-gray-600">We need to prepare for the presentation next week. Please review the materials.</p>
+                </div>
+                
+                <div>
+                  <div className="flex justify-between mb-2">
+                    <span className="text-sm font-medium">Fernand Naudé</span>
+                    <span className="text-xs text-gray-500">14 Jan</span>
+                  </div>
+                  <p className="text-sm text-gray-600">Documentation is complete, awaiting final approval from the client.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div className="mt-4">
               <ShortcutsBox 
                 hasEstimate={true}
                 hasApprovedDesign={hasApprovedDesign}

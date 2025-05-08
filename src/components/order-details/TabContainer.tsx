@@ -27,7 +27,7 @@ const TabContainer: React.FC<TabContainerProps> = ({ mainTab, children, colorSch
   const activeColor = "bg-[#33C3F0]";
   
   return (
-    <div className="mb-6 w-[70%]">
+    <div className="mb-6 w-full">
       <div className="inline-flex h-10 items-center justify-center rounded-lg p-1 text-muted-foreground mb-4 w-full sm:w-auto gap-8 border-b">
         <button 
           onClick={() => handleSubTabChange("activity")}

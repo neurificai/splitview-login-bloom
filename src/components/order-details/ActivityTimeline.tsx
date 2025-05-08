@@ -15,7 +15,7 @@ const ActivityTimeline: React.FC<ActivityTimelineProps> = ({
   activities,
   nextSteps = [],
   title = "Activity",
-  showNextStepsFirst = false
+  showNextStepsFirst = true // Changed default to true
 }) => {
   const renderPastActivities = () => {
     if (activities.length === 0) return null;

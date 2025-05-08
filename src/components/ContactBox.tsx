@@ -1,7 +1,7 @@
 
 import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Mail, Phone } from "lucide-react";
 
 interface ContactPerson {
@@ -18,13 +18,10 @@ interface ContactBoxProps {
 
 const ContactBox: React.FC<ContactBoxProps> = ({ contacts }) => {
   return (
-    <Card className="shadow-md border-none bg-white h-full transition-all hover:shadow-lg">
-      <CardHeader className="pb-2 bg-gradient-to-r from-sky-50 to-white">
-        <CardTitle className="text-base font-medium text-sky-700">Your Contacts</CardTitle>
-      </CardHeader>
-      <CardContent className="pt-3">
+    <Card className="shadow-md border-none bg-white transition-all hover:shadow-lg">
+      <CardContent className="p-4">
         <div className="space-y-3">
-          {contacts.map((contact, index) => (
+          {contacts.slice(0, 4).map((contact, index) => (
             <div key={index} className="flex items-center gap-3 p-2 rounded-lg hover:bg-sky-50 transition-colors">
               <Avatar className="h-10 w-10 border border-sky-100 shadow-sm">
                 {contact.avatar ? (
@@ -43,14 +40,21 @@ const ContactBox: React.FC<ContactBoxProps> = ({ contacts }) => {
                     <Mail className="h-3 w-3 mr-1 text-blue-500" />
                     <span className="truncate text-muted-foreground">{contact.email}</span>
                   </div>
-                  <div className="flex items-center">
-                    <Phone className="h-3 w-3 mr-1 text-green-500" />
-                    <span className="text-gray-700 font-medium">{contact.phone}</span>
-                  </div>
                 </div>
               </div>
             </div>
           ))}
+          
+          {contacts.length > 4 && (
+            <div className="text-center mt-2">
+              <a href="#" className="text-sm text-blue-500 flex items-center justify-center gap-1 hover:underline">
+                View all ({contacts.length})
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </a>
+            </div>
+          )}
         </div>
       </CardContent>
     </Card>

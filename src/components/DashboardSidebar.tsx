@@ -3,7 +3,6 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import Logo from "./Logo";
-import ContactBox from "./ContactBox";
 import { 
   LayoutDashboard, 
   MessageSquare, 
@@ -18,23 +17,6 @@ const sidebarItems = [
   { icon: MessageSquare, label: "Messages", href: "/messages" },
   { icon: User, label: "Profile", href: "/profile" },
   { icon: Settings, label: "Settings", href: "/settings" },
-];
-
-const contacts = [
-  {
-    name: "Adam Parrock",
-    role: "Account Executive",
-    email: "adam.p@company.com",
-    phone: "(555) 123-4567",
-    avatar: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=150&h=150&fit=crop",
-  },
-  {
-    name: "Michael Schultz",
-    role: "Project Manager",
-    email: "michael.s@company.com",
-    phone: "(555) 987-6543",
-    avatar: "https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=150&h=150&fit=crop",
-  },
 ];
 
 const DashboardSidebar: React.FC = () => {
@@ -79,10 +61,6 @@ const DashboardSidebar: React.FC = () => {
           </Link>
         ))}
       </nav>
-      
-      <div className="px-2 pt-4 mt-auto">
-        <ContactBox contacts={contacts} />
-      </div>
     </div>
   );
 };
