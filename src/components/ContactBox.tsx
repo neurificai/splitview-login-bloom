@@ -44,7 +44,7 @@ const ContactBox: React.FC<ContactBoxProps> = ({ contacts }) => {
                     <span className="truncate text-muted-foreground">{contact.email}</span>
                   </div>
                   <div className="flex items-center">
-                    <Phone className="h-3 w-3 mr-1 text-orange-500" />
+                    <Phone className="h-3 w-3 mr-1 text-green-500" />
                     <span className="text-muted-foreground">{contact.phone}</span>
                   </div>
                 </div>

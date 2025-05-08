@@ -26,12 +26,14 @@ const contacts = [
     role: "Account Executive",
     email: "adam.p@company.com",
     phone: "(555) 123-4567",
+    avatar: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=150&h=150&fit=crop",
   },
   {
     name: "Michael Schultz",
     role: "Project Manager",
     email: "michael.s@company.com",
     phone: "(555) 987-6543",
+    avatar: "https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=150&h=150&fit=crop",
   },
 ];
 
@@ -46,8 +48,12 @@ const DashboardSidebar: React.FC = () => {
       
       <div className="px-3 mb-2">
         <div className="flex items-center gap-3 mb-6">
-          <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center">
-            <User className="h-6 w-6 text-gray-500" />
+          <div className="w-12 h-12 rounded-full overflow-hidden">
+            <img 
+              src="https://images.unsplash.com/photo-1518495973542-4542c06a5843?w=150&h=150&fit=crop" 
+              alt="John Doe"
+              className="w-full h-full object-cover"
+            />
           </div>
           <div>
             <div className="font-medium">John Doe</div>
