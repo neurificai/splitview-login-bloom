@@ -1,22 +1,20 @@
 
 import React from "react";
 import { TabsContent } from "@/components/ui/tabs";
-import { ActivityItem } from "@/services/orderService";
-import EstimateTab from "./tabs/EstimateTab";
-import DesignTab from "./tabs/DesignTab";
-import PrintTab from "./tabs/PrintTab";
-import InstallTab from "./tabs/InstallTab";
-import InvoiceTab from "./tabs/InvoiceTab";
+// import { ActivityItem } from "@/services/orderService";
+// import EstimateTab from "./tabs/EstimateTab";
+// import DesignTab from "./tabs/DesignTab";
+// import PrintTab from "./tabs/PrintTab";
+// import InstallTab from "./tabs/InstallTab";
+// import InvoiceTab from "./tabs/InvoiceTab";
+import OrderTab from "../../components/order-details/OrderTab";
 
 interface TabContentProps {
   activeTab: string;
-  activities: ActivityItem[];
   shippingAddresses?: string[];
-  vehicleDetails?: {
-    model?: string;
-    year?: string;
-    availabilityDate?: string;
-  };
+  estimates?: any[];
+  designs?: string[];
+  vehicleDetails?: any[];
   installLocations?: string[];
   approvedDesigns?: string[];
   invoices?: {
@@ -26,26 +24,26 @@ interface TabContentProps {
     status: "paid" | "pending";
   }[];
   sidebarContent?: React.ReactNode;
+  order: any;
 }
 
 const TabContent: React.FC<TabContentProps> = ({
   activeTab,
-  activities,
-  shippingAddresses,
+  order,
+  estimates,
+  designs,
   vehicleDetails,
-  installLocations,
-  approvedDesigns,
-  invoices,
-  sidebarContent
+  invoices
 }) => {
   return (
     <div className="flex">
       <div className="flex-1">
         <TabsContent value="estimate">
-          <EstimateTab activities={activities} />
+          {/* <EstimateTab estimates={estimates} /> */}
+          <OrderTab order={order} estimates={estimates} designs={designs} vehicleDetails={vehicleDetails} invoices={invoices} />
         </TabsContent>
-        
-        <TabsContent value="design">
+
+        {/* <TabsContent value="design">
           <DesignTab 
             activities={activities}
             approvedDesigns={approvedDesigns}
@@ -72,15 +70,15 @@ const TabContent: React.FC<TabContentProps> = ({
             activities={activities}
             invoices={invoices}
           />
-        </TabsContent>
+        </TabsContent> */}
       </div>
-      
+
       {/* Sidebar with contacts and shortcuts - adjusted margin top */}
-      {sidebarContent && (
+      {/* {sidebarContent && (
         <div className="w-64 shrink-0 mt-[48px]">
           {sidebarContent}
         </div>
-      )}
+      )} */}
     </div>
   );
 };

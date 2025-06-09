@@ -16,13 +16,13 @@ const OrderCard: React.FC<OrderCardProps> = ({ order }) => {
   const [expanded, setExpanded] = useState(false);
   const [progress, setProgress] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
-  
+
   // Animation for progress bar
   useEffect(() => {
     const timer = setTimeout(() => {
       setProgress(order.Job_Status_Pct);
     }, 200);
-    
+
     return () => clearTimeout(timer);
   }, [order.Job_Status_Pct]);
 
@@ -34,16 +34,16 @@ const OrderCard: React.FC<OrderCardProps> = ({ order }) => {
     day: 'numeric',
     year: 'numeric'
   });
-  
+
   // Calculate days between order and due date
   const daysDifference = 15; // Hardcoded to 15 as per specs
-  
+
   return (
-    <Card 
+    <Card
       className={cn(
         "overflow-hidden transition-all duration-200 rounded-2xl",
-        isHovered 
-          ? "shadow-lg transform -translate-y-1" 
+        isHovered
+          ? "shadow-lg transform -translate-y-1"
           : "shadow-sm"
       )}
       onMouseEnter={() => setIsHovered(true)}
@@ -60,57 +60,57 @@ const OrderCard: React.FC<OrderCardProps> = ({ order }) => {
               {order.Order_Title}
             </p>
           </div>
-          
-          <Badge 
+
+          <Badge
             className="ml-2 bg-[#FF6B6B] hover:bg-[#FF6B6B]/90 text-white"
           >
             {order.Job_Type}
           </Badge>
         </div>
-        
+
         {/* Progress bar */}
         <div className="mb-3">
           <div className="flex justify-between items-center mb-1">
             <span className="text-sm font-medium">Progress</span>
             <span className="text-sm font-semibold text-green-600">{order.Job_Status_Pct}%</span>
           </div>
-          
-          <Progress 
-            value={progress} 
-            className="h-2 bg-[#E0E4EA]" 
+
+          <Progress
+            value={progress}
+            className="h-2 bg-[#E0E4EA]"
             aria-valuenow={order.Job_Status_Pct}
             aria-valuemin={0}
             aria-valuemax={100}
           />
-          
+
           <div className="text-xs text-gray-500 mt-2">
             Ordered {formattedOrderDate} • Due {formattedDueDate} ({daysDifference} days)
           </div>
         </div>
-        
+
         {/* Stats Grid */}
         <div className="grid grid-cols-2 gap-4 mb-4">
           <div>
             <div className="text-xs text-gray-500">Unit No</div>
             <div className="text-sm font-medium">{order.Unit_No}</div>
           </div>
-          
+
           <div>
             <div className="text-xs text-gray-500">VIN No</div>
             <div className="text-sm font-medium truncate">{order.VIN_No}</div>
           </div>
-          
+
           <div>
             <div className="text-xs text-gray-500">AE / PM</div>
             <div className="text-sm font-medium">{order.AE_Name} / {order.PM_Name}</div>
           </div>
-          
+
           <div>
             <div className="text-xs text-gray-500">Job Request</div>
             <div className="text-sm font-medium">{order.Job_Request}</div>
           </div>
         </div>
-        
+
         {/* Installation Info */}
         <div className="flex justify-between mb-4 bg-gray-50 p-3 rounded-lg">
           <div className="flex items-center">
@@ -121,7 +121,7 @@ const OrderCard: React.FC<OrderCardProps> = ({ order }) => {
               <XCircle size={16} className="text-gray-300" />
             )}
           </div>
-          
+
           <div className="flex items-center">
             <div className="text-xs text-gray-500 mr-2">Vinyl:</div>
             {order.Vinyl_Installation ? (
@@ -131,11 +131,11 @@ const OrderCard: React.FC<OrderCardProps> = ({ order }) => {
             )}
           </div>
         </div>
-        
+
         {/* Customer Notes */}
         <div>
-          <Button 
-            variant="ghost" 
+          <Button
+            variant="ghost"
             size="sm"
             className="w-full justify-between text-[#007AFF]"
             onClick={() => setExpanded(!expanded)}
@@ -148,7 +148,7 @@ const OrderCard: React.FC<OrderCardProps> = ({ order }) => {
               <ChevronDown size={16} />
             )}
           </Button>
-          
+
           {expanded && (
             <div className="mt-2 p-3 bg-[#F5F7FA] rounded-lg text-sm animate-fade-in">
               <p>{order.Customer_Notes}</p>

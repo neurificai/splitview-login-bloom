@@ -11,9 +11,9 @@ interface SignupFormProps {
   togglePasswordVisibility: () => void;
 }
 
-export const SignupForm: React.FC<SignupFormProps> = ({ 
-  isPasswordVisible, 
-  togglePasswordVisibility 
+export const SignupForm: React.FC<SignupFormProps> = ({
+  isPasswordVisible,
+  togglePasswordVisibility
 }) => {
   const [form, setForm] = React.useState({
     name: "",
@@ -43,75 +43,75 @@ export const SignupForm: React.FC<SignupFormProps> = ({
           <Label htmlFor="name">Full Name</Label>
           <div className="relative">
             <User className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-            <Input 
-              id="name" 
-              placeholder="John Doe" 
+            <Input
+              id="name"
+              placeholder="John Doe"
               className="pl-10"
               value={form.name}
               onChange={(e) => updateForm("name", e.target.value)}
-              required 
+              required
             />
           </div>
         </div>
-        
+
         <div className="grid gap-2">
           <Label htmlFor="signup-email">Email</Label>
           <div className="relative">
             <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-            <Input 
-              id="signup-email" 
-              type="email" 
-              placeholder="name@example.com" 
+            <Input
+              id="signup-email"
+              type="email"
+              placeholder="name@example.com"
               className="pl-10"
               value={form.email}
               onChange={(e) => updateForm("email", e.target.value)}
-              required 
+              required
             />
           </div>
         </div>
-        
+
         <div className="grid gap-2">
           <Label htmlFor="signup-password">Password</Label>
           <div className="relative">
-            <EyeOff 
-              className={`absolute left-3 top-3 h-4 w-4 text-muted-foreground cursor-pointer ${isPasswordVisible ? 'hidden' : 'block'}`} 
+            <EyeOff
+              className={`absolute left-3 top-3 h-4 w-4 text-muted-foreground cursor-pointer ${isPasswordVisible ? 'hidden' : 'block'}`}
               onClick={togglePasswordVisibility}
             />
-            <Eye 
-              className={`absolute left-3 top-3 h-4 w-4 text-muted-foreground cursor-pointer ${isPasswordVisible ? 'block' : 'hidden'}`} 
+            <Eye
+              className={`absolute left-3 top-3 h-4 w-4 text-muted-foreground cursor-pointer ${isPasswordVisible ? 'block' : 'hidden'}`}
               onClick={togglePasswordVisibility}
             />
-            <Input 
-              id="signup-password" 
+            <Input
+              id="signup-password"
               type={isPasswordVisible ? "text" : "password"}
-              placeholder="••••••••" 
+              placeholder="••••••••"
               className="pl-10"
               value={form.password}
               onChange={(e) => updateForm("password", e.target.value)}
-              required 
+              required
             />
           </div>
         </div>
-        
+
         <div className="grid gap-2">
           <Label htmlFor="confirm-password">Confirm Password</Label>
           <div className="relative">
-            <EyeOff 
-              className={`absolute left-3 top-3 h-4 w-4 text-muted-foreground cursor-pointer ${isPasswordVisible ? 'hidden' : 'block'}`} 
+            <EyeOff
+              className={`absolute left-3 top-3 h-4 w-4 text-muted-foreground cursor-pointer ${isPasswordVisible ? 'hidden' : 'block'}`}
               onClick={togglePasswordVisibility}
             />
-            <Eye 
-              className={`absolute left-3 top-3 h-4 w-4 text-muted-foreground cursor-pointer ${isPasswordVisible ? 'block' : 'hidden'}`} 
+            <Eye
+              className={`absolute left-3 top-3 h-4 w-4 text-muted-foreground cursor-pointer ${isPasswordVisible ? 'block' : 'hidden'}`}
               onClick={togglePasswordVisibility}
             />
-            <Input 
-              id="confirm-password" 
+            <Input
+              id="confirm-password"
               type={isPasswordVisible ? "text" : "password"}
-              placeholder="••••••••" 
+              placeholder="••••••••"
               className="pl-10"
               value={form.confirmPassword}
               onChange={(e) => updateForm("confirmPassword", e.target.value)}
-              required 
+              required
             />
           </div>
         </div>

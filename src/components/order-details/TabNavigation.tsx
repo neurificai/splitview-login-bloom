@@ -16,10 +16,10 @@ interface TabNavigationProps {
   onTabClick: (tab: string) => void;
 }
 
-const TabNavigation: React.FC<TabNavigationProps> = ({ 
-  activeTab, 
-  tabStatus, 
-  onTabClick 
+const TabNavigation: React.FC<TabNavigationProps> = ({
+  activeTab,
+  tabStatus,
+  onTabClick
 }) => {
   // Define sky blue color for completed tabs
   const completedTabColor = "bg-[#8DE3FD]";
@@ -27,35 +27,35 @@ const TabNavigation: React.FC<TabNavigationProps> = ({
   return (
     <div className="relative flex mb-4 gap-2">
       {/* Estimate Tab */}
-      <div 
+      <div
         className={cn(
-          "flex-1 py-3 px-4 text-center relative arrow-tab first-tab font-medium transition-all duration-300",
-          activeTab === "estimate" ? "bg-[#33C3F0] text-white" : 
-          tabStatus.estimate ? completedTabColor + " text-white" : "bg-gray-200 text-gray-600",
+          "flex-1 py-3 px-4 text-center rounded-sm font-medium transition-all duration-300",
+          activeTab === "estimate" ? "bg-[#33C3F0] text-white" :
+            tabStatus.estimate ? completedTabColor + " text-white" : "bg-gray-200 text-gray-600",
           "hover:brightness-105"
         )}
         data-state={activeTab === "estimate" ? "active" : tabStatus.estimate ? "completed" : "inactive"}
         onClick={() => onTabClick("estimate")}
       >
-        Estimate
+        Estimates
       </div>
 
       {/* Design Tab */}
-      <div 
+      <div
         className={cn(
-          "flex-1 py-3 px-4 text-center relative arrow-tab font-medium transition-all duration-300",
-          activeTab === "design" ? "bg-[#33C3F0] text-white" : 
-          tabStatus.design ? completedTabColor + " text-white" : "bg-gray-200 text-gray-600",
+          "flex-1 py-3 px-4 text-center rounded-sm font-medium transition-all duration-300",
+          activeTab === "design" ? "bg-[#33C3F0] text-white" :
+            tabStatus.design ? completedTabColor + " text-white" : "bg-gray-200 text-gray-600",
           "hover:brightness-105"
         )}
         data-state={activeTab === "design" ? "active" : tabStatus.design ? "completed" : "inactive"}
         onClick={() => onTabClick("design")}
       >
-        Design
+        Designs
       </div>
 
       {/* Print Tab */}
-      <div 
+      {/* <div 
         className={cn(
           "flex-1 py-3 px-4 text-center relative arrow-tab font-medium transition-all duration-300",
           activeTab === "print" ? "bg-[#33C3F0] text-white" : 
@@ -66,34 +66,34 @@ const TabNavigation: React.FC<TabNavigationProps> = ({
         onClick={() => onTabClick("print")}
       >
         Print
-      </div>
+      </div> */}
 
       {/* Install Tab */}
-      <div 
+      <div
         className={cn(
-          "flex-1 py-3 px-4 text-center relative arrow-tab font-medium transition-all duration-300",
-          activeTab === "install" ? "bg-[#33C3F0] text-white" : 
-          tabStatus.install ? completedTabColor + " text-white" : "bg-gray-200 text-gray-600",
+          "flex-1 py-3 px-4 text-center rounded-sm font-medium transition-all duration-300",
+          activeTab === "install" ? "bg-[#33C3F0] text-white" :
+            tabStatus.install ? completedTabColor + " text-white" : "bg-gray-200 text-gray-600",
           "hover:brightness-105"
         )}
         data-state={activeTab === "install" ? "active" : tabStatus.install ? "completed" : "inactive"}
         onClick={() => onTabClick("install")}
       >
-        Install
+        Unit Details
       </div>
 
       {/* Invoice Tab */}
-      <div 
+      <div
         className={cn(
-          "flex-1 py-3 px-4 text-center relative arrow-tab last-tab font-medium transition-all duration-300",
-          activeTab === "invoice" ? "bg-[#33C3F0] text-white" : 
-          tabStatus.invoice ? completedTabColor + " text-white" : "bg-gray-200 text-gray-600",
+          "flex-1 py-3 px-4 text-center rounded-sm font-medium transition-all duration-300",
+          activeTab === "invoice" ? "bg-[#33C3F0] text-white" :
+            tabStatus.invoice ? completedTabColor + " text-white" : "bg-gray-200 text-gray-600",
           "hover:brightness-105"
         )}
         data-state={activeTab === "invoice" ? "active" : tabStatus.invoice ? "completed" : "inactive"}
         onClick={() => onTabClick("invoice")}
       >
-        Invoice
+        Invoices
       </div>
     </div>
   );
