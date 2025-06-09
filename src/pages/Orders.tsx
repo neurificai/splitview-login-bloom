@@ -22,13 +22,13 @@ const Orders = () => {
       order.PM_Name.toLowerCase().includes(searchQuery.toLowerCase());
 
     // Job type filter
-    const matchesJobType = 
-      filterJobType === "all" || 
+    const matchesJobType =
+      filterJobType === "all" ||
       order.Job_Type === filterJobType;
 
     // AE Name filter
-    const matchesAEName = 
-      filterAEName === "all" || 
+    const matchesAEName =
+      filterAEName === "all" ||
       order.AE_Name === filterAEName;
 
     // Status filter
@@ -43,7 +43,7 @@ const Orders = () => {
   return (
     <DashboardLayout>
       <div className="mb-6">
-        <OrdersToolbar 
+        {/* <OrdersToolbar
           searchQuery={searchQuery}
           onSearchChange={setSearchQuery}
           filterOption={filterOption}
@@ -55,8 +55,9 @@ const Orders = () => {
           jobTypes={[...new Set(orders.map(order => order.Job_Type))]}
           aeNames={[...new Set(orders.map(order => order.AE_Name))]}
         />
-        
-        <OrdersList orders={filteredOrders} />
+        <OrdersList orders={filteredOrders} /> */}
+    
+        <OrdersList />
       </div>
     </DashboardLayout>
   );

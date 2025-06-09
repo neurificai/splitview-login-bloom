@@ -1,21 +1,16 @@
 
 import React, { useState } from "react";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ActivityItem } from "@/services/orderService";
-import TabNavigation from "./order-details/TabNavigation";
 import TabContent from "./order-details/TabContent";
 import { useTabStatus } from "@/hooks/useTabStatus";
 
 interface OrderDetailsTabsProps {
-  activities: ActivityItem[];
   shippingAddresses?: string[];
-  vehicleDetails?: {
-    model?: string;
-    year?: string;
-    availabilityDate?: string;
-  };
+  vehicleDetails?: any[];
   installLocations?: string[];
   approvedDesigns?: string[];
+  estimates?: any[];
+  designs?: string[];
   invoices?: {
     id: string;
     date: string;
@@ -23,22 +18,20 @@ interface OrderDetailsTabsProps {
     status: "paid" | "pending";
   }[];
   sidebarContent?: React.ReactNode;
+  order: any;
 }
 
 const OrderDetailsTabs: React.FC<OrderDetailsTabsProps> = ({
-  activities,
-  shippingAddresses,
+  order,
+  estimates,
+  designs,
   vehicleDetails,
-  installLocations,
-  approvedDesigns,
   invoices,
-  sidebarContent
 }) => {
-  // Add state to control the active tab
   const [activeTab, setActiveTab] = useState<string>("estimate");
-  
+
   // Use the new hook to get tab status
-  const tabStatus = useTabStatus(activities);
+  const tabStatus = useTabStatus(estimates);
 
   // Handle tab selection
   const handleTabClick = (tabValue: string) => {
@@ -47,33 +40,25 @@ const OrderDetailsTabs: React.FC<OrderDetailsTabsProps> = ({
 
   return (
     <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-      {/* Custom tab navigation */}
-      <TabNavigation 
-        activeTab={activeTab}
-        tabStatus={tabStatus}
-        onTabClick={handleTabClick}
-      />
-      
+
       {/* Hidden actual tabs for functionality */}
       <TabsList className="hidden">
-        <TabsTrigger value="estimate">Estimate</TabsTrigger>
-        <TabsTrigger value="design">Design</TabsTrigger>
-        <TabsTrigger value="print">Print</TabsTrigger>
-        <TabsTrigger value="install">Install</TabsTrigger>
-        <TabsTrigger value="invoice">Invoice</TabsTrigger>
+        <TabsTrigger value="estimate">Estimates</TabsTrigger>
+        <TabsTrigger value="design">Designs</TabsTrigger>
+        <TabsTrigger value="unitDetail">Unit Details</TabsTrigger>
+        <TabsTrigger value="invoice">Invoices</TabsTrigger>
       </TabsList>
-      
+
       {/* Tab content component */}
       <TabContent
         activeTab={activeTab}
-        activities={activities}
-        shippingAddresses={shippingAddresses}
+        order={order}
+        estimates={estimates}
+        designs={designs}
         vehicleDetails={vehicleDetails}
-        installLocations={installLocations}
-        approvedDesigns={approvedDesigns}
         invoices={invoices}
-        sidebarContent={sidebarContent}
       />
+
     </Tabs>
   );
 };

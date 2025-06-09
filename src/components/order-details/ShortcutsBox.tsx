@@ -10,10 +10,10 @@ interface ShortcutsBoxProps {
   hasInstallPictures?: boolean;
 }
 
-const ShortcutsBox: React.FC<ShortcutsBoxProps> = ({ 
-  hasEstimate = true, 
+const ShortcutsBox: React.FC<ShortcutsBoxProps> = ({
+  hasEstimate = true,
   hasApprovedDesign = false,
-  hasInstallPictures = false 
+  hasInstallPictures = false
 }) => {
   return (
     <div className="pl-6">
@@ -21,8 +21,8 @@ const ShortcutsBox: React.FC<ShortcutsBoxProps> = ({
       <Card className="shadow-sm border-none bg-white">
         <CardContent className="pt-5 pb-5 px-5 flex flex-col gap-2">
           {hasEstimate && (
-            <Button 
-              variant="outline" 
+            <Button
+              variant="outline"
               className="w-full justify-start text-blue-600 border-blue-200 hover:bg-blue-50 transition-all"
               size="sm"
             >
@@ -30,30 +30,30 @@ const ShortcutsBox: React.FC<ShortcutsBoxProps> = ({
               Download Estimate
             </Button>
           )}
-          
+
           {/* Always show View Designs shortcut */}
-          <Button 
-            variant="outline" 
+          <Button
+            variant="outline"
             className="w-full justify-start text-purple-600 border-purple-200 hover:bg-purple-50 transition-all"
             size="sm"
           >
             <Eye className="h-3.5 w-3.5 mr-1.5" />
             View Designs
           </Button>
-          
+
           {/* Always show View Installs shortcut */}
-          <Button 
-            variant="outline" 
+          <Button
+            variant="outline"
             className="w-full justify-start text-amber-600 border-amber-200 hover:bg-amber-50 transition-all"
             size="sm"
           >
             <Package className="h-3.5 w-3.5 mr-1.5" />
             View Installs
           </Button>
-          
+
           {hasApprovedDesign && (
-            <Button 
-              variant="outline" 
+            <Button
+              variant="outline"
               className="w-full justify-start text-green-600 border-green-200 hover:bg-green-50 transition-all"
               size="sm"
             >
@@ -61,10 +61,10 @@ const ShortcutsBox: React.FC<ShortcutsBoxProps> = ({
               View Approved Design
             </Button>
           )}
-          
+
           {hasInstallPictures && (
-            <Button 
-              variant="outline" 
+            <Button
+              variant="outline"
               className="w-full justify-start text-orange-600 border-orange-200 hover:bg-orange-50 transition-all"
               size="sm"
             >

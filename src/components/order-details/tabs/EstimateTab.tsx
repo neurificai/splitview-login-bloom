@@ -9,11 +9,12 @@ import TabContainer from "../TabContainer";
 import { tabColors } from "../TabColors";
 
 interface EstimateTabProps {
-  activities: ActivityItem[];
+  // activities: ActivityItem[];
+  estimates: any[];
 }
 
-const EstimateTab: React.FC<EstimateTabProps> = ({ activities }) => {
-  const estimateActivities = activities.filter(a => a.type === "estimate");
+const EstimateTab: React.FC<EstimateTabProps> = ({ estimates }) => {
+  const estimateActivities = [];//activities.filter(a => a.type === "estimate");
   
   const activityContent = (
     <ActivityTimeline activities={estimateActivities} title="Activity" />

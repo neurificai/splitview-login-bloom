@@ -11,7 +11,7 @@ interface ActivityTimelineProps {
   showNextStepsFirst?: boolean;
 }
 
-const ActivityTimeline: React.FC<ActivityTimelineProps> = ({ 
+const ActivityTimeline: React.FC<ActivityTimelineProps> = ({
   activities,
   nextSteps = [],
   title = "Activity",
@@ -19,7 +19,7 @@ const ActivityTimeline: React.FC<ActivityTimelineProps> = ({
 }) => {
   const renderPastActivities = () => {
     if (activities.length === 0) return null;
-    
+
     return (
       <>
         <h4 className="font-medium text-base mb-4">Past Activity</h4>
@@ -31,7 +31,7 @@ const ActivityTimeline: React.FC<ActivityTimelineProps> = ({
                 {index < activities.length - 1 && (
                   <div className="absolute left-4 top-6 h-full w-0.5 bg-gray-200"></div>
                 )}
-                
+
                 <div className="flex items-start">
                   <div className="mr-4 bg-green-100 rounded-full p-1 z-10">
                     {activity.status === "completed" ? (
@@ -53,10 +53,10 @@ const ActivityTimeline: React.FC<ActivityTimelineProps> = ({
       </>
     );
   };
-  
+
   const renderNextSteps = () => {
     if (nextSteps.length === 0) return null;
-    
+
     return (
       <>
         <h4 className="font-medium text-base mb-4">Next Steps</h4>
@@ -68,7 +68,7 @@ const ActivityTimeline: React.FC<ActivityTimelineProps> = ({
                 {index < nextSteps.length - 1 && (
                   <div className="absolute left-4 top-6 h-full w-0.5 bg-gray-200"></div>
                 )}
-                
+
                 <div className="flex items-start">
                   <div className="mr-4 bg-blue-100 rounded-full p-1 z-10">
                     <Clock className="h-6 w-6 text-blue-500" />
@@ -95,7 +95,7 @@ const ActivityTimeline: React.FC<ActivityTimelineProps> = ({
         <Activity size={18} className="text-green-500" />
         {title}
       </h3>
-      
+
       {showNextStepsFirst ? (
         <>
           {renderNextSteps()}
@@ -107,7 +107,7 @@ const ActivityTimeline: React.FC<ActivityTimelineProps> = ({
           {renderNextSteps()}
         </>
       )}
-      
+
       {activities.length === 0 && nextSteps.length === 0 && (
         <p className="text-gray-500">No activities yet.</p>
       )}

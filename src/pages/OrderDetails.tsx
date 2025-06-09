@@ -9,6 +9,8 @@ import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ContactBox from "@/components/ContactBox";
 import ShortcutsBox from "@/components/order-details/ShortcutsBox";
+import { getOrderDetails } from "../services/netSuiteOrderService";
+import OrdersHeader from "@/components/order-details/OrdersHeader";
 
 const OrderDetails = () => {
   const { id } = useParams<{ id: string }>();
@@ -16,24 +18,57 @@ const OrderDetails = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  // useEffect(() => {
+  //   if (!id) {
+  //     setError("Order ID is missing");
+  //     setLoading(false);
+  //     return;
+  //   }
+
+  //   const details = getOrderDetailsById(id);
+  //   if (!details) {
+  //     setError(`Order #${id} not found`);
+  //     setLoading(false);
+  //     return;
+  //   }
+
+  //   setOrderDetails(details);
+  //   setLoading(false);
+  // }, [id]);
+
   useEffect(() => {
-    if (!id) {
-      setError("Order ID is missing");
-      setLoading(false);
-      return;
-    }
+    console.log('Neetu')
+    setLoading(true);
+    getOrderDetails({ so_id: id })
+      .then((response) => {
+        if (response.data) {
+          // setData(response.data.data);
+          console.log('Data loaded:', response.data.data);
+          setOrderDetails(response.data.data);
+          setLoading(false);
+        }
+        // if (!orderDetails) {
+        //   toast({
+        //     title: "Order Not Found",
+        //     description: "The requested order could not be found.",
+        //     variant: "destructive"
+        //   });
+        //   navigate("/orders");
+        // }
+      })
+      .catch((err) => {
+        setError(err);
+        // setLoading(false);
+        return;
+      });
+  }, []);
+  console.log(orderDetails);
+  if (!orderDetails) return null;
+  const order = orderDetails.record;
+  localStorage.setItem("contacts", JSON.stringify(orderDetails.contacts));
 
-    const details = getOrderDetailsById(id);
-    if (!details) {
-      setError(`Order #${id} not found`);
-      setLoading(false);
-      return;
-    }
-
-    setOrderDetails(details);
-    setLoading(false);
-  }, [id]);
-
+  console.log('loading');
+  console.log(loading);
   if (loading) {
     return (
       <DashboardLayout>
@@ -66,52 +101,19 @@ const OrderDetails = () => {
     );
   }
 
-  const { order } = orderDetails;
-
-  // Mock contact data - in a real app, this would come from API
-  const contacts = [
-    {
-      name: "Sarah Johnson",
-      role: "Account Manager",
-      email: "sarah.j@example.com",
-      phone: "(555) 123-4567"
-    },
-    {
-      name: "Mike Peterson",
-      role: "Design Lead",
-      email: "mike.p@example.com",
-      phone: "(555) 987-6543"
-    }
-  ];
-
-  // Determine which shortcuts to show based on the order's progress
-  const hasApprovedDesign = orderDetails.approvedDesigns && orderDetails.approvedDesigns.length > 0;
-  const hasInstallPictures = orderDetails.activities.some(a => a.type === "install" && a.title.includes("Complete"));
-
   return (
     <DashboardLayout>
       <div className="mb-6">
         {/* Header with back button and order info */}
-        <OrderDetailsHeader order={order} />
-        
+        <OrdersHeader order={order} />
+
         {/* Main tabs row - full width */}
-        <OrderDetailsTabs 
-          activities={orderDetails.activities}
-          shippingAddresses={orderDetails.shippingAddresses}
-          vehicleDetails={orderDetails.vehicleDetails}
-          installLocations={orderDetails.installLocations}
-          approvedDesigns={orderDetails.approvedDesigns}
+        <OrderDetailsTabs
+          order={order}
+          estimates={orderDetails.estimates}
+          designs={orderDetails.designs}
+          vehicleDetails={orderDetails.items}
           invoices={orderDetails.invoices}
-          sidebarContent={
-            <div className="space-y-4">
-              <ContactBox contacts={contacts} />
-              <ShortcutsBox 
-                hasEstimate={true}
-                hasApprovedDesign={hasApprovedDesign}
-                hasInstallPictures={hasInstallPictures}
-              />
-            </div>
-          }
         />
       </div>
     </DashboardLayout>

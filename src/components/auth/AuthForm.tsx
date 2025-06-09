@@ -31,16 +31,16 @@ export const AuthForm: React.FC<AuthFormProps> = ({ className }) => {
 
         <CardContent className="pt-6">
           <TabsContent value="login" className="form-fade-in">
-            <LoginForm 
-              isPasswordVisible={isPasswordVisible} 
-              togglePasswordVisibility={togglePasswordVisibility} 
+            <LoginForm
+              isPasswordVisible={isPasswordVisible}
+              togglePasswordVisibility={togglePasswordVisibility}
             />
           </TabsContent>
 
           <TabsContent value="signup" className="form-fade-in">
-            <SignupForm 
-              isPasswordVisible={isPasswordVisible} 
-              togglePasswordVisibility={togglePasswordVisibility} 
+            <SignupForm
+              isPasswordVisible={isPasswordVisible}
+              togglePasswordVisibility={togglePasswordVisibility}
             />
           </TabsContent>
         </CardContent>

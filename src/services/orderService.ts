@@ -16,6 +16,10 @@ export interface Order {
   Frame_Installation: boolean;
   Vinyl_Installation: boolean;
   Customer_Notes: string;
+  order_date: string;
+  order_number: string;
+  order_title: string;
+  project: string;
 }
 
 // Activity timeline items
@@ -30,6 +34,12 @@ export interface ActivityItem {
 // Order details data model
 export interface OrderDetails {
   order: Order;
+  record: any[];
+  contacts: any[];
+  items: any[];
+  estimates: any[];
+  invoices: any[];
+  designs: any[];
   activities: ActivityItem[];
   shippingAddresses?: string[];
   vehicleDetails?: {
@@ -39,12 +49,12 @@ export interface OrderDetails {
   };
   installLocations?: string[];
   approvedDesigns?: string[];
-  invoices?: {
-    id: string;
-    date: string;
-    amount: number;
-    status: 'paid' | 'pending';
-  }[];
+  // invoices?: {
+  //   id: string;
+  //   date: string;
+  //   amount: number;
+  //   status: 'paid' | 'pending';
+  // }[];
 }
 
 // View mode and filter options
@@ -54,7 +64,7 @@ export type FilterOption = "all" | "inProgress" | "completed";
 // Sample data based on the provided JSON
 export const orders: Order[] = [
   {
-    AV_SO: "AVSO1793",
+    AV_SO: "AVSO125",
     Order_Title: "3306 Proforce | Qty 15 | Charlotte, NC",
     Unit_No: "U-1204",
     FMC_Unit_No: "FMC-332",
@@ -125,7 +135,7 @@ export const orders: Order[] = [
 
 // Mock order details data
 export const orderDetailsData: Record<string, OrderDetails> = {
-  "AVSO1793": {
+  "AVSO125": {
     order: orders[0],
     activities: [
       {

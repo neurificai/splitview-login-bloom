@@ -1,5 +1,6 @@
 
 import React from "react";
+import { useEffect, useState } from 'react';
 import { Order } from "@/services/orderService";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
@@ -8,16 +9,67 @@ import { formatDate, calculateDueDate } from "@/services/orderService";
 import { ChevronDown, ChevronUp, CheckCircle, XCircle, ZoomIn } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { getOrderList } from "../services/netSuiteOrderService";
+import OrderProgress from "../components/order-details/OrderProgress";
 
 interface OrdersListProps {
   orders: Order[];
 }
 
-const OrdersList: React.FC<OrdersListProps> = ({ orders }) => {
+//Set Orders data state
+// const [orders, setOrders] = useState(null);
+
+const OrdersList: React.FC = () => {
   const [expandedOrder, setExpandedOrder] = React.useState<string | null>(null);
 
-  if (orders.length === 0) {
+  const navigate = useNavigate();
+  const handleRowClick = (orderId: string, event: React.MouseEvent) => {
+    // Prevent navigation if the click was on the action button
+    if ((event.target as HTMLElement).closest('a')) {
+      return;
+    }
+    navigate(`/order/${orderId}`);
+  };
+
+  //Set User data state
+  const [user, setUser] = useState(() => {
+    const storedUser = localStorage.getItem("user");
+    return storedUser ? JSON.parse(storedUser) : null;
+  });
+
+  //Set Orders data state
+  const [orders, setOrders] = useState(null);
+
+  //get and set localStorage user data
+  useEffect(() => {
+    if (!user) {
+      const storedUser = localStorage.getItem("user");
+      if (storedUser) {
+        setUser(JSON.parse(storedUser));
+      }
+    }
+  }, [user]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result = await getOrderList({ poc_id: user.poc_id, company_id: user.company_id });
+        //const result = await getOrderList({poc_id:123416, company_id:1844});
+        if (result) {
+          setOrders(result.nsdata);
+        }
+      } catch (error) {
+        console.error("Error Fetching Data:", error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  const orderCount = orders ? orders.data.total_count : 0;
+  console.log(orders);
+
+  if (orderCount === 0) {
     return (
       <div className="text-center p-8 border rounded-lg bg-white shadow-sm">
         <p className="text-gray-500">No orders found matching your criteria.</p>
@@ -35,19 +87,19 @@ const OrdersList: React.FC<OrdersListProps> = ({ orders }) => {
 
   return (
     <div className="space-y-4">
-      {orders.map((order) => {
-        const dueDate = calculateDueDate(order.Order_Date);
-        const formattedOrderDate = formatDate(order.Order_Date);
+      {orders.data.records.map((order) => {
+        const dueDate = calculateDueDate(order.order_date);
+        const formattedOrderDate = formatDate(order.order_date);
         const formattedDueDate = dueDate.toLocaleDateString("en-US", {
           month: "long",
           day: "numeric",
           year: "numeric",
         });
-        const isExpanded = expandedOrder === order.AV_SO;
+        const isExpanded = expandedOrder === order.order_number;
 
         return (
           <div
-            key={order.AV_SO}
+            key={order.order_number}
             className={cn(
               "bg-white rounded-xl border border-gray-100 overflow-hidden transition-all duration-200",
               "hover:shadow-md hover:border-gray-200"
@@ -56,41 +108,45 @@ const OrdersList: React.FC<OrdersListProps> = ({ orders }) => {
             <div className="p-4 sm:p-6">
               {/* Header */}
               <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
-                <div>
+                {/* Left Side - Order Info */}
+                <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-3">
-                    <h3 className="text-base font-semibold">#{order.AV_SO}</h3>
-                    <Badge
+                    <h3 className="text-base font-semibold">#{order.order_number}</h3>
+                    {/* <Badge
                       className="bg-[#FF6B6B]/10 text-[#FF6B6B] hover:bg-[#FF6B6B]/20 border-0"
                     >
-                      {order.Job_Type}
-                    </Badge>
+                      {order.project}
+                    </Badge> */}
                   </div>
-                  <p className="text-sm text-gray-600 mt-1">{order.Order_Title}</p>
+                  {/* <p className="text-sm text-gray-600 mt-1">{order.order_title}</p> */}
+                  <p className="text-sm text-gray-600 mt-1">
+                    {order.customer}
+                    {order.end_customer && order.end_customer != order.customer && ` | ${order.end_customer}`}
+                    {` | Qty: ${order.display_qty}`}
+                  </p>
+                </div>
+
+                {/* Right Side - Order Details Link */}
+                <div className="flex items-start">
+                  {/* <Link to={`/order/${order.order_number}`}> */}
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="text-[#007AFF]"
+                    onClick={(e) => handleRowClick(order.so_id, e)}
+                  >
+                    <span>Order Details</span>
+                    <ZoomIn size={16} />
+                  </Button>
+                  {/* </Link> */}
                 </div>
               </div>
 
               {/* Progress Bar - Horizontal, 90% width, now green and thinner */}
-              <div className="mb-4 w-full">
-                <div className="flex justify-between items-center mb-1">
-                  <span className="text-xs text-gray-500">Progress</span>
-                  <span className="text-sm font-medium text-green-600">{order.Job_Status_Pct}%</span>
-                </div>
-                <div className="w-[90%] mx-auto">
-                  <div className="h-1 bg-[#E0E4EA] rounded-full w-full relative">
-                    <div 
-                      className="h-full bg-green-500 rounded-full absolute left-0 transition-all duration-500 ease-out"
-                      style={{ width: `${order.Job_Status_Pct}%` }}
-                      aria-valuenow={order.Job_Status_Pct}
-                      aria-valuemin={0}
-                      aria-valuemax={100}
-                      role="progressbar"
-                    ></div>
-                  </div>
-                </div>
-              </div>
+              <OrderProgress order={order} />
 
               {/* Details Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+              {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
                 <div className="p-3 bg-gray-50 rounded-lg">
                   <div className="text-xs text-gray-500 mb-1">Unit / VIN</div>
                   <div className="flex justify-between">
@@ -101,7 +157,7 @@ const OrdersList: React.FC<OrdersListProps> = ({ orders }) => {
 
                 <div className="p-3 bg-gray-50 rounded-lg">
                   <div className="text-xs text-gray-500 mb-1">Assigned to</div>
-                  <div className="text-sm font-medium">{order.AE_Name} / {order.PM_Name}</div>
+                  <div className="text-sm font-medium">{order.ae_name} / {order.pm_name}</div>
                 </div>
 
                 <div className="p-3 bg-gray-50 rounded-lg">
@@ -115,10 +171,10 @@ const OrdersList: React.FC<OrdersListProps> = ({ orders }) => {
                     {formattedOrderDate} → {formattedDueDate}
                   </div>
                 </div>
-              </div>
+              </div> */}
 
               {/* Installation & Notes */}
-              <div className="flex flex-wrap items-center justify-between gap-4">
+              {/* <div className="flex flex-wrap items-center justify-between gap-4">
                 <div className="flex items-center gap-4">
                   <div className="flex items-center">
                     <span className="text-xs text-gray-500 mr-2">Frame:</span>
@@ -144,7 +200,7 @@ const OrdersList: React.FC<OrdersListProps> = ({ orders }) => {
                     variant="ghost"
                     size="sm"
                     className="text-[#007AFF]"
-                    onClick={() => toggleNotes(order.AV_SO)}
+                    onClick={() => toggleNotes(order.order_number)}
                     aria-expanded={isExpanded}
                   >
                     <span>Notes</span>
@@ -154,8 +210,8 @@ const OrdersList: React.FC<OrdersListProps> = ({ orders }) => {
                       <ChevronDown size={16} />
                     )}
                   </Button>
-                  
-                  <Link to={`/order/${order.AV_SO}`}>
+
+                  <Link to={`/order/${order.order_number}`}>
                     <Button
                       variant="ghost"
                       size="sm"
@@ -166,14 +222,14 @@ const OrdersList: React.FC<OrdersListProps> = ({ orders }) => {
                     </Button>
                   </Link>
                 </div>
-              </div>
+              </div> */}
 
               {/* Expandable Notes Section */}
-              {isExpanded && (
+              {/* {isExpanded && (
                 <div className="mt-4 p-4 bg-[#F5F7FA] rounded-lg text-sm animate-fade-in">
                   <p>{order.Customer_Notes}</p>
                 </div>
-              )}
+              )} */}
             </div>
           </div>
         );

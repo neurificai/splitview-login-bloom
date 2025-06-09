@@ -18,7 +18,7 @@ const OrderProgressBar: React.FC<OrderProgressBarProps> = ({ order }) => {
         </div>
         <div className="w-full">
           <div className="h-2 bg-gray-200 rounded-full w-full relative">
-            <div 
+            <div
               className="h-full bg-green-500 rounded-full absolute left-0 transition-all duration-500 ease-out"
               style={{ width: `${order.Job_Status_Pct}%` }}
               aria-valuenow={order.Job_Status_Pct}
@@ -28,7 +28,7 @@ const OrderProgressBar: React.FC<OrderProgressBarProps> = ({ order }) => {
             ></div>
           </div>
         </div>
-        
+
         {/* Progress steps */}
         <div className="flex justify-between mt-4">
           <div className="flex flex-col items-center w-1/5">
@@ -39,7 +39,7 @@ const OrderProgressBar: React.FC<OrderProgressBarProps> = ({ order }) => {
             </div>
             <span className="text-xs mt-1 text-center">Estimate</span>
           </div>
-          
+
           <div className="flex flex-col items-center w-1/5">
             {order.Job_Status_Pct >= 30 ? (
               <div className="h-6 w-6 rounded-full bg-green-500 flex items-center justify-center">
@@ -54,7 +54,7 @@ const OrderProgressBar: React.FC<OrderProgressBarProps> = ({ order }) => {
             )}
             <span className="text-xs mt-1 text-center">Design</span>
           </div>
-          
+
           <div className="flex flex-col items-center w-1/5">
             {order.Job_Status_Pct >= 60 ? (
               <div className="h-6 w-6 rounded-full bg-green-500 flex items-center justify-center">
@@ -69,7 +69,7 @@ const OrderProgressBar: React.FC<OrderProgressBarProps> = ({ order }) => {
             )}
             <span className="text-xs mt-1 text-center">Print</span>
           </div>
-          
+
           <div className="flex flex-col items-center w-1/5">
             {order.Job_Status_Pct >= 80 ? (
               <div className="h-6 w-6 rounded-full bg-green-500 flex items-center justify-center">
@@ -84,7 +84,7 @@ const OrderProgressBar: React.FC<OrderProgressBarProps> = ({ order }) => {
             )}
             <span className="text-xs mt-1 text-center">Install</span>
           </div>
-          
+
           <div className="flex flex-col items-center w-1/5">
             {order.Job_Status_Pct === 100 ? (
               <div className="h-6 w-6 rounded-full bg-green-500 flex items-center justify-center">
