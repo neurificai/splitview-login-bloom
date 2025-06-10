@@ -1,63 +1,60 @@
 
-import React, { useState } from "react";
+import React from "react";
 import DashboardLayout from "@/components/DashboardLayout";
 import OrdersToolbar from "@/components/OrdersToolbar";
-import OrdersList from "@/components/OrdersList";
-import { orders, FilterOption } from "@/services/orderService";
+import OrderStatusToggle from "@/components/OrderStatusToggle";
+import SimpleOrderList from "@/components/SimpleOrderList";
+import { useOrdersFiltering } from "@/hooks/useOrdersFiltering";
 
 const Orders = () => {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [filterOption, setFilterOption] = useState<FilterOption>("all");
-  const [filterJobType, setFilterJobType] = useState<string>("all");
-  const [filterAEName, setFilterAEName] = useState<string>("all");
-
-  // Filter orders based on search query and filters
-  const filteredOrders = orders.filter((order) => {
-    // Search filter
-    const matchesSearch =
-      searchQuery === "" ||
-      order.AV_SO.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      order.Order_Title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      order.AE_Name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      order.PM_Name.toLowerCase().includes(searchQuery.toLowerCase());
-
-    // Job type filter
-    const matchesJobType =
-      filterJobType === "all" ||
-      order.Job_Type === filterJobType;
-
-    // AE Name filter
-    const matchesAEName =
-      filterAEName === "all" ||
-      order.AE_Name === filterAEName;
-
-    // Status filter
-    const matchesStatus =
-      filterOption === "all" ||
-      (filterOption === "inProgress" && order.Job_Status_Pct < 100) ||
-      (filterOption === "completed" && order.Job_Status_Pct === 100);
-
-    return matchesSearch && matchesJobType && matchesAEName && matchesStatus;
-  });
+  const {
+    searchQuery,
+    setSearchQuery,
+    filterOption,
+    setFilterOption,
+    filterJobType,
+    setFilterJobType,
+    filterAEName,
+    setFilterAEName,
+    startDate,
+    setStartDate,
+    endDate,
+    setEndDate,
+    viewStatus,
+    setViewStatus,
+    filteredOrders,
+    jobTypes,
+    aeNames
+  } = useOrdersFiltering();
 
   return (
     <DashboardLayout>
-      <div className="mb-6">
-        {/* <OrdersToolbar
-          searchQuery={searchQuery}
-          onSearchChange={setSearchQuery}
-          filterOption={filterOption}
-          setFilterOption={setFilterOption}
-          filterJobType={filterJobType}
-          setFilterJobType={setFilterJobType}
-          filterAEName={filterAEName}
-          setFilterAEName={setFilterAEName}
-          jobTypes={[...new Set(orders.map(order => order.Job_Type))]}
-          aeNames={[...new Set(orders.map(order => order.AE_Name))]}
-        />
-        <OrdersList orders={filteredOrders} /> */}
-    
-        <OrdersList />
+      <div className="space-y-4">
+        <div className="bg-white rounded-xl p-5 shadow-sm border border-slate-100">
+          <OrdersToolbar
+            searchQuery={searchQuery}
+            onSearchChange={setSearchQuery}
+            filterOption={filterOption}
+            setFilterOption={setFilterOption}
+            filterJobType={filterJobType}
+            setFilterJobType={setFilterJobType}
+            filterAEName={filterAEName}
+            setFilterAEName={setFilterAEName}
+            startDate={startDate}
+            setStartDate={setStartDate}
+            endDate={endDate}
+            setEndDate={setEndDate}
+            jobTypes={jobTypes}
+            aeNames={aeNames}
+          />
+
+          <OrderStatusToggle
+            viewStatus={viewStatus}
+            setViewStatus={setViewStatus}
+          />
+        </div>
+
+        <SimpleOrderList />
       </div>
     </DashboardLayout>
   );
