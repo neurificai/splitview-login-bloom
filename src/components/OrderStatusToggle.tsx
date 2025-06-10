@@ -1,7 +1,7 @@
 
 import React from "react";
 import { cn } from "@/lib/utils";
-import { Check, X, ListFilter } from "lucide-react";
+import { Check, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface OrderStatusToggleProps {
@@ -16,11 +16,6 @@ const OrderStatusToggle: React.FC<OrderStatusToggleProps> = ({
   console.log(viewStatus);
   return (
     <div className="mb-5 mt-6">
-      <div className="flex items-center gap-2 mb-3">
-        <ListFilter size={16} className="text-slate-500" />
-        <h3 className="text-sm font-medium text-slate-700">Filter by Status</h3>
-      </div>
-
       <div className="flex flex-wrap gap-2">
         <Button
           type="button"
