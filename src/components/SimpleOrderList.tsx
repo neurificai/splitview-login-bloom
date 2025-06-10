@@ -81,40 +81,40 @@ const SimpleOrderList: React.FC = () => {
             {/* Header Row */}
             <div className="grid grid-cols-4 gap-6 mb-6">
               <div className="flex items-center gap-2">
-                <span className="text-sm text-gray-500">Project:</span>
-                <h3 className="text-sm text-gray-900 whitespace-nowrap">#{project.projectNumber}</h3>
+                <span className="text-xs text-gray-500">Project:</span>
+                <h3 className="text-xs text-gray-900 whitespace-nowrap">#{project.projectNumber}</h3>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-sm text-gray-500">Project Date:</span>
-                <span className="text-sm text-gray-900 whitespace-nowrap">{formattedProjectDate}</span>
+                <span className="text-xs text-gray-500">Project Date:</span>
+                <span className="text-xs text-gray-900 whitespace-nowrap">{formattedProjectDate}</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-sm text-gray-500">Status:</span>
-                <Badge className={cn("text-sm", getStatusColor(project.projectStatus))}>
+                <span className="text-xs text-gray-500">Status:</span>
+                <Badge className={cn("text-xs", getStatusColor(project.projectStatus))}>
                   {project.projectStatus}
                 </Badge>
               </div>
               <div className="flex items-center gap-2 justify-end">
-                <span className="text-sm text-gray-500">Total:</span>
-                <div className="text-sm text-gray-900 whitespace-nowrap">${project.projectTotal.toLocaleString()}</div>
+                <span className="text-xs text-gray-500">Total:</span>
+                <div className="text-xs text-gray-900 whitespace-nowrap">${project.projectTotal.toLocaleString()}</div>
               </div>
             </div>
 
             {/* Details Row */}
             <div className="grid grid-cols-3 gap-6 mb-6">
               <div className="flex items-center gap-2">
-                <span className="text-sm text-gray-500">Fulfilment Date:</span>
-                <span className="text-sm text-gray-900 whitespace-nowrap">{formattedFulfillDate}</span>
+                <span className="text-xs text-gray-500">Fulfilment Date:</span>
+                <span className="text-xs text-gray-900 whitespace-nowrap">{formattedFulfillDate}</span>
               </div>
               
               <div className="flex items-center gap-2">
-                <span className="text-sm text-gray-500">Units:</span>
-                <span className="text-sm text-gray-900 whitespace-nowrap">{project.numberOfUnits}</span>
+                <span className="text-xs text-gray-500">Units:</span>
+                <span className="text-xs text-gray-900 whitespace-nowrap">{project.numberOfUnits}</span>
               </div>
               
               <div className="flex items-center gap-2">
-                <span className="text-sm text-gray-500">Unit Status:</span>
-                <div className="inline-flex items-center px-3 py-1 bg-gray-50 border border-gray-200 rounded-md text-sm text-gray-900 whitespace-nowrap">
+                <span className="text-xs text-gray-500">Unit Status:</span>
+                <div className="inline-flex items-center px-2 py-1 bg-gray-50 border border-gray-200 rounded-md text-xs text-gray-900 whitespace-nowrap">
                   {project.unitStatus.completed}/{project.unitStatus.total} Units
                 </div>
               </div>
@@ -123,7 +123,7 @@ const SimpleOrderList: React.FC = () => {
             {/* Description and Action Row */}
             <div className="flex items-start justify-between gap-6 pt-4 border-t border-gray-100">
               <div className="flex-1">
-                <span className="text-gray-500 text-sm block mb-2">Opportunity:</span>
+                <span className="text-gray-500 text-xs block mb-2">Opportunity:</span>
                 <p className="text-gray-900 leading-relaxed text-sm">
                   {project.opportunity}
                 </p>
