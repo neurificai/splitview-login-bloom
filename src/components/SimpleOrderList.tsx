@@ -81,25 +81,25 @@ const SimpleOrderList: React.FC = () => {
           >
             {/* Combined Header Row */}
             <div className="grid grid-cols-5 gap-6 mb-6">
-              <div className="flex items-center gap-2">
+              <div className="flex flex-col gap-0.5">
                 <span className="text-xs text-gray-500">Project:</span>
                 <h3 className="text-xs text-gray-900 whitespace-nowrap">#{project.projectNumber}</h3>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex flex-col gap-0.5">
                 <span className="text-xs text-gray-500">Project Date:</span>
                 <span className="text-xs text-gray-900 whitespace-nowrap">{formattedProjectDate}</span>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex flex-col gap-0.5">
                 <span className="text-xs text-gray-500">Status:</span>
                 <Badge className={cn("text-xs", getStatusColor(project.projectStatus))}>
                   {project.projectStatus}
                 </Badge>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex flex-col gap-0.5">
                 <span className="text-xs text-gray-500">Project Total:</span>
                 <div className="text-xs text-gray-900 whitespace-nowrap">${project.projectTotal.toLocaleString()}</div>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex flex-col gap-0.5">
                 <span className="text-xs text-gray-500">Fulfilment Date:</span>
                 <span className="text-xs text-gray-900 whitespace-nowrap">{formattedFulfillDate}</span>
               </div>
@@ -107,7 +107,7 @@ const SimpleOrderList: React.FC = () => {
 
             {/* Details Row */}
             <div className="grid grid-cols-3 gap-6 mb-6">
-              <div className="flex items-center gap-2">
+              <div className="flex flex-col gap-0.5">
                 <span className="text-xs text-gray-500">Unit Status:</span>
                 <div className="inline-flex items-center px-2 py-1 bg-gray-50 border border-gray-200 rounded-md text-xs text-gray-900 whitespace-nowrap">
                   <Layers size={12} className="mr-1 text-green-600" />
