@@ -74,13 +74,13 @@ const SimpleOrderList: React.FC = () => {
           <div
             key={project.projectNumber}
             className={cn(
-              "bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-all duration-200 cursor-pointer",
+              "bg-gray-50 border border-gray-200 rounded-lg p-6 hover:shadow-md transition-all duration-200 cursor-pointer",
               "hover:border-gray-300"
             )}
             onClick={(e) => handleRowClick(project.projectNumber, e)}
           >
-            {/* Header Row */}
-            <div className="grid grid-cols-3 gap-6 mb-6">
+            {/* Combined Header Row */}
+            <div className="grid grid-cols-5 gap-6 mb-6">
               <div className="flex items-center gap-2">
                 <span className="text-xs text-gray-500">Project:</span>
                 <h3 className="text-xs text-gray-900 whitespace-nowrap">#{project.projectNumber}</h3>
@@ -95,20 +95,18 @@ const SimpleOrderList: React.FC = () => {
                   {project.projectStatus}
                 </Badge>
               </div>
-            </div>
-
-            {/* Details Row */}
-            <div className="grid grid-cols-3 gap-6 mb-6">
               <div className="flex items-center gap-2">
                 <span className="text-xs text-gray-500">Project Total:</span>
                 <div className="text-xs text-gray-900 whitespace-nowrap">${project.projectTotal.toLocaleString()}</div>
               </div>
-              
               <div className="flex items-center gap-2">
                 <span className="text-xs text-gray-500">Fulfilment Date:</span>
                 <span className="text-xs text-gray-900 whitespace-nowrap">{formattedFulfillDate}</span>
               </div>
+            </div>
 
+            {/* Details Row */}
+            <div className="grid grid-cols-3 gap-6 mb-6">
               <div className="flex items-center gap-2">
                 <span className="text-xs text-gray-500">Unit Status:</span>
                 <div className="inline-flex items-center px-2 py-1 bg-gray-50 border border-gray-200 rounded-md text-xs text-gray-900 whitespace-nowrap">
