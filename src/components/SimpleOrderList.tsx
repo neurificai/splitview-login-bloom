@@ -3,7 +3,6 @@ import React from "react";
 import { useEffect, useState } from 'react';
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
-import { Calendar, DollarSign, Package } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Link, useNavigate } from "react-router-dom";
@@ -59,7 +58,7 @@ const SimpleOrderList: React.FC = () => {
   }
 
   return (
-    <div className="space-y-3 mt-6">
+    <div className="space-y-4 mt-6">
       {projects.map((project, index) => {
         const projectDate = new Date(project.projectDate);
         const fulfillDate = new Date(project.projectFulfillDate);
@@ -74,74 +73,72 @@ const SimpleOrderList: React.FC = () => {
           <div
             key={project.projectNumber}
             className={cn(
-              "bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-all duration-200 cursor-pointer",
+              "bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-all duration-200 cursor-pointer",
               "hover:border-gray-300"
             )}
             onClick={(e) => handleRowClick(project.projectNumber, e)}
           >
-            {/* Row 1 - Header Information */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-3 text-sm">
-              <div className="flex items-center gap-2">
-                <span className="text-gray-600 text-xs">Project:</span>
-                <h3 className="font-semibold text-gray-900">#{project.projectNumber}</h3>
+            {/* Header Row */}
+            <div className="flex items-start justify-between mb-4">
+              <div className="flex items-center gap-6">
+                <div>
+                  <span className="text-sm text-gray-500">Project:</span>
+                  <h3 className="text-lg font-semibold text-gray-900">#{project.projectNumber}</h3>
+                </div>
+                <div>
+                  <span className="text-sm text-gray-500">Status:</span>
+                  <div className="mt-1">
+                    <Badge className={cn("text-sm", getStatusColor(project.projectStatus))}>
+                      {project.projectStatus}
+                    </Badge>
+                  </div>
+                </div>
               </div>
-              
-              <div className="flex items-center gap-2">
-                <Calendar size={14} className="text-blue-500" />
-                <span className="text-gray-600 text-xs">Project Date:</span>
-                <span className="font-medium text-gray-900">{formattedProjectDate}</span>
-              </div>
-              
-              <div className="flex items-center gap-2">
-                <DollarSign size={14} className="text-green-500" />
-                <span className="text-gray-600 text-xs">Total:</span>
-                <span className="font-semibold text-gray-900">${project.projectTotal.toLocaleString()}</span>
-              </div>
-              
-              <div className="flex items-center gap-2">
-                <span className="text-gray-600 text-xs">Status:</span>
-                <Badge className={cn("text-xs", getStatusColor(project.projectStatus))}>
-                  {project.projectStatus}
-                </Badge>
+              <div className="text-right">
+                <span className="text-sm text-gray-500">Total:</span>
+                <div className="text-xl font-bold text-gray-900">${project.projectTotal.toLocaleString()}</div>
               </div>
             </div>
 
-            {/* Row 2 - Fulfillment & Units */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-2 mb-3 text-sm">
-              <div className="flex items-center gap-2">
-                <Calendar size={14} className="text-purple-500" />
-                <span className="text-gray-600 text-xs">Fulfilment Date:</span>
+            {/* Details Row */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-4 text-sm">
+              <div>
+                <span className="text-gray-500 block mb-1">Project Date:</span>
+                <span className="font-medium text-gray-900">{formattedProjectDate}</span>
+              </div>
+              
+              <div>
+                <span className="text-gray-500 block mb-1">Fulfilment Date:</span>
                 <span className="font-medium text-gray-900">{formattedFulfillDate}</span>
               </div>
               
-              <div className="flex items-center gap-2">
-                <Package size={14} className="text-orange-500" />
-                <span className="text-gray-600 text-xs">Units:</span>
+              <div>
+                <span className="text-gray-500 block mb-1">Units:</span>
                 <span className="font-medium text-gray-900">{project.numberOfUnits}</span>
               </div>
               
-              <div className="flex items-center justify-start">
-                <div className="px-3 py-1 border border-gray-300 rounded text-xs text-gray-900 bg-white flex items-center gap-1">
-                  <Package size={12} className="text-gray-600" />
-                  <span>{project.unitStatus.completed}/{project.unitStatus.total} Units</span>
+              <div>
+                <span className="text-gray-500 block mb-1">Unit Status:</span>
+                <div className="inline-flex items-center px-3 py-1 bg-gray-50 border border-gray-200 rounded-md text-sm font-medium text-gray-900">
+                  {project.unitStatus.completed}/{project.unitStatus.total} Units
                 </div>
               </div>
             </div>
 
-            {/* Row 3 - Description & Actions */}
-            <div className="flex items-start justify-between gap-4">
+            {/* Description and Action Row */}
+            <div className="flex items-start justify-between gap-6 pt-4 border-t border-gray-100">
               <div className="flex-1">
-                <span className="text-gray-600 text-xs block mb-1">Opportunity:</span>
-                <p className="text-sm text-gray-700 line-clamp-2 leading-relaxed">
+                <span className="text-gray-500 text-sm block mb-2">Opportunity:</span>
+                <p className="text-gray-700 leading-relaxed">
                   {project.opportunity}
                 </p>
               </div>
               
-              <div className="flex items-center gap-2 flex-shrink-0">
+              <div className="flex-shrink-0">
                 <Link to={`/order/${project.projectNumber}`} onClick={(e) => e.stopPropagation()}>
                   <Button 
                     size="sm" 
-                    className="bg-yellow-400 text-black hover:bg-yellow-500 border-none"
+                    className="bg-yellow-400 text-black hover:bg-yellow-500 border-none px-6"
                   >
                     View Details
                   </Button>
