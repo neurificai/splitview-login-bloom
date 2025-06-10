@@ -82,20 +82,24 @@ const SimpleOrderList: React.FC = () => {
             {/* Row 1 - Header Information */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-3 text-sm">
               <div className="flex items-center gap-2">
+                <span className="text-gray-600 text-xs">Project:</span>
                 <h3 className="font-semibold text-gray-900">#{project.projectNumber}</h3>
               </div>
               
               <div className="flex items-center gap-1">
                 <Calendar size={14} className="text-blue-500" />
+                <span className="text-gray-600 text-xs">Date:</span>
                 <span className="text-blue-600 font-medium">{formattedProjectDate}</span>
               </div>
               
               <div className="flex items-center gap-1">
                 <DollarSign size={14} className="text-green-500" />
+                <span className="text-gray-600 text-xs">Total:</span>
                 <span className="font-semibold text-green-600">${project.projectTotal.toLocaleString()}</span>
               </div>
               
-              <div className="flex justify-start">
+              <div className="flex items-center gap-1">
+                <span className="text-gray-600 text-xs">Status:</span>
                 <Badge className={cn("text-xs", getStatusColor(project.projectStatus))}>
                   {project.projectStatus}
                 </Badge>
@@ -106,38 +110,34 @@ const SimpleOrderList: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-3 text-sm">
               <div className="flex items-center gap-1">
                 <Calendar size={14} className="text-purple-500" />
-                <span className="text-gray-600">Fulfill:</span>
+                <span className="text-gray-600 text-xs">Fulfill:</span>
                 <span className="font-medium text-purple-600">{formattedFulfillDate}</span>
               </div>
               
               <div className="flex items-center gap-1">
                 <Package size={14} className="text-orange-500" />
-                <span className="text-gray-600">Units:</span>
+                <span className="text-gray-600 text-xs">Units:</span>
                 <span className="font-medium text-orange-600">{project.numberOfUnits}</span>
               </div>
               
-              <div className="flex items-center gap-1">
-                <TrendingUp size={14} className="text-indigo-500" />
-                <span className="text-gray-600">Status:</span>
-                <span className="font-medium text-indigo-600">{project.unitStatus.completed}/{project.unitStatus.total} Units</span>
+              <div className="flex items-center justify-start">
+                <div className="px-3 py-1 border border-black rounded text-xs text-black bg-white flex items-center gap-1">
+                  <Package size={12} />
+                  <span>{project.unitStatus.completed}/{project.unitStatus.total} Units</span>
+                </div>
               </div>
             </div>
 
             {/* Row 3 - Description & Actions */}
             <div className="flex items-start justify-between gap-4">
               <div className="flex-1">
+                <span className="text-gray-600 text-xs block mb-1">Opportunity:</span>
                 <p className="text-sm text-gray-700 line-clamp-2 leading-relaxed">
                   {project.opportunity}
                 </p>
               </div>
               
               <div className="flex items-center gap-2 flex-shrink-0">
-                {/* Units Container - Non-clickable button-like styling */}
-                <div className="px-3 py-1 border border-black rounded text-xs text-black bg-white flex items-center gap-1">
-                  <Package size={12} />
-                  <span>{project.unitStatus.completed}/{project.unitStatus.total} Units</span>
-                </div>
-                
                 <Link to={`/order/${project.projectNumber}`} onClick={(e) => e.stopPropagation()}>
                   <Button 
                     size="sm" 
