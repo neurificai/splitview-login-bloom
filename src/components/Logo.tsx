@@ -16,8 +16,8 @@ const Logo: React.FC<LogoProps> = ({ size = "md", className = "" }) => {
   return (
     <div className={`flex items-center ${className}`}>
       <img
-        src="/lovable-uploads/de760570-bd7b-4feb-be5b-7fde0578b566.png"
-        alt="Logo"
+        src="/lovable-uploads/785a8b91-a426-4252-8ccb-88c1d89c7bf8.png"
+        alt="GraphiTrak Logo"
         className={`${sizeClasses[size]} w-auto`}
       />
     </div>
