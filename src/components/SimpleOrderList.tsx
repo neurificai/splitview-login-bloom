@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Link, useNavigate } from "react-router-dom";
+import { Layers } from "lucide-react";
 import { getProjectList, ProjectData } from "../services/mockProjectService";
 
 const SimpleOrderList: React.FC = () => {
@@ -99,18 +100,19 @@ const SimpleOrderList: React.FC = () => {
             {/* Details Row */}
             <div className="grid grid-cols-3 gap-6 mb-6">
               <div className="flex items-center gap-2">
-                <span className="text-xs text-gray-500">Fulfilment Date:</span>
-                <span className="text-xs text-gray-900 whitespace-nowrap">{formattedFulfillDate}</span>
+                <span className="text-xs text-gray-500">Project Total:</span>
+                <div className="text-xs text-gray-900 whitespace-nowrap">${project.projectTotal.toLocaleString()}</div>
               </div>
               
               <div className="flex items-center gap-2">
-                <span className="text-xs text-gray-500">Total:</span>
-                <div className="text-xs text-gray-900 whitespace-nowrap">${project.projectTotal.toLocaleString()}</div>
+                <span className="text-xs text-gray-500">Fulfilment Date:</span>
+                <span className="text-xs text-gray-900 whitespace-nowrap">{formattedFulfillDate}</span>
               </div>
 
               <div className="flex items-center gap-2">
                 <span className="text-xs text-gray-500">Unit Status:</span>
                 <div className="inline-flex items-center px-2 py-1 bg-gray-50 border border-gray-200 rounded-md text-xs text-gray-900 whitespace-nowrap">
+                  <Layers size={12} className="mr-1 text-green-600" />
                   {project.unitStatus.completed}/{project.unitStatus.total} Units
                 </div>
               </div>
