@@ -1,4 +1,3 @@
-
 import React from "react";
 import { useEffect, useState } from 'react';
 import { format } from "date-fns";
@@ -127,16 +126,17 @@ const SimpleOrderList: React.FC = () => {
                 </p>
               </div>
               
-              <div className="flex items-center gap-2">
-                <span className="text-xs text-gray-500 invisible">Action:</span>
-                <Link to={`/order/${project.projectNumber}`} onClick={(e) => e.stopPropagation()}>
-                  <Button 
-                    size="sm" 
-                    className="bg-yellow-200 text-black hover:bg-yellow-300 border-none px-6"
-                  >
-                    View Details
-                  </Button>
-                </Link>
+              <div className="flex items-center">
+                <div className="ml-[calc(theme(spacing.20)+theme(spacing.2))]">
+                  <Link to={`/order/${project.projectNumber}`} onClick={(e) => e.stopPropagation()}>
+                    <Button 
+                      size="sm" 
+                      className="bg-yellow-200 text-black hover:bg-yellow-300 border-none px-6"
+                    >
+                      View Details
+                    </Button>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
