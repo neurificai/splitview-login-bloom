@@ -127,7 +127,8 @@ const SimpleOrderList: React.FC = () => {
                 </p>
               </div>
               
-              <div className="flex items-start justify-end">
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-gray-500 invisible">Action:</span>
                 <Link to={`/order/${project.projectNumber}`} onClick={(e) => e.stopPropagation()}>
                   <Button 
                     size="sm" 
