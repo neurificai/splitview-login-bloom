@@ -104,20 +104,10 @@ const SimpleOrderList: React.FC = () => {
               </div>
               
               <div className="flex items-center gap-2">
-                <span className="text-xs text-gray-500">Units:</span>
-                <span className="text-xs text-gray-900 whitespace-nowrap">{project.numberOfUnits}</span>
-              </div>
-              
-              <div className="flex items-center gap-2">
                 <span className="text-xs text-gray-500">Total:</span>
                 <div className="text-xs text-gray-900 whitespace-nowrap">${project.projectTotal.toLocaleString()}</div>
               </div>
-            </div>
 
-            {/* Unit Status Row */}
-            <div className="grid grid-cols-3 gap-6 mb-6">
-              <div></div>
-              <div></div>
               <div className="flex items-center gap-2">
                 <span className="text-xs text-gray-500">Unit Status:</span>
                 <div className="inline-flex items-center px-2 py-1 bg-gray-50 border border-gray-200 rounded-md text-xs text-gray-900 whitespace-nowrap">
