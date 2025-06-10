@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -49,7 +48,7 @@ const DashboardTopbar = () => {
                         
                         <button
                             onClick={handleLogout}
-                            className="inline-flex items-center px-3 py-1.5 text-xs font-medium text-red-600 bg-red-50 hover:bg-red-100 border border-red-200 rounded-md transition-colors duration-200 ease-in-out"
+                            className="inline-flex items-center px-3 py-1.5 text-xs font-medium text-white bg-[#bc0022] hover:bg-[#9a001c] border border-[#bc0022] rounded-md transition-colors duration-200 ease-in-out"
                         >
                             <LogOut size={12} className="mr-1.5" />
                             Logout

@@ -74,31 +74,31 @@ const SimpleOrderList: React.FC = () => {
           <div
             key={project.projectNumber}
             className={cn(
-              "bg-gray-50 border border-gray-200 rounded-lg p-3 hover:shadow-md transition-all duration-200 cursor-pointer",
+              "bg-gray-50 border border-[#003864] rounded-lg p-3 hover:shadow-md transition-all duration-200 cursor-pointer",
               "hover:border-gray-300"
             )}
             onClick={(e) => handleRowClick(project.projectNumber, e)}
           >
-            {/* First Row with All Information */}
-            <div className="grid grid-cols-5 gap-2 mb-2 items-center">
+            {/* First Row with All Information - Horizontally Aligned Labels */}
+            <div className="grid grid-cols-5 gap-2 mb-2 items-baseline">
               <div className="flex flex-col">
-                <span className="text-xs text-gray-500 mb-0.5">Project</span>
-                <h3 className="text-xs text-gray-900 truncate">#{project.projectNumber}</h3>
+                <span className="text-xs text-gray-500 mb-0.5 leading-tight">Project</span>
+                <h3 className="text-xs text-gray-900 truncate leading-tight">#{project.projectNumber}</h3>
               </div>
               <div className="flex flex-col">
-                <span className="text-xs text-gray-500 mb-0.5">Project Date</span>
-                <span className="text-xs text-gray-900 truncate">{formattedProjectDate}</span>
+                <span className="text-xs text-gray-500 mb-0.5 leading-tight">Project Date</span>
+                <span className="text-xs text-gray-900 truncate leading-tight">{formattedProjectDate}</span>
               </div>
               <div className="flex flex-col">
-                <span className="text-xs text-gray-500 mb-0.5">Fulfilment Date</span>
-                <span className="text-xs text-gray-900 truncate">{formattedFulfillDate}</span>
+                <span className="text-xs text-gray-500 mb-0.5 leading-tight">Fulfilment Date</span>
+                <span className="text-xs text-gray-900 truncate leading-tight">{formattedFulfillDate}</span>
               </div>
               <div className="flex flex-col">
-                <span className="text-xs text-gray-500 mb-0.5">Project Total</span>
-                <div className="text-xs text-gray-900 truncate">${project.projectTotal.toLocaleString()}</div>
+                <span className="text-xs text-gray-500 mb-0.5 leading-tight">Project Total</span>
+                <div className="text-xs text-gray-900 truncate leading-tight">${project.projectTotal.toLocaleString()}</div>
               </div>
               <div className="flex flex-col">
-                <span className="text-xs text-gray-500 mb-0.5">Unit Status</span>
+                <span className="text-xs text-gray-500 mb-0.5 leading-tight">Unit Status</span>
                 <div className="inline-flex items-center px-1.5 py-0.5 bg-white border border-gray-200 rounded text-xs text-gray-900 w-fit">
                   <Layers size={10} className="mr-1 text-green-600" />
                   {project.unitStatus.completed}/{project.unitStatus.total}
@@ -106,22 +106,22 @@ const SimpleOrderList: React.FC = () => {
               </div>
             </div>
 
-            {/* Second Row with Opportunity and Action */}
-            <div className="pt-2 border-t border-gray-100 flex items-start justify-between gap-3">
+            {/* Second Row with Opportunity and Action - Horizontally Aligned */}
+            <div className="pt-2 border-t border-gray-100 flex items-baseline justify-between gap-3">
               <div className="flex-1">
-                <span className="text-gray-500 text-xs block mb-1">Opportunity</span>
+                <span className="text-gray-500 text-xs leading-tight mb-1 block">Opportunity</span>
                 <p className="text-gray-900 leading-relaxed text-xs">
                   {project.opportunity}
                 </p>
               </div>
-              <div className="flex items-start gap-2">
+              <div className="flex items-baseline gap-2">
                 <Badge className={cn("text-xs whitespace-nowrap", getStatusColor(project.projectStatus))}>
                   {project.projectStatus}
                 </Badge>
                 <Link to={`/order/${project.projectNumber}`} onClick={(e) => e.stopPropagation()}>
                   <Button 
                     size="sm" 
-                    className="bg-yellow-200 text-black hover:bg-yellow-300 border-none text-xs py-1 px-3 h-6 whitespace-nowrap"
+                    className="bg-[#bc0022] text-white hover:bg-[#9a001c] border-none text-xs py-1 px-3 h-6 whitespace-nowrap"
                   >
                     View Details
                   </Button>

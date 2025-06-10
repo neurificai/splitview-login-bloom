@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
@@ -43,7 +42,7 @@ const DashboardSidebar: React.FC = () => {
   console.log('sidebarContacts');
   return (
     <div className="hidden md:flex h-screen flex-col border-r bg-white w-64 py-4 px-2 fixed left-0 top-0">
-      <div className="flex items-center px-4 mb-8">
+      <div className="flex items-center justify-center px-4 mb-8">
         <Logo size="md" />
       </div>
 
@@ -72,9 +71,9 @@ const DashboardSidebar: React.FC = () => {
         </div>
       )}
 
-      {/* Powered by section at the bottom */}
+      {/* Powered by section at the bottom - Centered */}
       <div className="mt-auto px-4 py-3 border-t border-gray-100">
-        <div className="flex flex-col items-start space-y-2">
+        <div className="flex flex-col items-center space-y-2">
           <p className="text-xs text-gray-500 font-medium">Powered by</p>
           <img
             src="/lovable-uploads/c1c8e5bb-3edd-4ac5-9469-452bba7c42bd.png"
