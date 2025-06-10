@@ -78,7 +78,7 @@ const DashboardSidebar: React.FC = () => {
           <img
             src="/lovable-uploads/c1c8e5bb-3edd-4ac5-9469-452bba7c42bd.png"
             alt="Advertising Vehicles"
-            className="h-16 w-auto"
+            className="h-20 w-auto"
           />
         </div>
       </div>
