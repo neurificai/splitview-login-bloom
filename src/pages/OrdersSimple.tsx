@@ -54,7 +54,7 @@ const OrdersSimple = () => {
           />
         </div>
 
-        <SimpleOrderList orders={filteredOrders} />
+        <SimpleOrderList />
       </div>
     </DashboardLayout>
   );

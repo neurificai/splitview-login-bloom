@@ -5,16 +5,10 @@ import { cn } from "@/lib/utils";
 interface TabContainerProps {
   mainTab: string;
   children: {
-    estimate: React.ReactNode;
-    design: React.ReactNode;
-    detail: React.ReactNode;
-    invoice: React.ReactNode;
+    [key: string]: React.ReactNode;
   };
   colorScheme: {
-    estimate: string;
-    design: string;
-    detail: string;
-    invoice: string;
+    [key: string]: string;
   };
 }
 
@@ -78,7 +72,7 @@ const TabContainer: React.FC<TabContainerProps> = ({ mainTab, children, colorSch
       </div>
 
       <div className="mt-3">
-        {children[activeSubTab as keyof typeof children]}
+        {children[activeSubTab] || children["detail"]}
       </div>
     </div>
   );
