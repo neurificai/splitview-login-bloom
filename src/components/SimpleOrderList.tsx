@@ -79,46 +79,42 @@ const SimpleOrderList: React.FC = () => {
             onClick={(e) => handleRowClick(project.projectNumber, e)}
           >
             {/* Header Row */}
-            <div className="flex items-start justify-between mb-4">
-              <div className="flex items-center gap-6">
-                <div>
-                  <span className="text-sm text-gray-500">Project:</span>
-                  <h3 className="text-lg font-semibold text-gray-900">#{project.projectNumber}</h3>
-                </div>
-                <div>
-                  <span className="text-sm text-gray-500">Status:</span>
-                  <div className="mt-1">
-                    <Badge className={cn("text-sm", getStatusColor(project.projectStatus))}>
-                      {project.projectStatus}
-                    </Badge>
-                  </div>
-                </div>
+            <div className="grid grid-cols-3 gap-6 mb-6">
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-gray-500">Project:</span>
+                <h3 className="text-lg font-semibold text-gray-900">#{project.projectNumber}</h3>
               </div>
-              <div className="text-right">
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-gray-500">Status:</span>
+                <Badge className={cn("text-sm", getStatusColor(project.projectStatus))}>
+                  {project.projectStatus}
+                </Badge>
+              </div>
+              <div className="flex items-center gap-2 justify-end">
                 <span className="text-sm text-gray-500">Total:</span>
                 <div className="text-xl font-bold text-gray-900">${project.projectTotal.toLocaleString()}</div>
               </div>
             </div>
 
             {/* Details Row */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-4 text-sm">
-              <div>
-                <span className="text-gray-500 block mb-1">Project Date:</span>
+            <div className="grid grid-cols-4 gap-6 mb-6">
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-gray-500">Project Date:</span>
                 <span className="font-medium text-gray-900">{formattedProjectDate}</span>
               </div>
               
-              <div>
-                <span className="text-gray-500 block mb-1">Fulfilment Date:</span>
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-gray-500">Fulfilment Date:</span>
                 <span className="font-medium text-gray-900">{formattedFulfillDate}</span>
               </div>
               
-              <div>
-                <span className="text-gray-500 block mb-1">Units:</span>
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-gray-500">Units:</span>
                 <span className="font-medium text-gray-900">{project.numberOfUnits}</span>
               </div>
               
-              <div>
-                <span className="text-gray-500 block mb-1">Unit Status:</span>
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-gray-500">Unit Status:</span>
                 <div className="inline-flex items-center px-3 py-1 bg-gray-50 border border-gray-200 rounded-md text-sm font-medium text-gray-900">
                   {project.unitStatus.completed}/{project.unitStatus.total} Units
                 </div>
