@@ -74,7 +74,7 @@ const DashboardSidebar: React.FC = () => {
 
       {/* Powered by section at the bottom */}
       <div className="mt-auto px-4 py-3 border-t border-gray-100">
-        <div className="flex flex-col items-center space-y-2">
+        <div className="flex flex-col items-start space-y-2">
           <p className="text-xs text-gray-500 font-medium">Powered by</p>
           <img
             src="/lovable-uploads/c1c8e5bb-3edd-4ac5-9469-452bba7c42bd.png"
