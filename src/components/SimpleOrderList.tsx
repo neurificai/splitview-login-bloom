@@ -119,19 +119,19 @@ const SimpleOrderList: React.FC = () => {
             </div>
 
             {/* Description and Action Row */}
-            <div className="flex items-start justify-between gap-6 pt-4 border-t border-gray-100">
-              <div className="flex-1">
+            <div className="grid grid-cols-3 gap-6 pt-4 border-t border-gray-100">
+              <div className="col-span-2">
                 <span className="text-gray-500 text-xs block mb-2">Opportunity:</span>
-                <p className="text-gray-900 leading-relaxed text-sm">
+                <p className="text-gray-900 leading-relaxed text-xs">
                   {project.opportunity}
                 </p>
               </div>
               
-              <div className="flex-shrink-0">
+              <div className="flex items-start justify-end">
                 <Link to={`/order/${project.projectNumber}`} onClick={(e) => e.stopPropagation()}>
                   <Button 
                     size="sm" 
-                    className="bg-yellow-400 text-black hover:bg-yellow-500 border-none px-6"
+                    className="bg-yellow-200 text-black hover:bg-yellow-300 border-none px-6"
                   >
                     View Details
                   </Button>
