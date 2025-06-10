@@ -82,11 +82,11 @@ const SimpleOrderList: React.FC = () => {
             <div className="grid grid-cols-4 gap-6 mb-6">
               <div className="flex items-center gap-2">
                 <span className="text-sm text-gray-500">Project:</span>
-                <h3 className="text-lg font-semibold text-gray-900">#{project.projectNumber}</h3>
+                <h3 className="text-sm text-gray-900 whitespace-nowrap">#{project.projectNumber}</h3>
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-sm text-gray-500">Project Date:</span>
-                <span className="text-sm font-medium text-gray-900">{formattedProjectDate}</span>
+                <span className="text-sm text-gray-900 whitespace-nowrap">{formattedProjectDate}</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-sm text-gray-500">Status:</span>
@@ -96,7 +96,7 @@ const SimpleOrderList: React.FC = () => {
               </div>
               <div className="flex items-center gap-2 justify-end">
                 <span className="text-sm text-gray-500">Total:</span>
-                <div className="text-lg font-bold text-gray-900">${project.projectTotal.toLocaleString()}</div>
+                <div className="text-sm text-gray-900 whitespace-nowrap">${project.projectTotal.toLocaleString()}</div>
               </div>
             </div>
 
@@ -104,17 +104,17 @@ const SimpleOrderList: React.FC = () => {
             <div className="grid grid-cols-3 gap-6 mb-6">
               <div className="flex items-center gap-2">
                 <span className="text-sm text-gray-500">Fulfilment Date:</span>
-                <span className="text-sm font-medium text-gray-900">{formattedFulfillDate}</span>
+                <span className="text-sm text-gray-900 whitespace-nowrap">{formattedFulfillDate}</span>
               </div>
               
               <div className="flex items-center gap-2">
                 <span className="text-sm text-gray-500">Units:</span>
-                <span className="text-sm font-medium text-gray-900">{project.numberOfUnits}</span>
+                <span className="text-sm text-gray-900 whitespace-nowrap">{project.numberOfUnits}</span>
               </div>
               
               <div className="flex items-center gap-2">
                 <span className="text-sm text-gray-500">Unit Status:</span>
-                <div className="inline-flex items-center px-3 py-1 bg-gray-50 border border-gray-200 rounded-md text-sm font-medium text-gray-900">
+                <div className="inline-flex items-center px-3 py-1 bg-gray-50 border border-gray-200 rounded-md text-sm text-gray-900 whitespace-nowrap">
                   {project.unitStatus.completed}/{project.unitStatus.total} Units
                 </div>
               </div>
@@ -124,7 +124,7 @@ const SimpleOrderList: React.FC = () => {
             <div className="flex items-start justify-between gap-6 pt-4 border-t border-gray-100">
               <div className="flex-1">
                 <span className="text-gray-500 text-sm block mb-2">Opportunity:</span>
-                <p className="text-gray-700 leading-relaxed text-sm">
+                <p className="text-gray-900 leading-relaxed text-sm">
                   {project.opportunity}
                 </p>
               </div>
