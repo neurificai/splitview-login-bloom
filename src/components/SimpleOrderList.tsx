@@ -88,11 +88,22 @@ const SimpleOrderList: React.FC = () => {
                 </Badge>
               </div>
               
-              <Link to={`/order/${project.projectNumber}`} onClick={(e) => e.stopPropagation()}>
-                <Button variant="outline" size="sm" className="text-blue-600 border-blue-200 hover:bg-blue-50">
-                  View Details
-                </Button>
-              </Link>
+              <div className="flex items-center gap-2">
+                {/* Units Container - Non-clickable button-like styling */}
+                <div className="px-3 py-1 border border-black rounded text-xs text-black bg-white flex items-center gap-1">
+                  <Package size={12} />
+                  <span>{project.unitStatus.completed}/{project.unitStatus.total} Units</span>
+                </div>
+                
+                <Link to={`/order/${project.projectNumber}`} onClick={(e) => e.stopPropagation()}>
+                  <Button 
+                    size="sm" 
+                    className="bg-yellow-400 text-black hover:bg-yellow-500 border-none"
+                  >
+                    View Details
+                  </Button>
+                </Link>
+              </div>
             </div>
 
             {/* Project Description */}
@@ -100,8 +111,8 @@ const SimpleOrderList: React.FC = () => {
               {project.opportunity}
             </p>
 
-            {/* Info Grid - Compact Layout */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
+            {/* Info Grid - 3 columns instead of 4 */}
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 text-xs">
               <div className="flex items-center gap-1">
                 <Calendar size={12} className="text-gray-400" />
                 <span className="text-gray-600">Project:</span>
@@ -118,26 +129,6 @@ const SimpleOrderList: React.FC = () => {
                 <DollarSign size={12} className="text-gray-400" />
                 <span className="text-gray-600">Total:</span>
                 <span className="font-medium">${project.projectTotal.toLocaleString()}</span>
-              </div>
-              
-              <div className="flex items-center gap-1">
-                <Package size={12} className="text-gray-400" />
-                <span className="text-gray-600">Units:</span>
-                <span className="font-medium">{project.unitStatus.completed}/{project.unitStatus.total}</span>
-              </div>
-            </div>
-
-            {/* Progress Bar */}
-            <div className="mt-3">
-              <div className="flex justify-between items-center mb-1">
-                <span className="text-xs text-gray-500">Progress</span>
-                <span className="text-xs font-medium text-gray-700">{project.progress}%</span>
-              </div>
-              <div className="w-full bg-gray-200 rounded-full h-1.5">
-                <div
-                  className="bg-blue-500 h-1.5 rounded-full transition-all duration-300"
-                  style={{ width: `${project.progress}%` }}
-                ></div>
               </div>
             </div>
           </div>
