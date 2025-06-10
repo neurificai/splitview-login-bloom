@@ -1,4 +1,3 @@
-
 // Order model
 export interface Order {
   AV_SO: string;
@@ -49,12 +48,6 @@ export interface OrderDetails {
   };
   installLocations?: string[];
   approvedDesigns?: string[];
-  // invoices?: {
-  //   id: string;
-  //   date: string;
-  //   amount: number;
-  //   status: 'paid' | 'pending';
-  // }[];
 }
 
 // View mode and filter options
@@ -78,7 +71,11 @@ export const orders: Order[] = [
     Job_Status_Pct: 45,
     Frame_Installation: true,
     Vinyl_Installation: false,
-    Customer_Notes: "Client prefers matte finish on all banners."
+    Customer_Notes: "Client prefers matte finish on all banners.",
+    order_date: "2025-05-07",
+    order_number: "AVSO125",
+    order_title: "3306 Proforce | Qty 15 | Charlotte, NC",
+    project: "Print & Install"
   },
   {
     AV_SO: "AVSO1794",
@@ -95,7 +92,11 @@ export const orders: Order[] = [
     Job_Status_Pct: 75,
     Frame_Installation: true,
     Vinyl_Installation: false,
-    Customer_Notes: "Install frames by May 20th."
+    Customer_Notes: "Install frames by May 20th.",
+    order_date: "2025-05-10",
+    order_number: "AVSO1794",
+    order_title: "4221 Oak Street | Qty 8 | Austin, TX",
+    project: "Framing"
   },
   {
     AV_SO: "AVSO1795",
@@ -112,7 +113,11 @@ export const orders: Order[] = [
     Job_Status_Pct: 90,
     Frame_Installation: true,
     Vinyl_Installation: true,
-    Customer_Notes: "Customer requests weather-resistant materials for outdoor application. Previous installation was damaged in harsh conditions."
+    Customer_Notes: "Customer requests weather-resistant materials for outdoor application. Previous installation was damaged in harsh conditions.",
+    order_date: "2025-05-01",
+    order_number: "AVSO1795",
+    order_title: "Millennium Fleet | Qty 22 | Denver, CO",
+    project: "Design & Install"
   },
   {
     AV_SO: "AVSO1796",
@@ -129,7 +134,11 @@ export const orders: Order[] = [
     Job_Status_Pct: 30,
     Frame_Installation: false,
     Vinyl_Installation: true,
-    Customer_Notes: "High-visibility reflective material requested for night visibility. Contact client for installation approval before proceeding."
+    Customer_Notes: "High-visibility reflective material requested for night visibility. Contact client for installation approval before proceeding.",
+    order_date: "2025-05-05",
+    order_number: "AVSO1796",
+    order_title: "NewTech Industries | Qty 5 | Seattle, WA",
+    project: "Print Only"
   }
 ];
 
@@ -137,6 +146,25 @@ export const orders: Order[] = [
 export const orderDetailsData: Record<string, OrderDetails> = {
   "AVSO125": {
     order: orders[0],
+    record: [],
+    contacts: [],
+    items: [],
+    estimates: [],
+    invoices: [
+      {
+        id: "INV-2025-045",
+        date: "2025-05-01",
+        amount: 2500,
+        status: "paid"
+      },
+      {
+        id: "INV-2025-067",
+        date: "2025-05-15",
+        amount: 2500,
+        status: "pending"
+      }
+    ],
+    designs: [],
     activities: [
       {
         date: "2025-04-28",
@@ -201,24 +229,23 @@ export const orderDetailsData: Record<string, OrderDetails> = {
     installLocations: [
       "Charlotte HQ", "Charlotte Warehouse", "Charlotte Distribution Center"
     ],
-    approvedDesigns: ["Design_v2_final.pdf", "Installation_diagram.pdf"],
-    invoices: [
-      {
-        id: "INV-2025-045",
-        date: "2025-05-01",
-        amount: 2500,
-        status: "paid"
-      },
-      {
-        id: "INV-2025-067",
-        date: "2025-05-15",
-        amount: 2500,
-        status: "pending"
-      }
-    ]
+    approvedDesigns: ["Design_v2_final.pdf", "Installation_diagram.pdf"]
   },
   "AVSO1794": {
     order: orders[1],
+    record: [],
+    contacts: [],
+    items: [],
+    estimates: [],
+    invoices: [
+      {
+        id: "INV-2025-052",
+        date: "2025-05-05",
+        amount: 3200,
+        status: "paid"
+      }
+    ],
+    designs: [],
     activities: [
       {
         date: "2025-05-03",
@@ -262,18 +289,29 @@ export const orderDetailsData: Record<string, OrderDetails> = {
     installLocations: [
       "Austin Main Office", "Austin East Wing"
     ],
-    approvedDesigns: ["Frame_specs.pdf"],
-    invoices: [
-      {
-        id: "INV-2025-052",
-        date: "2025-05-05",
-        amount: 3200,
-        status: "paid"
-      }
-    ]
+    approvedDesigns: ["Frame_specs.pdf"]
   },
   "AVSO1795": {
     order: orders[2],
+    record: [],
+    contacts: [],
+    items: [],
+    estimates: [],
+    invoices: [
+      {
+        id: "INV-2025-039",
+        date: "2025-04-22",
+        amount: 12000,
+        status: "paid"
+      },
+      {
+        id: "INV-2025-064",
+        date: "2025-05-08",
+        amount: 12000,
+        status: "pending"
+      }
+    ],
+    designs: [],
     activities: [
       {
         date: "2025-04-20",
@@ -351,24 +389,23 @@ export const orderDetailsData: Record<string, OrderDetails> = {
     installLocations: [
       "Denver Main Depot", "Denver Secondary Lot"
     ],
-    approvedDesigns: ["Fleet_design_final.pdf", "Vehicle_layout.pdf", "Brand_guidelines.pdf"],
-    invoices: [
-      {
-        id: "INV-2025-039",
-        date: "2025-04-22",
-        amount: 12000,
-        status: "paid"
-      },
-      {
-        id: "INV-2025-064",
-        date: "2025-05-08",
-        amount: 12000,
-        status: "pending"
-      }
-    ]
+    approvedDesigns: ["Fleet_design_final.pdf", "Vehicle_layout.pdf", "Brand_guidelines.pdf"]
   },
   "AVSO1796": {
     order: orders[3],
+    record: [],
+    contacts: [],
+    items: [],
+    estimates: [],
+    invoices: [
+      {
+        id: "INV-2025-049",
+        date: "2025-05-03",
+        amount: 1800,
+        status: "paid"
+      }
+    ],
+    designs: [],
     activities: [
       {
         date: "2025-05-01",
@@ -395,15 +432,7 @@ export const orderDetailsData: Record<string, OrderDetails> = {
     shippingAddresses: [
       "800 Tech Drive, Seattle, WA 98109"
     ],
-    approvedDesigns: [],
-    invoices: [
-      {
-        id: "INV-2025-049",
-        date: "2025-05-03",
-        amount: 1800,
-        status: "paid"
-      }
-    ]
+    approvedDesigns: []
   }
 };
 
