@@ -1,4 +1,3 @@
-
 import React from "react";
 import { useEffect, useState } from 'react';
 import { format } from "date-fns";
@@ -79,10 +78,14 @@ const SimpleOrderList: React.FC = () => {
             onClick={(e) => handleRowClick(project.projectNumber, e)}
           >
             {/* Header Row */}
-            <div className="grid grid-cols-3 gap-6 mb-6">
+            <div className="grid grid-cols-4 gap-6 mb-6">
               <div className="flex items-center gap-2">
                 <span className="text-sm text-gray-500">Project:</span>
                 <h3 className="text-lg font-semibold text-gray-900">#{project.projectNumber}</h3>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-gray-500">Project Date:</span>
+                <span className="font-medium text-gray-900">{formattedProjectDate}</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-sm text-gray-500">Status:</span>
@@ -97,12 +100,7 @@ const SimpleOrderList: React.FC = () => {
             </div>
 
             {/* Details Row */}
-            <div className="grid grid-cols-4 gap-6 mb-6">
-              <div className="flex items-center gap-2">
-                <span className="text-sm text-gray-500">Project Date:</span>
-                <span className="font-medium text-gray-900">{formattedProjectDate}</span>
-              </div>
-              
+            <div className="grid grid-cols-3 gap-6 mb-6">
               <div className="flex items-center gap-2">
                 <span className="text-sm text-gray-500">Fulfilment Date:</span>
                 <span className="font-medium text-gray-900">{formattedFulfillDate}</span>
