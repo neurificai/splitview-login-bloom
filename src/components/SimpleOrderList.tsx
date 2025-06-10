@@ -3,7 +3,7 @@ import React from "react";
 import { useEffect, useState } from 'react';
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
-import { Calendar, DollarSign, Package, TrendingUp } from "lucide-react";
+import { Calendar, DollarSign, Package } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Link, useNavigate } from "react-router-dom";
@@ -80,25 +80,25 @@ const SimpleOrderList: React.FC = () => {
             onClick={(e) => handleRowClick(project.projectNumber, e)}
           >
             {/* Row 1 - Header Information */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-3 text-sm">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-3 text-sm">
               <div className="flex items-center gap-2">
                 <span className="text-gray-600 text-xs">Project:</span>
                 <h3 className="font-semibold text-gray-900">#{project.projectNumber}</h3>
               </div>
               
-              <div className="flex items-center gap-1">
+              <div className="flex items-center gap-2">
                 <Calendar size={14} className="text-blue-500" />
-                <span className="text-gray-600 text-xs">Date:</span>
-                <span className="text-blue-600 font-medium">{formattedProjectDate}</span>
+                <span className="text-gray-600 text-xs">Project Date:</span>
+                <span className="font-medium text-gray-900">{formattedProjectDate}</span>
               </div>
               
-              <div className="flex items-center gap-1">
+              <div className="flex items-center gap-2">
                 <DollarSign size={14} className="text-green-500" />
                 <span className="text-gray-600 text-xs">Total:</span>
-                <span className="font-semibold text-green-600">${project.projectTotal.toLocaleString()}</span>
+                <span className="font-semibold text-gray-900">${project.projectTotal.toLocaleString()}</span>
               </div>
               
-              <div className="flex items-center gap-1">
+              <div className="flex items-center gap-2">
                 <span className="text-gray-600 text-xs">Status:</span>
                 <Badge className={cn("text-xs", getStatusColor(project.projectStatus))}>
                   {project.projectStatus}
@@ -107,22 +107,22 @@ const SimpleOrderList: React.FC = () => {
             </div>
 
             {/* Row 2 - Fulfillment & Units */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-3 text-sm">
-              <div className="flex items-center gap-1">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-2 mb-3 text-sm">
+              <div className="flex items-center gap-2">
                 <Calendar size={14} className="text-purple-500" />
-                <span className="text-gray-600 text-xs">Fulfill:</span>
-                <span className="font-medium text-purple-600">{formattedFulfillDate}</span>
+                <span className="text-gray-600 text-xs">Fulfilment Date:</span>
+                <span className="font-medium text-gray-900">{formattedFulfillDate}</span>
               </div>
               
-              <div className="flex items-center gap-1">
+              <div className="flex items-center gap-2">
                 <Package size={14} className="text-orange-500" />
                 <span className="text-gray-600 text-xs">Units:</span>
-                <span className="font-medium text-orange-600">{project.numberOfUnits}</span>
+                <span className="font-medium text-gray-900">{project.numberOfUnits}</span>
               </div>
               
               <div className="flex items-center justify-start">
-                <div className="px-3 py-1 border border-black rounded text-xs text-black bg-white flex items-center gap-1">
-                  <Package size={12} />
+                <div className="px-3 py-1 border border-gray-300 rounded text-xs text-gray-900 bg-white flex items-center gap-1">
+                  <Package size={12} className="text-gray-600" />
                   <span>{project.unitStatus.completed}/{project.unitStatus.total} Units</span>
                 </div>
               </div>
