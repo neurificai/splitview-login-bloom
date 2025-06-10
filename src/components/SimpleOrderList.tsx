@@ -79,7 +79,7 @@ const SimpleOrderList: React.FC = () => {
             onClick={(e) => handleRowClick(project.projectNumber, e)}
           >
             {/* Header Row */}
-            <div className="grid grid-cols-4 gap-6 mb-6">
+            <div className="grid grid-cols-3 gap-6 mb-6">
               <div className="flex items-center gap-2">
                 <span className="text-xs text-gray-500">Project:</span>
                 <h3 className="text-xs text-gray-900 whitespace-nowrap">#{project.projectNumber}</h3>
@@ -93,10 +93,6 @@ const SimpleOrderList: React.FC = () => {
                 <Badge className={cn("text-xs", getStatusColor(project.projectStatus))}>
                   {project.projectStatus}
                 </Badge>
-              </div>
-              <div className="flex items-center gap-2 justify-end">
-                <span className="text-xs text-gray-500">Total:</span>
-                <div className="text-xs text-gray-900 whitespace-nowrap">${project.projectTotal.toLocaleString()}</div>
               </div>
             </div>
 
@@ -112,6 +108,16 @@ const SimpleOrderList: React.FC = () => {
                 <span className="text-xs text-gray-900 whitespace-nowrap">{project.numberOfUnits}</span>
               </div>
               
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-gray-500">Total:</span>
+                <div className="text-xs text-gray-900 whitespace-nowrap">${project.projectTotal.toLocaleString()}</div>
+              </div>
+            </div>
+
+            {/* Unit Status Row */}
+            <div className="grid grid-cols-3 gap-6 mb-6">
+              <div></div>
+              <div></div>
               <div className="flex items-center gap-2">
                 <span className="text-xs text-gray-500">Unit Status:</span>
                 <div className="inline-flex items-center px-2 py-1 bg-gray-50 border border-gray-200 rounded-md text-xs text-gray-900 whitespace-nowrap">
