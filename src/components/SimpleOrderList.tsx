@@ -53,7 +53,7 @@ const SimpleOrderList: React.FC = () => {
   if (projects.length === 0) {
     return (
       <div className="text-center p-8 border rounded-lg bg-white shadow-sm">
-        <p className="text-gray-500">No projects found matching your criteria.</p>
+        <p className="text-xs text-gray-500">No projects found matching your criteria.</p>
       </div>
     );
   }
@@ -82,24 +82,24 @@ const SimpleOrderList: React.FC = () => {
             {/* First Row with All Information - Horizontally Aligned Labels */}
             <div className="grid grid-cols-5 gap-2 mb-2 items-baseline">
               <div className="flex flex-col">
-                <span className="text-xs text-gray-500 mb-0.5 leading-tight">Project</span>
-                <h3 className="text-xs text-gray-900 truncate leading-tight">#{project.projectNumber}</h3>
+                <span className="text-[15px] text-gray-500 mb-0.5 leading-tight">Project</span>
+                <h3 className="text-[15px] text-gray-900 truncate leading-tight">#{project.projectNumber}</h3>
               </div>
               <div className="flex flex-col">
-                <span className="text-xs text-gray-500 mb-0.5 leading-tight">Project Date</span>
-                <span className="text-xs text-gray-900 truncate leading-tight">{formattedProjectDate}</span>
+                <span className="text-[15px] text-gray-500 mb-0.5 leading-tight">Project Date</span>
+                <span className="text-[15px] text-gray-900 truncate leading-tight">{formattedProjectDate}</span>
               </div>
               <div className="flex flex-col">
-                <span className="text-xs text-gray-500 mb-0.5 leading-tight">Fulfilment Date</span>
-                <span className="text-xs text-gray-900 truncate leading-tight">{formattedFulfillDate}</span>
+                <span className="text-[15px] text-gray-500 mb-0.5 leading-tight">Fulfilment Date</span>
+                <span className="text-[15px] text-gray-900 truncate leading-tight">{formattedFulfillDate}</span>
               </div>
               <div className="flex flex-col">
-                <span className="text-xs text-gray-500 mb-0.5 leading-tight">Project Total</span>
-                <div className="text-xs text-gray-900 truncate leading-tight">${project.projectTotal.toLocaleString()}</div>
+                <span className="text-[15px] text-gray-500 mb-0.5 leading-tight">Project Total</span>
+                <div className="text-[15px] text-gray-900 truncate leading-tight">${project.projectTotal.toLocaleString()}</div>
               </div>
               <div className="flex flex-col">
-                <span className="text-xs text-gray-500 mb-0.5 leading-tight">Unit Status</span>
-                <div className="inline-flex items-center px-1.5 py-0.5 bg-white border border-gray-200 rounded text-xs text-gray-900 w-fit">
+                <span className="text-[15px] text-gray-500 mb-0.5 leading-tight">Unit Status</span>
+                <div className="inline-flex items-center px-1.5 py-0.5 bg-white border border-gray-200 rounded text-[15px] text-gray-900 w-fit">
                   <Layers size={10} className="mr-1 text-green-600" />
                   {project.unitStatus.completed}/{project.unitStatus.total}
                 </div>
@@ -109,8 +109,8 @@ const SimpleOrderList: React.FC = () => {
             {/* Second Row with Opportunity and Action - Horizontally Aligned */}
             <div className="pt-2 border-t border-gray-100 flex items-baseline justify-between gap-3">
               <div className="flex-1">
-                <span className="text-gray-500 text-xs leading-tight mb-1 block">Opportunity</span>
-                <p className="text-gray-900 leading-relaxed text-xs">
+                <span className="text-gray-500 text-[15px] leading-tight mb-1 block">Opportunity</span>
+                <p className="text-gray-900 leading-relaxed text-[15px]">
                   {project.opportunity}
                 </p>
               </div>
